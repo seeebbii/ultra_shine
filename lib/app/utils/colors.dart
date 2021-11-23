@@ -23,13 +23,20 @@ const darkRedColor = Color(0xFFf16056);
 const orangeColor = Color(0xFFF2994A);
 const greenColor = Color(0xFF0DD073);
 
-const lightBlack = Color(0xFF404041);
+const dividerColor = Colors.black54;
 const red = Color(0xFFFF6054);
 
 const backgroundCoffee = Color(0xffe0e0e1);
 const bord = Color(0xffd5dde0);
-const primaryColor = Color(0xff6cc2d0);
+const primaryColor = Colors.red;
 
+// AUTH TEXT FIELD CONTAINER
+Color authTextFieldContainerColor = Colors.grey.shade200;
+const double authTextFieldContainerBorderRadius = 20.0;
+
+// SOCIAL COLORS
+const Color facebookColor = Color(0xFF3b5998);
+Color googleColor = Colors.grey.shade200;
 
 const Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),

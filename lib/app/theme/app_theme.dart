@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData myTheme = ThemeData(
-    primaryTextTheme: const TextTheme(
-      headline5: TextStyle(
-        fontFamily: 'Akira',
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
+    primaryTextTheme: GoogleFonts.montserratTextTheme(),
+    textTheme: TextTheme(
+      headline1: TextStyle(
+        fontFamily: GoogleFonts.montserrat().fontFamily,
+        letterSpacing: 2.7,
+        fontSize: 32.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      ),
+      headline2: TextStyle(
+        fontFamily: GoogleFonts.montserrat().fontFamily,
+        fontSize: 11.sp,
+        color: Colors.grey.shade500,
+      ),
+      bodyText1: TextStyle(
+        fontFamily: GoogleFonts.montserrat().fontFamily,
+        fontSize: 12.sp,
         color: Colors.black,
       ),
     ),
-    textTheme: const TextTheme(
-      bodyText1: TextStyle(
-        fontFamily: 'Avenir',
-        fontSize: 14,
-        color: Colors.black,
-      ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+          color: Colors.grey.withOpacity(0.7),
+          fontSize: 13.sp),
     ),
     appBarTheme: const AppBarTheme(
       color: Colors.white,
       elevation: 0,
-      iconTheme: IconThemeData(color: Colors.black),
-      textTheme: TextTheme(
-        headline6: TextStyle(
-          fontFamily: 'Avenir',
-          fontSize: 18,
-          color: Colors.black,
-        ),
-      ),
     ),
-    primarySwatch: const MaterialColor(0xFFFFB703, color),
+    primarySwatch: MaterialColor(primaryColor.value, color),
     primaryColor: primaryColor,
     accentColor: primaryColor,
     scaffoldBackgroundColor: Colors.white,
     cardColor: primaryColor,
-    dividerColor: primaryColor,
+    dividerColor: dividerColor,
     focusColor: primaryColor,
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -44,7 +48,11 @@ ThemeData myTheme = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         onPrimary: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
         primary: primaryColor,
+        shape: RoundedRectangleBorder( //to set border radius to button
+            borderRadius: BorderRadius.circular(28)
+        ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
