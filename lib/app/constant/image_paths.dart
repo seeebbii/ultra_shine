@@ -17,6 +17,11 @@ static const String onBoardWelcome2 = "$IMAGES_PATH/onboard-welcome2.jpg";
 static const String onBoardWelcome3 = "$IMAGES_PATH/onboard-welcome3.jpg";
 
 
+static const String sliderIcon = "$IMAGES_PATH/slider_icon.png";
+static const String sliderCircularDotIcon = "$IMAGES_PATH/slider_circular_dot.png";
+static const String sliderRedDot = "$IMAGES_PATH/slider_red_dot.png";
+
+
 
 
 

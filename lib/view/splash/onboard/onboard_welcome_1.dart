@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/view/splash/onboard/widgets/onboard_text.dart';
 
 class OnBoardWelcome1 extends StatefulWidget {
   const OnBoardWelcome1({Key? key}) : super(key: key);
@@ -9,23 +10,28 @@ class OnBoardWelcome1 extends StatefulWidget {
   State<OnBoardWelcome1> createState() => _OnBoardWelcome1State();
 }
 
-class _OnBoardWelcome1State extends State<OnBoardWelcome1> with AutomaticKeepAliveClientMixin {
+class _OnBoardWelcome1State extends State<OnBoardWelcome1> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(ImagePaths.onBoardWelcome1),
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high),
+              opacity: 0.5,
+              image: AssetImage(ImagePaths.onBoardWelcome1),
+              fit: BoxFit.cover,
+            ),
           ),
-          child: Stack(
-            fit: StackFit.expand,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
+              _buildTextWidget(),
+              SizedBox(
+                height: 0.2.sh,
+              ),
             ],
           ),
         ),
@@ -33,7 +39,10 @@ class _OnBoardWelcome1State extends State<OnBoardWelcome1> with AutomaticKeepAli
     );
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  Widget _buildTextWidget() {
+    return const OnBoardText(
+      title: 'Get Access to Training Videos',
+      subTitle: 'Lorem ipsum is simply dummy text of the printing 1500s,',
+    );
+  }
 }

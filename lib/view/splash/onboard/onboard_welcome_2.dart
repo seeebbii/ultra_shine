@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/view/splash/onboard/widgets/onboard_text.dart';
 
 class OnBoardWelcome2 extends StatefulWidget {
   const OnBoardWelcome2({Key? key}) : super(key: key);
@@ -8,23 +10,29 @@ class OnBoardWelcome2 extends StatefulWidget {
   State<OnBoardWelcome2> createState() => _OnBoardWelcome2State();
 }
 
-class _OnBoardWelcome2State extends State<OnBoardWelcome2> with AutomaticKeepAliveClientMixin {
+class _OnBoardWelcome2State extends State<OnBoardWelcome2>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(ImagePaths.onBoardWelcome2),
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high),
+              opacity: 0.5,
+              image: AssetImage(ImagePaths.onBoardWelcome2),
+              fit: BoxFit.cover,
+            ),
           ),
-          child: Stack(
-            fit: StackFit.expand,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
+              _buildTextWidget(),
+              SizedBox(
+                height: 0.2.sh,
+              ),
             ],
           ),
         ),
@@ -35,4 +43,11 @@ class _OnBoardWelcome2State extends State<OnBoardWelcome2> with AutomaticKeepAli
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  Widget _buildTextWidget() {
+    return const OnBoardText(
+      title: 'Auto Service Builder',
+      subTitle: 'Lorem ipsum is simply dummy text of the printing 1500s,',
+    );
+  }
 }

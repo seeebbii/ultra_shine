@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/app/router/router_generator.dart';
+import 'package:ultra_shine/view/components/auth_button.dart';
+import 'package:ultra_shine/view/splash/onboard/widgets/onboard_text.dart';
 
 class OnBoardWelcome3 extends StatefulWidget {
   const OnBoardWelcome3({Key? key}) : super(key: key);
@@ -8,25 +13,36 @@ class OnBoardWelcome3 extends StatefulWidget {
   State<OnBoardWelcome3> createState() => _OnBoardWelcome3State();
 }
 
-class _OnBoardWelcome3State extends State<OnBoardWelcome3> with AutomaticKeepAliveClientMixin  {
+class _OnBoardWelcome3State extends State<OnBoardWelcome3> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(ImagePaths.onBoardWelcome3),
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high),
+              opacity: 0.5,
+              image: AssetImage(ImagePaths.onBoardWelcome3),
+              fit: BoxFit.cover,
+            ),
           ),
-          child: Stack(
-            fit: StackFit.expand,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
-
-
+              _buildTextWidget(),
+              SizedBox(
+                height: 0.05.sh,
+              ),
+              AuthButton(
+                  buttonText: "LET'S GO",
+                  onPressed: () {
+                    navigationController.navigateToNamed(authLoginScreen);
+                  }),
+              SizedBox(
+                height: 0.07.sh,
+              )
             ],
           ),
         ),
@@ -34,7 +50,10 @@ class _OnBoardWelcome3State extends State<OnBoardWelcome3> with AutomaticKeepAli
     );
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  Widget _buildTextWidget() {
+    return const OnBoardText(
+      title: 'Get Your Appointment Now',
+      subTitle: 'Lorem ipsum is simply dummy text of the printing 1500s,',
+    );
+  }
 }

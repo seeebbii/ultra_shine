@@ -17,7 +17,6 @@ const String onBoardWelcome2 = '/on-board-welcome-2';
 const String onBoardWelcome3 = '/on-board-welcome-3';
 
 
-
 const String authLoginScreen = '/login-screen';
 const String authSignUpScreen = '/sign-up-screen';
 
@@ -37,6 +36,7 @@ class RouteGenerator {
 
       case onBoardRoot:
         return _getPageRoute(OnBoardRoot());
+
 
       case onBoardWelcome1:
         return _getPageRoute(const OnBoardWelcome1());

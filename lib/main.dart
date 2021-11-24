@@ -24,8 +24,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    ImagePaths.preCacheImages(context);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    ImagePaths.preCacheImages(context);
+    super.didChangeDependencies();
   }
 
   @override

@@ -35,6 +35,7 @@ class _MainSplashScreenState extends State<MainSplashScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
