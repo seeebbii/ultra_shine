@@ -16,15 +16,16 @@ class MainSplashScreen extends StatefulWidget {
   State<MainSplashScreen> createState() => _MainSplashScreenState();
 }
 
-class _MainSplashScreenState extends State<MainSplashScreen> with SingleTickerProviderStateMixin{
-
+class _MainSplashScreenState extends State<MainSplashScreen>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
     // TODO ::  we will later navigate to auth decider
     Timer(const Duration(seconds: 4),
-            () => navigationController.getOffAll(authLoginScreen));
+        () => navigationController.getOffAll(onBoardRoot));
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -39,7 +40,7 @@ class _MainSplashScreenState extends State<MainSplashScreen> with SingleTickerPr
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(ImagePaths.mainSplash),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 filterQuality: FilterQuality.high),
           ),
           child: Stack(
@@ -47,14 +48,14 @@ class _MainSplashScreenState extends State<MainSplashScreen> with SingleTickerPr
             children: [
               Center(
                   child: Hero(
-                    tag: 'main-logo',
-                    child: Image.asset(
-                ImagePaths.ultraShineLogo,
-                height: 0.25.sh,
-                filterQuality: FilterQuality.high,
-                color: Colors.white,
-              ),
-                  ))
+                tag: 'main-logo',
+                child: Image.asset(
+                  ImagePaths.ultraShineLogo,
+                  height: 0.25.sh,
+                  filterQuality: FilterQuality.high,
+                  color: Colors.white,
+                ),
+              ))
             ],
           ),
         ),

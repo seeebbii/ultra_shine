@@ -2,13 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
 import 'package:ultra_shine/view/authentication/auth_signup_screen.dart';
 import 'package:ultra_shine/view/splash/main_splash_screen.dart';
+import 'package:ultra_shine/view/splash/onboard/onboard_root.dart';
+import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
+import 'package:ultra_shine/view/splash/onboard/onboard_welcome_2.dart';
+import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
 
 import '../../main.dart';
 
 // STATIC ROUTE NAMES
 const String mainSplashScreen = '/main-splash-screen';
+const String onBoardRoot = '/on-board-root';
+const String onBoardWelcome1 = '/on-board-welcome-1';
+const String onBoardWelcome2 = '/on-board-welcome-2';
+const String onBoardWelcome3 = '/on-board-welcome-3';
+
+
+
 const String authLoginScreen = '/login-screen';
 const String authSignUpScreen = '/sign-up-screen';
+
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 class RouteGenerator {
@@ -22,6 +34,18 @@ class RouteGenerator {
     switch (settings.name) {
       case mainSplashScreen:
         return _getPageRoute(const MainSplashScreen());
+
+      case onBoardRoot:
+        return _getPageRoute(OnBoardRoot());
+
+      case onBoardWelcome1:
+        return _getPageRoute(const OnBoardWelcome1());
+
+      case onBoardWelcome2:
+        return _getPageRoute(const OnBoardWelcome2());
+
+      case onBoardWelcome3:
+        return _getPageRoute(const OnBoardWelcome3());
 
       case authLoginScreen:
         return _getPageRoute(const AuthLoginScreen());

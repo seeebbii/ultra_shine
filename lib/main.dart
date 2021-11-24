@@ -24,7 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    precacheImage(const AssetImage(ImagePaths.ultraShineLogo), context);
+    ImagePaths.preCacheImages(context);
     super.initState();
   }
 
@@ -39,4 +39,6 @@ class _MyAppState extends State<MyApp> {
             )
     );
   }
+
+
 }

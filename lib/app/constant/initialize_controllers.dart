@@ -6,6 +6,7 @@ class InitializeControllers{
 
   static void init(){
     Get.put(NavigationController());
+
   }
 
   static void dispose(){
