@@ -18,6 +18,12 @@ ThemeData myTheme = ThemeData(
         fontSize: 11.sp,
         color: Colors.grey.shade500,
       ),
+      headline3: TextStyle(
+        fontFamily: GoogleFonts.montserrat().fontFamily,
+        fontSize: 18.sp,
+        color: Colors.red,
+        fontWeight: FontWeight.bold,
+      ),
       bodyText1: TextStyle(
         fontFamily: GoogleFonts.montserrat().fontFamily,
         fontSize: 12.sp,
@@ -30,7 +36,7 @@ ThemeData myTheme = ThemeData(
           fontSize: 13.sp),
     ),
     appBarTheme: const AppBarTheme(
-      color: Colors.white,
+      color: Colors.transparent,
       elevation: 0,
     ),
     primarySwatch: MaterialColor(primaryColor.value, color),
@@ -45,6 +51,8 @@ ThemeData myTheme = ThemeData(
         primary: primaryColor,
       ),
     ),
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         onPrimary: Colors.white,

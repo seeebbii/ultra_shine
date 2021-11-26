@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/constant/imp.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
@@ -40,72 +41,88 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
         width: double.infinity,
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Stack(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 0.18.sh,
-                  ),
-                  Text('Welcome', style: Theme.of(context).textTheme.headline1),
-                  Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Text('Login to your account',
-                          style: Theme.of(context).textTheme.headline2)),
-                  SizedBox(
-                    height: 0.12.sh,
-                  ),
-                  _buildEmailField(),
-                  _buildPasswordField(),
-                  SizedBox(
-                    height: 0.03.sh,
-                  ),
-                  _buildLoginButton(),
-                  SizedBox(
-                    height: 0.02.sh,
-                  ),
-                ],
+              Positioned(
+                top: 0.05.sh,
+                left: 0.02.sw,
+                child: GestureDetector(
+                  onTap: () => navigationController.goBack(),
+                    child: Image.asset(
+                  ImagePaths.backArrow,
+                  scale: 0.9,
+                )),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Divider(
-                          indent: 0.05.sw,
-                          endIndent: 0.05.sw,
-                        ),
+                      SizedBox(
+                        height: 0.18.sh,
                       ),
-                      Text(
-                        "or sign in with",
-                        style: Theme.of(context).textTheme.headline2?.copyWith(
-                              color: Colors.black,
+                      Text('Welcome',
+                          style: Theme.of(context).textTheme.headline1),
+                      Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: Text('Login to your account',
+                              style: Theme.of(context).textTheme.headline2)),
+                      SizedBox(
+                        height: 0.12.sh,
+                      ),
+                      _buildEmailField(),
+                      _buildPasswordField(),
+                      SizedBox(
+                        height: 0.03.sh,
+                      ),
+                      _buildLoginButton(),
+                      SizedBox(
+                        height: 0.02.sh,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              indent: 0.05.sw,
+                              endIndent: 0.05.sw,
                             ),
+                          ),
+                          Text(
+                            "or sign in with",
+                            style:
+                                Theme.of(context).textTheme.headline2?.copyWith(
+                                      color: Colors.black,
+                                    ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              indent: 0.05.sw,
+                              endIndent: 0.05.sw,
+                            ),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Divider(
-                          indent: 0.05.sw,
-                          endIndent: 0.05.sw,
-                        ),
+                      SizedBox(
+                        height: 0.02.sh,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildFacebookButton(),
+                          _buildGoogleButton()
+                        ],
+                      ),
+                      SizedBox(
+                        height: 0.08.sh,
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 0.02.sh,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildFacebookButton(),
-                      _buildGoogleButton()
-                    ],
-                  ),
-                  SizedBox(
-                    height: 0.05.sh,
                   ),
                 ],
               ),
