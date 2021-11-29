@@ -21,6 +21,9 @@ class ImagePaths{
   static const String stripeIcons = "$ICON_PATH/stripe_icons.png";
 
 
+  static const String drawerProfile = "$ICON_PATH/profile.png";
+
+
 // TODO :: IMAGES
 static const String mainSplash = "$IMAGES_PATH/main-splash.jpg";
 static const String onBoardWelcome1 = "$IMAGES_PATH/onboard-welcome1.jpg";

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
+import 'package:ultra_shine/view/drawer/my_appointments.dart';
+import 'package:ultra_shine/view/drawer/personal_info_screen.dart';
 import 'package:ultra_shine/view/home/choose_vehicle_type.dart';
-import 'package:ultra_shine/view/home/custom_drawer.dart';
+import 'package:ultra_shine/view/drawer/custom_drawer.dart';
 import 'package:ultra_shine/view/home/exterior_screen.dart';
 import 'package:ultra_shine/view/home/film_screen.dart';
 import 'package:ultra_shine/view/home/interior_screen.dart';
@@ -43,6 +45,8 @@ const String paymentMethodScreen = '/payment-method-screen';
 
 
 const String customDrawer='/custom-drawer';
+const String personalInfo='/personal-info';
+const String myAppointments='/my-appointments';
 
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
@@ -55,6 +59,7 @@ class RouteGenerator {
     }
     debugPrint(settings.name);
     switch (settings.name) {
+
       case mainSplashScreen:
         return _getPageRoute(const MainSplashScreen());
 
@@ -100,8 +105,14 @@ class RouteGenerator {
         case paymentMethodScreen:
         return _getPageRoute(const PaymentMethodScreen());
 
+        case personalInfo:
+        return _getPageRoute(const PersonalInfoScreen());
+
+      case myAppointments:
+        return _getPageRoute(const MyAppointments());
+
         case customDrawer:
-        return _getPageRoute(const Custom_drawer());
+        return _getPageRoute(const CustomDrawer());
 
       default:
         return _errorRoute();
