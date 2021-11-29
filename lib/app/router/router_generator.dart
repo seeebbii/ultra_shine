@@ -6,6 +6,7 @@ import 'package:ultra_shine/view/home/film_screen.dart';
 import 'package:ultra_shine/view/home/interior_screen.dart';
 import 'package:ultra_shine/view/home/maintenance_screen.dart';
 import 'package:ultra_shine/view/home/paint_protection_screen.dart';
+import 'package:ultra_shine/view/home/payment_method_screen.dart';
 import 'package:ultra_shine/view/home/product_screen.dart';
 import 'package:ultra_shine/view/home/request_screen.dart';
 import 'package:ultra_shine/view/splash/main_splash_screen.dart';
@@ -36,6 +37,7 @@ const String paintProtectionScreen = '/paint-protection-screen';
 const String productScreen = '/product-screen';
 const String maintenanceScreen = '/maintenance-screen';
 const String requestScreen = '/request-screen';
+const String paymentMethodScreen = '/payment-method-screen';
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 class RouteGenerator {
@@ -88,6 +90,9 @@ class RouteGenerator {
 
         case requestScreen:
         return _getPageRoute(const RequestScreen());
+
+        case paymentMethodScreen:
+        return _getPageRoute(const PaymentMethodScreen());
 
       default:
         return _errorRoute();

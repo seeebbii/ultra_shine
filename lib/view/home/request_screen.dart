@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_textfield.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
+import 'package:ultra_shine/view/home/widgets/upload_photo_bottomsheet.dart';
 
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
@@ -61,56 +64,73 @@ class _RequestScreenState extends State<RequestScreen> {
               ),
               SliverToBoxAdapter(
                   child: Column(
-                    children: [
-                      _buildNameField(),
-                      _buildEmailField(),
-                      _buildNumberField(),
-                      _buildYearField(),
-                      _buildModelField(),
-                      _buildPolishedField(),
-                      _buildCityField(),
-                      _buildCountryField(),
-                      _buildManufacturerField(),
-                      _buildAddressField(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2.sp),
-                              child: Text("Must Upload Videos/Photos of damaged car", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),),
-                            ),
-                            SizedBox(height: 0.01.sp),
-                            InkWell(
-                              onTap: (){},
-                              child: Card(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Container(
-                                    alignment: Alignment.bottomCenter,
-                                    height: 0.18.sh,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(image: AssetImage(ImagePaths.uploadImage),scale: 0.6),
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.black45)
-                                    ),
-                                    child: Container(
-                                      margin: EdgeInsets.all(20.sp),
-                                        child: Text("Add Photo or Video", style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.grey.shade500),)),
-                                  ),
-                                ),
+                children: [
+                  _buildNameField(),
+                  _buildEmailField(),
+                  _buildNumberField(),
+                  _buildYearField(),
+                  _buildModelField(),
+                  _buildPolishedField(),
+                  _buildCityField(),
+                  _buildCountryField(),
+                  _buildManufacturerField(),
+                  _buildAddressField(),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.sp),
+                          child: Text(
+                            "Must Upload Videos/Photos of damaged car",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        SizedBox(height: 0.01.sp),
+                        InkWell(
+                          onTap: () {
+                            Get.bottomSheet(const UploadPhotoBottomSheet());
+                          },
+                          child: Card(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                height: 0.18.sh,
+                                decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                        image:
+                                            AssetImage(ImagePaths.uploadImage),
+                                        scale: 0.6),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(color: Colors.black45)),
+                                child: Container(
+                                    margin: EdgeInsets.all(20.sp),
+                                    child: Text(
+                                      "Add Photo or Video",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.copyWith(
+                                              color: Colors.grey.shade500),
+                                    )),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      )
-                    ],
-                  )),
+                      ],
+                    ),
+                  )
+                ],
+              )),
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -129,7 +149,8 @@ class _RequestScreenState extends State<RequestScreen> {
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Send",
-                            onPressed: () => {},
+                            onPressed: () => navigationController
+                                .navigateToNamed(paymentMethodScreen),
                             pageNumber: 3,
                             btnColor: Colors.grey,
                           )),
@@ -147,7 +168,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildNameField(){
+  Widget _buildNameField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -155,7 +176,13 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Name", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),),
+            child: Text(
+              "Name",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(fontWeight: FontWeight.w700),
+            ),
           ),
           AuthTextField(
               controller: nameController,
@@ -172,7 +199,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildEmailField(){
+  Widget _buildEmailField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -180,7 +207,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Email", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Email",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: emailController,
@@ -197,7 +228,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildNumberField(){
+  Widget _buildNumberField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -205,7 +236,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Contact Number", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Contact Number",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: contactController,
@@ -222,7 +257,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildYearField(){
+  Widget _buildYearField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -230,7 +265,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Year Make", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Year Make",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: yearMakeController,
@@ -247,7 +286,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildModelField(){
+  Widget _buildModelField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -255,7 +294,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Model", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Model",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: modelController,
@@ -272,7 +315,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildPolishedField(){
+  Widget _buildPolishedField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -280,7 +323,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("How many time your car is Polished?", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("How many time your car is Polished?",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: polishedController,
@@ -297,7 +344,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildCityField(){
+  Widget _buildCityField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -305,7 +352,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("City", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("City",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: cityController,
@@ -322,7 +373,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildCountryField(){
+  Widget _buildCountryField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -330,7 +381,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Country", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Country",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: countryController,
@@ -347,7 +402,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildManufacturerField(){
+  Widget _buildManufacturerField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -355,7 +410,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Manufacturer", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Manufacturer",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: manufacturerController,
@@ -372,7 +431,7 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
-  Widget _buildAddressField(){
+  Widget _buildAddressField() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
       child: Column(
@@ -380,7 +439,11 @@ class _RequestScreenState extends State<RequestScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.sp),
-            child: Text("Address", style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700)),
+            child: Text("Address",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
           AuthTextField(
               controller: addressController,
@@ -396,6 +459,4 @@ class _RequestScreenState extends State<RequestScreen> {
       ),
     );
   }
-
-
 }

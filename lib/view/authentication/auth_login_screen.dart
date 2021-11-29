@@ -47,11 +47,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                 top: 0.05.sh,
                 left: 0.02.sw,
                 child: GestureDetector(
-                  onTap: () => navigationController.goBack(),
+                    onTap: () => navigationController.goBack(),
                     child: Image.asset(
-                  ImagePaths.backArrow,
-                  scale: 0.9,
-                )),
+                      ImagePaths.backArrow,
+                    )),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -198,24 +197,28 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
 
   Widget _buildFacebookButton() {
     return AuthSocialButton(
-        onPressed: () {
-          debugPrint("Facebook pressed");
-        },
-        socialName: 'Facebook',
-        imagePath: ImagePaths.facebookIcon,
-        backGroundColor: facebookColor,
-        textColor: Colors.white);
+      onPressed: () {
+        debugPrint("Facebook pressed");
+      },
+      socialName: 'Facebook',
+      imagePath: ImagePaths.facebookIcon,
+      backGroundColor: facebookColor,
+      textColor: Colors.white,
+      elevation: 0,
+    );
   }
 
   Widget _buildGoogleButton() {
     return AuthSocialButton(
-        onPressed: () {
-          debugPrint("Google pressed");
-        },
-        socialName: 'Google',
-        imagePath: ImagePaths.google,
-        backGroundColor: googleColor,
-        textColor: Colors.black54);
+      onPressed: () {
+        debugPrint("Google pressed");
+      },
+      socialName: 'Google',
+      imagePath: ImagePaths.google,
+      backGroundColor: googleColor,
+      textColor: Colors.black54,
+      elevation: 0,
+    );
   }
 
   Widget _buildSignUpText() {

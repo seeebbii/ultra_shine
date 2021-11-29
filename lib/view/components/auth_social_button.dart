@@ -8,6 +8,7 @@ class AuthSocialButton extends StatelessWidget {
   final String imagePath;
   final Color backGroundColor;
   final Color textColor;
+  final double elevation;
 
   const AuthSocialButton(
       {Key? key,
@@ -15,7 +16,7 @@ class AuthSocialButton extends StatelessWidget {
       required this.socialName,
       required this.imagePath,
       required this.backGroundColor,
-      required this.textColor})
+      required this.textColor, required this.elevation})
       : super(key: key);
 
   @override
@@ -30,7 +31,7 @@ class AuthSocialButton extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 16)),
               backgroundColor:
                   MaterialStateProperty.all<Color>(backGroundColor),
-              elevation: MaterialStateProperty.all(0)),
+              elevation: MaterialStateProperty.all(elevation)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

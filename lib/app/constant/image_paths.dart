@@ -14,6 +14,13 @@ class ImagePaths{
   static const String interiorSeat = "$ICON_PATH/interior_seat.png";
 
 
+  static const String questionMark = "$ICON_PATH/question.png";
+  static const String cameraIcon = "$ICON_PATH/camera_icon.png";
+  static const String galleryIcon = "$ICON_PATH/gallery_icon.png";
+  static const String payPal = "$ICON_PATH/paypal.png";
+  static const String stripeIcons = "$ICON_PATH/stripe_icons.png";
+
+
 // TODO :: IMAGES
 static const String mainSplash = "$IMAGES_PATH/main-splash.jpg";
 static const String onBoardWelcome1 = "$IMAGES_PATH/onboard-welcome1.jpg";
