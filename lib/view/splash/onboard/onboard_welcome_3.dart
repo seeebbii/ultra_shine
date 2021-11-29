@@ -38,7 +38,7 @@ class _OnBoardWelcome3State extends State<OnBoardWelcome3> {
               AuthButton(
                   buttonText: "LET'S GO",
                   onPressed: () {
-                    navigationController.navigateToNamed(chooseVehicleType);
+                    navigationController.navigateToNamed(customDrawer);
                   }),
               SizedBox(
                 height: 0.07.sh,

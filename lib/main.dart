@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/initialize_controllers.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
-import 'package:ultra_shine/app/utils/colors.dart';
 import 'app/constant/image_paths.dart';
 import 'app/theme/app_theme.dart';
 
