@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ultra_shine/view/Home/choose_vehicle_type.dart';
+
 import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
+import 'package:ultra_shine/view/home/choose_vehicle_type.dart';
+import 'package:ultra_shine/view/home/custom_drawer.dart';
 import 'package:ultra_shine/view/home/exterior_screen.dart';
 import 'package:ultra_shine/view/home/film_screen.dart';
 import 'package:ultra_shine/view/home/interior_screen.dart';
@@ -36,7 +38,7 @@ const String paintProtectionScreen = '/paint-protection-screen';
 const String productScreen = '/product-screen';
 const String maintenanceScreen = '/maintenance-screen';
 const String requestScreen = '/request-screen';
-
+const String customDrawer='/custom-drawer';
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 class RouteGenerator {
   // FUNCTION THAT HANDLES ROUTING
@@ -88,7 +90,8 @@ class RouteGenerator {
 
         case requestScreen:
         return _getPageRoute(const RequestScreen());
-
+        case customDrawer:
+        return _getPageRoute(const Custom_drawer());
       default:
         return _errorRoute();
     }

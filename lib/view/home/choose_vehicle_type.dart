@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
@@ -6,16 +7,18 @@ import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
 import 'package:ultra_shine/models/home/choose_vehicle_paintwork_model.dart';
-import 'package:ultra_shine/view/Home/widgets/build_bottom_buttons.dart';
-import 'package:ultra_shine/view/Home/widgets/build_vehicle_paintwork.dart';
-import 'package:ultra_shine/view/Home/widgets/build_vehicle_type.dart';
+
 import 'dart:math' as math;
 
 import 'package:ultra_shine/view/components/auth_button.dart';
+import 'package:ultra_shine/view/home/widgets/build_vehicle_type.dart';
+
+import 'widgets/build_bottom_buttons.dart';
+import 'widgets/build_vehicle_paintwork.dart';
 
 class ChooseVehicleType extends StatefulWidget {
-  const ChooseVehicleType({Key? key}) : super(key: key);
-
+  const ChooseVehicleType({Key? key, this.animation}) : super(key: key);
+  final VoidCallback ? animation;
   @override
   State<ChooseVehicleType> createState() => _ChooseVehicleTypeState();
 }
@@ -50,7 +53,8 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(leading: IconButton(icon: const Icon(CupertinoIcons.sidebar_left,color: Colors.black,), onPressed: () {widget.animation!();}) ,
+      ),
       body: Stack(
         children: [
           Positioned(
@@ -149,7 +153,8 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                         onTap: () {
                           setState(() {
                             paintWorkTypes
-                                .forEach((element) => element.value = false);
+                                .forEach((element) => element.value = false
+                                );
                             paintWorkTypes[index].value = true;
                           });
                         },
