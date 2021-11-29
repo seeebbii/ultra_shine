@@ -11,6 +11,7 @@ import 'package:ultra_shine/view/home/paint_protection_screen.dart';
 import 'package:ultra_shine/view/home/payment_method_screen.dart';
 import 'package:ultra_shine/view/home/product_screen.dart';
 import 'package:ultra_shine/view/home/request_screen.dart';
+import 'package:ultra_shine/view/profile/personel_info.dart';
 import 'package:ultra_shine/view/splash/main_splash_screen.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_root.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
@@ -40,6 +41,9 @@ const String productScreen = '/product-screen';
 const String maintenanceScreen = '/maintenance-screen';
 const String requestScreen = '/request-screen';
 const String paymentMethodScreen = '/payment-method-screen';
+
+//Profile
+const String personalInfo='/personal-info';
 
 
 const String customDrawer='/custom-drawer';
@@ -102,7 +106,9 @@ class RouteGenerator {
 
         case customDrawer:
         return _getPageRoute(const Custom_drawer());
-
+        
+        case personalInfo :
+        return _getPageRoute(PersonalInfo());
       default:
         return _errorRoute();
     }

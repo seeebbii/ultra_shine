@@ -184,7 +184,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                       child: Row(
                         children: [
                           Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed: ()=>navigationController.goBack(), pageNumber: 1, btnColor: Colors.grey,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(exteriorScreen), pageNumber: 1, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(personalInfo), pageNumber: 1, btnColor: primaryColor,)),
                           // AuthButton(buttonText: "Previous", onPressed: (){}),
                         ],
                       ),
