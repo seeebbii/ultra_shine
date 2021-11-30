@@ -48,7 +48,8 @@ ThemeData myTheme = ThemeData(
     focusColor: primaryColor,
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        primary: primaryColor,
+        primary: Colors.transparent,
+        splashFactory: NoSplash.splashFactory
       ),
     ),
     splashColor: Colors.transparent,
@@ -62,6 +63,9 @@ ThemeData myTheme = ThemeData(
             borderRadius: BorderRadius.circular(28)
         ),
       ),
+    ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: primaryColor,
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(

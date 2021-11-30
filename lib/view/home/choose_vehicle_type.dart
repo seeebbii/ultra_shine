@@ -19,6 +19,7 @@ import 'widgets/build_vehicle_paintwork.dart';
 class ChooseVehicleType extends StatefulWidget {
   const ChooseVehicleType({Key? key, this.animation}) : super(key: key);
   final VoidCallback ? animation;
+
   @override
   State<ChooseVehicleType> createState() => _ChooseVehicleTypeState();
 }
@@ -39,7 +40,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   ];
 
   List<ChooseVehiclePaintworkModel> paintWorkTypes =
-      <ChooseVehiclePaintworkModel>[
+  <ChooseVehiclePaintworkModel>[
     ChooseVehiclePaintworkModel(
         value: false, carText: "New Car", imagePath: ImagePaths.ptNew),
     ChooseVehiclePaintworkModel(
@@ -53,127 +54,115 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: IconButton(icon: const Icon(CupertinoIcons.sidebar_left,color: Colors.black,), onPressed: () {widget.animation!();}) ,
+      appBar: AppBar(leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.black,),
+          onPressed: () {
+            widget.animation!();
+          }),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            right: -0.55.sw,
-            bottom: 0.99.sw,
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Transform.rotate(
-                angle: -math.pi / 6.5.sp,
-                child: Image.asset(
-                  ImagePaths.tireBackground,
-                  width: 0.9.sw,
+      body: GestureDetector(
+        onPanUpdate: (details) {
+          // Swiping in right direction.
+          if (details.delta.dx > 0) {
+            widget.animation!();
+          }
+
+        },
+        child: Stack(
+          children: [
+            Positioned(
+              right: -0.55.sw,
+              bottom: 0.99.sw,
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Transform.rotate(
+                  angle: -math.pi / 6.5.sp,
+                  child: Image.asset(
+                    ImagePaths.tireBackground,
+                    width: 0.9.sw,
+                  ),
                 ),
               ),
             ),
-          ),
-          CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 25.sp, vertical: 2.sp),
-                      child: Text(
-                        'Choose your Vehicle Type',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 0.02.sh,
-                    ),
-                  ],
-                ),
-              ),
-              SliverPadding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            carTypes
-                                .forEach((element) => element.value = false);
-                            carTypes[index].value = true;
-                          });
-                        },
-                        child: BuildVehicleType(
-                          imagePath: carTypes[index].imagePath!,
-                          carText: carTypes[index].carText!,
-                          value: carTypes[index].value!,
-                          index: index,
+            CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.sp, vertical: 2.sp),
+                        child: Text(
+                          'Choose your Vehicle Type',
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline3,
                         ),
-                      );
-                    },
-                    childCount: carTypes.length,
-                  ),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200.sp,
-                      childAspectRatio: 3 / 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 0.05.sh,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 25.sp, vertical: 2.sp),
-                      child: Text(
-                        'Condition of your paintwork?',
-                        style: Theme.of(context).textTheme.headline3,
                       ),
-                    ),
-                    SizedBox(
-                      height: 0.02.sh,
-                    ),
-                  ],
-                ),
-              ),
-              SliverPadding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            paintWorkTypes
-                                .forEach((element) => element.value = false
-                                );
-                            paintWorkTypes[index].value = true;
-                          });
-                        },
-                        child: BuildVehiclePaintwork(
-                          imagePath: paintWorkTypes[index].imagePath!,
-                          carText: paintWorkTypes[index].carText!,
-                          value: paintWorkTypes[index].value!,
-                          index: index,
-                        ),
-                      );
-                    },
-                    childCount: paintWorkTypes.length,
+                      SizedBox(
+                        height: 0.02.sh,
+                      ),
+                    ],
                   ),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200.sp,
-                      childAspectRatio: 3 / 2.5,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5),
                 ),
+                SliverPadding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              carTypes
+                                  .forEach((element) => element.value = false);
+                              carTypes[index].value = true;
+                            });
+                          },
+                          child: BuildVehicleType(
+                            imagePath: carTypes[index].imagePath!,
+                            carText: carTypes[index].carText!,
+                            value: carTypes[index].value!,
+                            index: index,
+                          ),
+                        );
+                      },
+                      childCount: carTypes.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200.sp,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 0.05.sh,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.sp, vertical: 2.sp),
+                        child: Text(
+                          'Condition of your paintwork?',
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline3,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0.02.sh,
+                      ),
+                    ],
+                  ),
+                ),
+<<<<<<< HEAD
               ),
               SliverToBoxAdapter(
                 child: Column(
@@ -188,14 +177,71 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                           // AuthButton(buttonText: "Previous", onPressed: (){}),
                         ],
                       ),
+=======
+                SliverPadding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              paintWorkTypes
+                                  .forEach((element) => element.value = false
+                              );
+                              paintWorkTypes[index].value = true;
+                            });
+                          },
+                          child: BuildVehiclePaintwork(
+                            imagePath: paintWorkTypes[index].imagePath!,
+                            carText: paintWorkTypes[index].carText!,
+                            value: paintWorkTypes[index].value!,
+                            index: index,
+                          ),
+                        );
+                      },
+                      childCount: paintWorkTypes.length,
+>>>>>>> main
                     ),
-                    SizedBox(height: 0.05.sh),
-                  ],
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200.sp,
+                        childAspectRatio: 3 / 2.5,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5),
+                  ),
                 ),
-              )
-            ],
-          ),
-        ],
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 0.05.sh),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.sp),
+                        child: Row(
+                          children: [
+                            Expanded(child: BuildBottomButton(
+                              buttonText: "Previous",
+                              onPressed: () => navigationController.goBack(),
+                              pageNumber: 1,
+                              btnColor: Colors.grey,)),
+                            Expanded(child: BuildBottomButton(buttonText: "Next",
+                              onPressed: () =>
+                                  navigationController.navigateToNamed(
+                                      exteriorScreen),
+                              pageNumber: 1,
+                              btnColor: primaryColor,)),
+                            // AuthButton(buttonText: "Previous", onPressed: (){}),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 0.05.sh),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
