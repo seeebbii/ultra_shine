@@ -19,7 +19,42 @@ class BuildVehicleType extends StatefulWidget {
   State<BuildVehicleType> createState() => _BuildVehicleTypeState();
 }
 
-class _BuildVehicleTypeState extends State<BuildVehicleType> {
+class _BuildVehicleTypeState extends State<BuildVehicleType> with TickerProviderStateMixin{
+ late  AnimationController  _animationController;
+ late Animation _animation;
+
+  void typelistener(status) {
+    if (status == AnimationStatus.completed) {
+      _animation.removeStatusListener(typelistener);
+      _animationController.reset();
+      _animation = Tween(begin: 0.0, end: 0.0).animate(CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeIn,
+      ));
+      _animationController.forward();
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1500),
+    );
+
+    _animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.ease,
+    ))
+      ..addStatusListener(typelistener);
+
+    _animationController.forward();
+  }
+  @override
+dispose() {
+  _animationController.dispose(); // you need this
+  super.dispose();
+}
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,14 +82,7 @@ class _BuildVehicleTypeState extends State<BuildVehicleType> {
                     shape: BoxShape.circle),
               ),
             ),
-            Positioned.fill(
-                child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Image.asset(
-                widget.imagePath,
-                fit: BoxFit.cover,
-              ),
-            )),
+             _buildAnim(),
             Container(
               margin: const EdgeInsets.all(5),
               child: Align(
@@ -71,5 +99,21 @@ class _BuildVehicleTypeState extends State<BuildVehicleType> {
         ),
       ),
     );
+  }
+
+  AnimatedBuilder _buildAnim() {
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) => Transform(
+            transform:
+                Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
+        child:  Positioned.fill(
+              child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset(
+              widget.imagePath,
+              fit: BoxFit.cover,
+            ),
+          )),));
   }
 }

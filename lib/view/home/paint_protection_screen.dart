@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/models/home/paint_protection_model.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
@@ -18,12 +16,23 @@ class PaintProtectionScreen extends StatefulWidget {
 }
 
 class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
-
   List<RatingTile> ratingTiles = <RatingTile>[
-    RatingTile(packageName: "Durability", value: 5,),
-    RatingTile(packageName: "Ease of Application", value: 4,),
-    RatingTile(packageName: "Sickness", value: 3.5,),
-    RatingTile(packageName: "Gloss", value: 1.5,),
+    RatingTile(
+      packageName: "Durability",
+      value: 5,
+    ),
+    RatingTile(
+      packageName: "Ease of Application",
+      value: 4,
+    ),
+    RatingTile(
+      packageName: "Sickness",
+      value: 3.5,
+    ),
+    RatingTile(
+      packageName: "Gloss",
+      value: 1.5,
+    ),
   ];
 
   late List<PaintProtectionModel> paintProtectionModel;
@@ -35,30 +44,29 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
           ratingTile: ratingTiles,
           titleText: "Heading",
           subTitleText:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
           value: false),
       PaintProtectionModel(
           ratingTile: ratingTiles,
           titleText: "Heading",
           subTitleText:
-          "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
+              "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
           value: false),
       PaintProtectionModel(
           ratingTile: ratingTiles,
           titleText: "Heading",
           subTitleText:
-          "Exterior Protection for the front Windshield from Stone Chips ",
+              "Exterior Protection for the front Windshield from Stone Chips ",
           value: false),
       PaintProtectionModel(
           ratingTile: ratingTiles,
           titleText: "Heading",
           subTitleText:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
           value: false),
     ];
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +120,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 15.sp,),
+                        horizontal: 15.sp,
+                      ),
                       child: Text(
                         "Paint Protection Options",
                         style: Theme.of(context)
@@ -139,8 +148,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: primaryColor)),
+                                      fontWeight: FontWeight.w700,
+                                      color: primaryColor)),
                         ],
                       ),
                     ),
@@ -151,11 +160,10 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                 ),
               ),
               SliverPadding(
-                padding:
-                EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver:SliverGrid(
+                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
+                sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
-                        (context, index) {
+                    (context, index) {
                       return InkWell(
                         onTap: () {
                           setState(() {
@@ -164,19 +172,23 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                             paintProtectionModel[index].value = true;
                           });
                         },
-                        child: BuildPaintProtection(model: paintProtectionModel[index],),
+                        child: BuildPaintProtection(
+                          model: paintProtectionModel[index],
+                        ),
                       );
                     },
                     childCount: paintProtectionModel.length,
                   ),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 350.sp,
-                      childAspectRatio: 0.36.sp,
-                      crossAxisSpacing: 1,
-                      mainAxisSpacing: 2),
+                      maxCrossAxisExtent: 300.sp,
+                      childAspectRatio: 0.33.sp,
+                      // childAspectRatio: 5 / 6,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 0
+                      
+                      ),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: Column(
                   children: [
