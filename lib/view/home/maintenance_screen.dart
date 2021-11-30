@@ -17,7 +17,7 @@ class MaintenanceScreen extends StatefulWidget {
   _MaintenanceScreenState createState() => _MaintenanceScreenState();
 }
 
-class _MaintenanceScreenState extends State<MaintenanceScreen> {
+class _MaintenanceScreenState extends State<MaintenanceScreen> with AutomaticKeepAliveClientMixin {
   List<KitFeatures> kitFeatures = <KitFeatures>[
     KitFeatures(
       packageName: "1x 500ml GWash",
@@ -206,4 +206,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -29,7 +29,7 @@ class StepperRoot extends StatefulWidget {
   State<StepperRoot> createState() => _StepperRootState();
 }
 
-class _StepperRootState extends State<StepperRoot> {
+class _StepperRootState extends State<StepperRoot> with AutomaticKeepAliveClientMixin {
   int activeStep = 0;
 
   final List<Widget> widgetList = <Widget>[
@@ -271,4 +271,8 @@ class _StepperRootState extends State<StepperRoot> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive =>true;
 }

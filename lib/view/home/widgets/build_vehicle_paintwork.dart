@@ -83,7 +83,7 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
 
   ClipRRect buildPaintworktypes() {
     return ClipRRect(
-borderRadius: BorderRadius.circular(8),child: FadeInImage.assetNetwork
+borderRadius: BorderRadius.circular(8.r),child: FadeInImage.assetNetwork
 
 (
   fadeInCurve: Curves.easeIn,

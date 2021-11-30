@@ -17,7 +17,7 @@ class ExteriorScreen extends StatefulWidget {
   State<ExteriorScreen> createState() => _ExteriorScreenState();
 }
 
-class _ExteriorScreenState extends State<ExteriorScreen> {
+class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAliveClientMixin {
   List<ExteriorOptions> exteriorOptions = <ExteriorOptions>[
     ExteriorOptions(packageName: "Small", price: 700, selected: false),
     ExteriorOptions(packageName: "Medium", price: 800, selected: false),
@@ -206,4 +206,8 @@ class _ExteriorScreenState extends State<ExteriorScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

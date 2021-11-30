@@ -16,7 +16,7 @@ class ProductScreen extends StatefulWidget {
   _ProductScreenState createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveClientMixin {
   late List<ProductModel> productModel;
 
   @override
@@ -182,4 +182,8 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

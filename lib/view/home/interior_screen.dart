@@ -17,7 +17,7 @@ class InteriorScreen extends StatefulWidget {
   State<InteriorScreen> createState() => _InteriorScreenState();
 }
 
-class _InteriorScreenState extends State<InteriorScreen> {
+class _InteriorScreenState extends State<InteriorScreen> with AutomaticKeepAliveClientMixin {
 
   List<InteriorOptions> interiorOptions = <InteriorOptions>[
     InteriorOptions(packageName: "Low", price: 300, selected: false),
@@ -216,4 +216,8 @@ class _InteriorScreenState extends State<InteriorScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

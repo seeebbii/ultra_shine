@@ -15,7 +15,7 @@ class PaintProtectionScreen extends StatefulWidget {
   _PaintProtectionScreenState createState() => _PaintProtectionScreenState();
 }
 
-class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
+class _PaintProtectionScreenState extends State<PaintProtectionScreen>with AutomaticKeepAliveClientMixin {
   List<RatingTile> ratingTiles = <RatingTile>[
     RatingTile(
       packageName: "Durability",
@@ -212,4 +212,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

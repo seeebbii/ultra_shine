@@ -101,19 +101,17 @@ dispose() {
     );
   }
 
-  AnimatedBuilder _buildAnim() {
+  Widget _buildAnim() {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) => Transform(
-            transform:
-                Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
-        child:  Positioned.fill(
-              child: Padding(
+            transform: Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
+        child:  Padding(
             padding: const EdgeInsets.all(12.0),
             child: Image.asset(
               widget.imagePath,
               fit: BoxFit.cover,
             ),
-          )),));
+          ),));
   }
 }

@@ -17,7 +17,7 @@ class FilmScreen extends StatefulWidget {
   _FilmScreenState createState() => _FilmScreenState();
 }
 
-class _FilmScreenState extends State<FilmScreen> {
+class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMixin {
 
   List<FilmOptions> filmOptions = <FilmOptions>[
     FilmOptions(packageName: "Price", price: 700, selected: false),
@@ -137,4 +137,8 @@ class _FilmScreenState extends State<FilmScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

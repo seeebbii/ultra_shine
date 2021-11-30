@@ -16,7 +16,7 @@ class RequestScreen extends StatefulWidget {
   _RequestScreenState createState() => _RequestScreenState();
 }
 
-class _RequestScreenState extends State<RequestScreen> {
+class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveClientMixin {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final contactController = TextEditingController();
@@ -459,4 +459,8 @@ class _RequestScreenState extends State<RequestScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

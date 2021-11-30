@@ -25,7 +25,7 @@ class ChooseVehicleType extends StatefulWidget {
 }
 
 class _ChooseVehicleTypeState extends State<ChooseVehicleType>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin , AutomaticKeepAliveClientMixin {
  late  AnimationController  _animationController;
  late Animation _animation;
   void homelistener(status) {
@@ -45,7 +45,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 1500),
     );
 
     _animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
@@ -95,12 +95,6 @@ dispose() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.black,),
-          onPressed: () {
-            widget.animation!();
-          }),
-      ),
       body: GestureDetector(
         onPanUpdate: (details) {
           // Swiping in right direction.
@@ -238,8 +232,7 @@ dispose() {
                               btnColor: Colors.grey,)),
                             Expanded(child: BuildBottomButton(buttonText: "Next",
                               onPressed: () =>
-                                  navigationController.navigateToNamed(
-                                      exteriorScreen),
+                                  stepperController.toNextPage(),
                               pageNumber: 1,
                               btnColor: primaryColor,)),
                             // AuthButton(buttonText: "Previous", onPressed: (){}),
@@ -276,5 +269,6 @@ dispose() {
 
   // ignore: todo
   // TODO: implement wantKeepAlive
+  @override
   bool get wantKeepAlive => true;
 }
