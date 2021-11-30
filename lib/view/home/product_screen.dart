@@ -17,7 +17,6 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-
   late List<ProductModel> productModel;
 
   @override
@@ -26,17 +25,17 @@ class _ProductScreenState extends State<ProductScreen> {
       ProductModel(
           titleText: "Heading",
           subTitleText:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
           value: false),
       ProductModel(
           titleText: "Heading",
           subTitleText:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
           value: false),
       ProductModel(
           titleText: "Heading",
           subTitleText:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
           value: false),
       ProductModel(
           titleText: "Heading",
@@ -94,7 +93,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 15.sp,),
+                        horizontal: 15.sp,
+                      ),
                       child: Text(
                         "Paint Protection Options",
                         style: Theme.of(context)
@@ -121,8 +121,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: primaryColor)),
+                                      fontWeight: FontWeight.w700,
+                                      color: primaryColor)),
                         ],
                       ),
                     ),
@@ -133,31 +133,33 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
               SliverPadding(
-                padding:
-                EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver:SliverGrid(
+                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
+                sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
-                        (context, index) {
+                    (context, index) {
                       return InkWell(
                         onTap: () {
                           setState(() {
-                            productModel.forEach((element) => element.value = false);
+                            productModel
+                                .forEach((element) => element.value = false);
                             productModel[index].value = true;
                           });
                         },
-                        child: BuildProduct(model: productModel[index],),
+                        child: BuildProduct(
+                          model: productModel[index],
+                        ),
                       );
                     },
                     childCount: productModel.length,
                   ),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 350.sp,
+                      maxCrossAxisExtent: 300.sp,
                       childAspectRatio: 0.5.sp,
-                      crossAxisSpacing: 1,
-                      mainAxisSpacing: 2),
+                      // childAspectRatio: 5 / 6,
+                      // crossAxisSpacing: 20,
+                      mainAxisSpacing: 0),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -166,8 +168,21 @@ class _ProductScreenState extends State<ProductScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(maintenanceScreen), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => navigationController.goBack(),
+                            pageNumber: 3,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () => navigationController
+                                .navigateToNamed(maintenanceScreen),
+                            pageNumber: 3,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),
