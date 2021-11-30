@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/controller/api/vehicle_type/vehicle_type_controller.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
 
@@ -15,6 +17,8 @@ class OnBoardRoot extends StatefulWidget {
 
 class _OnBoardRootState extends State<OnBoardRoot>
     with AutomaticKeepAliveClientMixin {
+
+
   final pageViewController =
       PageController(initialPage: 0, keepPage: true);
   int currentIndex = 0;
@@ -41,6 +45,12 @@ class _OnBoardRootState extends State<OnBoardRoot>
               width: 10.sp,
               height: 10.sp)),
     );
+  }
+
+  @override
+  void initState() {
+    Get.put(VehicleTypeController().getVehicleTypes());
+    super.initState();
   }
 
   @override
