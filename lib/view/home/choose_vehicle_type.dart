@@ -25,7 +25,48 @@ class ChooseVehicleType extends StatefulWidget {
 }
 
 class _ChooseVehicleTypeState extends State<ChooseVehicleType>
-    with AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin {
+ late  AnimationController  _animationController;
+ late Animation _animation;
+  void homelistener(status) {
+    if (status == AnimationStatus.completed) {
+      _animation.removeStatusListener(homelistener);
+      _animationController.reset();
+      _animation = Tween(begin: 0.0, end: 0.0).animate(CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.ease
+      ));
+      _animationController.forward();
+    }
+  }
+
+    @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1500),
+    );
+
+    _animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    ))
+      ..addStatusListener(homelistener);
+
+    _animationController.forward();
+  }
+
+
+ @override
+dispose() {
+   _animationController.dispose(); 
+  super.dispose();
+ // you need this
+}
+
+
+
   List<ChooseVehicleModel> carTypes = <ChooseVehicleModel>[
     ChooseVehicleModel(
         value: false, carText: "New Car", imagePath: ImagePaths.typeSmall),
@@ -93,13 +134,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.sp, vertical: 2.sp),
-                        child: Text(
-                          'Choose your Vehicle Type',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headline3,
-                        ),
+                        child:   _buildAnim('Choose Your Vechicle Type'),
                       ),
                       SizedBox(
                         height: 0.02.sh,
@@ -148,13 +183,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.sp, vertical: 2.sp),
-                        child: Text(
-                          'Condition of your paintwork?',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headline3,
-                        ),
+                        child:_buildAnim('Condition of your paintwork?'),
                       ),
                       SizedBox(
                         height: 0.02.sh,
@@ -162,22 +191,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                     ],
                   ),
                 ),
-<<<<<<< HEAD
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    SizedBox(height: 0.05.sh),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.sp),
-                      child: Row(
-                        children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed: ()=>navigationController.goBack(), pageNumber: 1, btnColor: Colors.grey,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(personalInfo), pageNumber: 1, btnColor: primaryColor,)),
-                          // AuthButton(buttonText: "Previous", onPressed: (){}),
-                        ],
-                      ),
-=======
                 SliverPadding(
                   padding:
                   EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
@@ -202,7 +215,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                         );
                       },
                       childCount: paintWorkTypes.length,
->>>>>>> main
                     ),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200.sp,
@@ -246,7 +258,23 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     );
   }
 
+  AnimatedBuilder _buildAnim(String headline) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) => Transform(
+            transform:
+                Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
+        child: Text(
+                       headline,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .headline3,
+                      ),));
+  }
+
   @override
+  // ignore: todo
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

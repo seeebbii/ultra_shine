@@ -178,7 +178,7 @@ class _CustomDrawerState extends State<CustomDrawer>
           animation: animationController,
           builder: (context, _) {
             double slide = 200.0 * animationController.value;
-            double scale = 1 - (animationController.value * 0.1);
+            double scale = 1 - (animationController.value * 0.2);
             return Stack(
               children: [
                 _buildDrawer(),
@@ -186,7 +186,7 @@ class _CustomDrawerState extends State<CustomDrawer>
                     transform: Matrix4.identity()
                       ..translate(slide)
                       ..scale(scale),
-                    alignment: Alignment.bottomCenter,
+                    alignment: Alignment.center,
                     child: GestureDetector(
                       child: _buildHome(),
                       onTap: () {

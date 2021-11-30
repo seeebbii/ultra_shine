@@ -49,10 +49,11 @@ const String personalInfo='/personal-info';
 
 
 const String customDrawer='/custom-drawer';
-const String personalInfo='/personal-info';
+
 const String myAppointments='/my-appointments';
 
 
+// ignore: todo
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 class RouteGenerator {
   // FUNCTION THAT HANDLES ROUTING
@@ -116,15 +117,8 @@ class RouteGenerator {
         return _getPageRoute(const MyAppointments());
 
         case customDrawer:
-<<<<<<< HEAD
-        return _getPageRoute(const Custom_drawer());
-        
-        case personalInfo :
-        return _getPageRoute(PersonalInfo());
-=======
         return _getPageRoute(const CustomDrawer());
 
->>>>>>> main
       default:
         return _errorRoute();
     }
