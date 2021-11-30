@@ -34,7 +34,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
       _animationController.reset();
       _animation = Tween(begin: 0.0, end: 0.0).animate(CurvedAnimation(
         parent: _animationController,
-        curve: Curves.ease
+        curve: Curves.easeIn
       ));
       _animationController.forward();
     }
@@ -200,9 +200,9 @@ dispose() {
                         return InkWell(
                           onTap: () {
                             setState(() {
-                              paintWorkTypes
-                                  .forEach((element) => element.value = false
-                              );
+                              for (var element in paintWorkTypes) {
+                                element.value = false;
+                              }
                               paintWorkTypes[index].value = true;
                             });
                           },
@@ -273,7 +273,7 @@ dispose() {
                       ),));
   }
 
-  @override
+
   // ignore: todo
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;

@@ -43,14 +43,12 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
         child: Stack(
           children: [
                Positioned.fill(
-                child: Padding(
-                
-              padding: const EdgeInsets.all(0.0),
+              
             
               child:buildPaintworktypes()
             
             
-            )),
+            ),
             Positioned(
               left: 0.01.sw,
               top: 0.01.sh,
@@ -89,7 +87,7 @@ borderRadius: BorderRadius.circular(8),child: FadeInImage.assetNetwork
 
 (
   fadeInCurve: Curves.easeIn,
-  fadeInDuration: Duration(milliseconds: 1000),
+  fadeInDuration: const Duration(milliseconds: 1500),
   placeholder:ImagePaths.loadingIcon,image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Mercedes-Benz_W115_220D_%281973%29.jpg/1200px-Mercedes-Benz_W115_220D_%281973%29.jpg',
   fit: BoxFit.cover,
 )
