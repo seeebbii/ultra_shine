@@ -16,7 +16,7 @@ class OnBoardRoot extends StatefulWidget {
 class _OnBoardRootState extends State<OnBoardRoot>
     with AutomaticKeepAliveClientMixin {
   final pageViewController =
-      PageController(initialPage: 0, keepPage: true, viewportFraction: 0.99);
+      PageController(initialPage: 0, keepPage: true);
   int currentIndex = 0;
 
   List<Widget> pageList = <Widget>[

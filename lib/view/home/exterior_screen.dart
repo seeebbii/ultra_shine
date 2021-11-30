@@ -17,7 +17,7 @@ class ExteriorScreen extends StatefulWidget {
   State<ExteriorScreen> createState() => _ExteriorScreenState();
 }
 
-class _ExteriorScreenState extends State<ExteriorScreen> {
+class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAliveClientMixin {
   List<ExteriorOptions> exteriorOptions = <ExteriorOptions>[
     ExteriorOptions(packageName: "Small", price: 700, selected: false),
     ExteriorOptions(packageName: "Medium", price: 800, selected: false),
@@ -53,7 +53,6 @@ class _ExteriorScreenState extends State<ExteriorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -192,8 +191,8 @@ class _ExteriorScreenState extends State<ExteriorScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 2, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(interiorScreen), pageNumber: 2, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 1, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>stepperController.toNextPage(), pageNumber: 1, btnColor: primaryColor,)),
                         ],
                       ),
                     ),
@@ -207,4 +206,8 @@ class _ExteriorScreenState extends State<ExteriorScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

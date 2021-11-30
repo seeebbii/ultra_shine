@@ -17,7 +17,7 @@ class FilmScreen extends StatefulWidget {
   _FilmScreenState createState() => _FilmScreenState();
 }
 
-class _FilmScreenState extends State<FilmScreen> {
+class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMixin {
 
   List<FilmOptions> filmOptions = <FilmOptions>[
     FilmOptions(packageName: "Price", price: 700, selected: false),
@@ -53,7 +53,6 @@ class _FilmScreenState extends State<FilmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -123,8 +122,8 @@ class _FilmScreenState extends State<FilmScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> navigationController.navigateToNamed(paintProtectionScreen), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 3, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 3, btnColor: primaryColor,)),
                         ],
                       ),
                     ),
@@ -138,4 +137,8 @@ class _FilmScreenState extends State<FilmScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

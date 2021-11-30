@@ -5,6 +5,7 @@ import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
+import 'package:ultra_shine/view/home/stepper/stepper_root.dart';
 
 import '../home/choose_vehicle_type.dart';
 
@@ -168,7 +169,7 @@ class _CustomDrawerState extends State<CustomDrawer>
             ),
           ],
         ),
-        child: ChooseVehicleType(
+        child: StepperRoot(
           animation: toggleAnimation,
         ));
 

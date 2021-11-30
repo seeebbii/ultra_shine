@@ -17,7 +17,7 @@ class MaintenanceScreen extends StatefulWidget {
   _MaintenanceScreenState createState() => _MaintenanceScreenState();
 }
 
-class _MaintenanceScreenState extends State<MaintenanceScreen> {
+class _MaintenanceScreenState extends State<MaintenanceScreen> with AutomaticKeepAliveClientMixin {
   List<KitFeatures> kitFeatures = <KitFeatures>[
     KitFeatures(
       packageName: "1x 500ml GWash",
@@ -78,7 +78,6 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -183,15 +182,15 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Previous",
-                            onPressed: () => navigationController.goBack(),
-                            pageNumber: 3,
+                            onPressed: () => stepperController.toPreviousPage(),
+                            pageNumber: 6,
                             btnColor: Colors.black,
                           )),
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Next",
-                            onPressed: () => navigationController.navigateToNamed(requestScreen),
-                            pageNumber: 3,
+                            onPressed: () => stepperController.toNextPage(),
+                            pageNumber: 6,
                             btnColor: primaryColor,
                           )),
                         ],
@@ -207,4 +206,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

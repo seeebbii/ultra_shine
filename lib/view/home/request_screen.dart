@@ -16,7 +16,7 @@ class RequestScreen extends StatefulWidget {
   _RequestScreenState createState() => _RequestScreenState();
 }
 
-class _RequestScreenState extends State<RequestScreen> {
+class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveClientMixin {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final contactController = TextEditingController();
@@ -31,7 +31,7 @@ class _RequestScreenState extends State<RequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+
       body: Stack(
         children: [
           CustomScrollView(
@@ -142,7 +142,7 @@ class _RequestScreenState extends State<RequestScreen> {
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Previous",
-                            onPressed: () => navigationController.goBack(),
+                            onPressed: () => stepperController.toPreviousPage(),
                             pageNumber: 3,
                             btnColor: Colors.black,
                           )),
@@ -459,4 +459,8 @@ class _RequestScreenState extends State<RequestScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/models/home/paint_protection_model.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
@@ -17,7 +15,7 @@ class PaintProtectionScreen extends StatefulWidget {
   _PaintProtectionScreenState createState() => _PaintProtectionScreenState();
 }
 
-class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
+class _PaintProtectionScreenState extends State<PaintProtectionScreen>with AutomaticKeepAliveClientMixin {
   List<RatingTile> ratingTiles = <RatingTile>[
     RatingTile(
       packageName: "Durability",
@@ -73,7 +71,6 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -200,21 +197,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(
-                              child: BuildBottomButton(
-                            buttonText: "Previous",
-                            onPressed: () => navigationController.goBack(),
-                            pageNumber: 3,
-                            btnColor: Colors.black,
-                          )),
-                          Expanded(
-                              child: BuildBottomButton(
-                            buttonText: "Next",
-                            onPressed: () => navigationController
-                                .navigateToNamed(productScreen),
-                            pageNumber: 3,
-                            btnColor: primaryColor,
-                          )),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 4, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 4, btnColor: primaryColor,)),
                         ],
                       ),
                     ),
@@ -228,4 +212,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

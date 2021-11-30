@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
 import 'package:ultra_shine/view/drawer/my_appointments.dart';
+import 'package:ultra_shine/view/drawer/notification_screen.dart';
 import 'package:ultra_shine/view/drawer/personal_info_screen.dart';
 import 'package:ultra_shine/view/home/choose_vehicle_type.dart';
 import 'package:ultra_shine/view/drawer/custom_drawer.dart';
@@ -13,6 +14,7 @@ import 'package:ultra_shine/view/home/paint_protection_screen.dart';
 import 'package:ultra_shine/view/home/payment_method_screen.dart';
 import 'package:ultra_shine/view/home/product_screen.dart';
 import 'package:ultra_shine/view/home/request_screen.dart';
+import 'package:ultra_shine/view/home/stepper/stepper_root.dart';
 import 'package:ultra_shine/view/profile/personel_info.dart';
 import 'package:ultra_shine/view/splash/main_splash_screen.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_root.dart';
@@ -22,6 +24,7 @@ import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
 
 
 // STATIC ROUTE NAMES
+
 // SPLASH / ON BOARDING
 const String mainSplashScreen = '/main-splash-screen';
 const String onBoardRoot = '/on-board-root';
@@ -31,6 +34,9 @@ const String onBoardWelcome3 = '/on-board-welcome-3';
 
 // AUTH
 const String authLoginScreen = '/login-screen';
+
+//  STEPPER ROOT
+const String stepperRoot = '/stepper-root';
 
 // HOME
 const String chooseVehicleType = '/choose-vehicle-type';
@@ -48,7 +54,7 @@ const String personalInfo='/personal-info';
 
 
 const String customDrawer='/custom-drawer';
-
+const String notificationScreen='/notification-screen';
 const String myAppointments='/my-appointments';
 
 
@@ -84,6 +90,9 @@ class RouteGenerator {
       case authLoginScreen:
         return _getPageRoute(const AuthLoginScreen());
 
+        case stepperRoot:
+        return _getPageRoute(const StepperRoot());
+
       case chooseVehicleType:
         return _getPageRoute(const ChooseVehicleType());
 
@@ -116,6 +125,9 @@ class RouteGenerator {
 
       case myAppointments:
         return _getPageRoute(const MyAppointments());
+
+        case notificationScreen:
+        return _getPageRoute(const NotificationScreen());
 
         case customDrawer:
         return _getPageRoute(const CustomDrawer());
