@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
@@ -18,29 +19,28 @@ import 'widgets/build_vehicle_paintwork.dart';
 
 class ChooseVehicleType extends StatefulWidget {
   const ChooseVehicleType({Key? key, this.animation}) : super(key: key);
-  final VoidCallback ? animation;
+  final VoidCallback? animation;
 
   @override
   State<ChooseVehicleType> createState() => _ChooseVehicleTypeState();
 }
 
 class _ChooseVehicleTypeState extends State<ChooseVehicleType>
-    with TickerProviderStateMixin , AutomaticKeepAliveClientMixin {
- late  AnimationController  _animationController;
- late Animation _animation;
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  late AnimationController _animationController;
+  late Animation _animation;
+
   void homelistener(status) {
     if (status == AnimationStatus.completed) {
       _animation.removeStatusListener(homelistener);
       _animationController.reset();
-      _animation = Tween(begin: 0.0, end: 0.0).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeIn
-      ));
+      _animation = Tween(begin: 0.0, end: 0.0).animate(
+          CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
       _animationController.forward();
     }
   }
 
-    @override
+  @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
@@ -57,31 +57,16 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     _animationController.forward();
   }
 
+  @override
+  dispose() {
+    _animationController.dispose();
+    super.dispose();
+    // you need this
+  }
 
- @override
-dispose() {
-   _animationController.dispose(); 
-  super.dispose();
- // you need this
-}
-
-
-
-  List<ChooseVehicleModel> carTypes = <ChooseVehicleModel>[
-    ChooseVehicleModel(
-        value: false, carText: "New Car", imagePath: ImagePaths.typeSmall),
-    ChooseVehicleModel(
-        value: false, carText: "Medium Car", imagePath: ImagePaths.typeMedium),
-    ChooseVehicleModel(
-        value: false, carText: "Large Car", imagePath: ImagePaths.typeLarge),
-    ChooseVehicleModel(
-        value: false,
-        carText: "Extra Large Car",
-        imagePath: ImagePaths.typeJeep),
-  ];
 
   List<ChooseVehiclePaintworkModel> paintWorkTypes =
-  <ChooseVehiclePaintworkModel>[
+      <ChooseVehiclePaintworkModel>[
     ChooseVehiclePaintworkModel(
         value: false, carText: "New Car", imagePath: ImagePaths.ptNew),
     ChooseVehiclePaintworkModel(
@@ -101,7 +86,6 @@ dispose() {
           if (details.delta.dx > 0) {
             widget.animation!();
           }
-
         },
         child: Stack(
           children: [
@@ -128,7 +112,7 @@ dispose() {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.sp, vertical: 2.sp),
-                        child:   _buildAnim('Choose Your Vechicle Type'),
+                        child: _buildAnim('Choose Your Vechicle Type'),
                       ),
                       SizedBox(
                         height: 0.02.sh,
@@ -138,27 +122,30 @@ dispose() {
                 ),
                 SliverPadding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
+                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
                   sliver: SliverGrid(
                     delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                        return InkWell(
+                      (context, index) {
+                        return Obx(() => InkWell(
                           onTap: () {
                             setState(() {
-                              carTypes
+                              vehicleTypeController.vehicleTypes
                                   .forEach((element) => element.value = false);
-                              carTypes[index].value = true;
+                              vehicleTypeController.vehicleTypes[index].value = true;
                             });
                           },
                           child: BuildVehicleType(
-                            imagePath: vehicleTypeController.vehicleTypes[index].imagePath!,
-                            carText: vehicleTypeController.vehicleTypes[index].carText!,
-                            value: vehicleTypeController.vehicleTypes[index].value!,
-                            index: vehicleTypeController.vehicleTypes.length,
+                            imagePath: vehicleTypeController
+                                .vehicleTypes[index].imagePath!,
+                            carText: vehicleTypeController
+                                .vehicleTypes[index].carText!,
+                            value: vehicleTypeController
+                                .vehicleTypes[index].value!,
+                            index: index,
                           ),
-                        );
+                        ));
                       },
-                      childCount: carTypes.length,
+                      childCount:  vehicleTypeController.vehicleTypes.length,
                     ),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200.sp,
@@ -177,7 +164,7 @@ dispose() {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.sp, vertical: 2.sp),
-                        child:_buildAnim('Condition of your paintwork?'),
+                        child: _buildAnim('Condition of your paintwork?'),
                       ),
                       SizedBox(
                         height: 0.02.sh,
@@ -187,10 +174,10 @@ dispose() {
                 ),
                 SliverPadding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
+                      EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
                   sliver: SliverGrid(
                     delegate: SliverChildBuilderDelegate(
-                          (context, index) {
+                      (context, index) {
                         return InkWell(
                           onTap: () {
                             setState(() {
@@ -225,16 +212,20 @@ dispose() {
                         padding: EdgeInsets.symmetric(horizontal: 10.sp),
                         child: Row(
                           children: [
-                            Expanded(child: BuildBottomButton(
+                            Expanded(
+                                child: BuildBottomButton(
                               buttonText: "Previous",
                               onPressed: () => navigationController.goBack(),
                               pageNumber: 1,
-                              btnColor: Colors.grey,)),
-                            Expanded(child: BuildBottomButton(buttonText: "Next",
-                              onPressed: () =>
-                                  stepperController.toNextPage(),
+                              btnColor: Colors.grey,
+                            )),
+                            Expanded(
+                                child: BuildBottomButton(
+                              buttonText: "Next",
+                              onPressed: () => stepperController.toNextPage(),
                               pageNumber: 1,
-                              btnColor: primaryColor,)),
+                              btnColor: primaryColor,
+                            )),
                             // AuthButton(buttonText: "Previous", onPressed: (){}),
                           ],
                         ),
@@ -253,19 +244,16 @@ dispose() {
 
   AnimatedBuilder _buildAnim(String headline) {
     return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) => Transform(
-            transform:
-                Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
-        child: Text(
-                       headline,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline3,
-                      ),));
+        animation: _animationController,
+        builder: (context, child) => Transform(
+              transform:
+                  Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
+              child: Text(
+                headline,
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ));
   }
-
 
   // ignore: todo
   // TODO: implement wantKeepAlive

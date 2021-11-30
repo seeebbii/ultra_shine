@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/controller/api/vehicle_paintwork/vehicle_paintwork.dart';
 import 'package:ultra_shine/controller/api/vehicle_type/vehicle_type_controller.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
@@ -50,6 +51,7 @@ class _OnBoardRootState extends State<OnBoardRoot>
   @override
   void initState() {
     Get.put(VehicleTypeController());
+    Get.put(VehiclePaintWorkController());
     super.initState();
   }
 
