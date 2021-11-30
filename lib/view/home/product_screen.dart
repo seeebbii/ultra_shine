@@ -16,7 +16,7 @@ class ProductScreen extends StatefulWidget {
   _ProductScreenState createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveClientMixin {
+class _ProductScreenState extends State<ProductScreen> {
   late List<ProductModel> productModel;
 
   @override
@@ -49,6 +49,7 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -139,8 +140,9 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
                       return InkWell(
                         onTap: () {
                           setState(() {
-                            productModel
-                                .forEach((element) => element.value = false);
+                            for (var element in productModel) {
+                              element.value = false;
+                            }
                             productModel[index].value = true;
                           });
                         },
@@ -167,8 +169,21 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 5, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>stepperController.toNextPage(), pageNumber: 5, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => navigationController.goBack(),
+                            pageNumber: 3,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () => navigationController
+                                .navigateToNamed(maintenanceScreen),
+                            pageNumber: 3,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),
@@ -182,8 +197,4 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
       ),
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }
