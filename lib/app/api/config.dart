@@ -1,0 +1,9 @@
+const HOST = "18.117.92.20";
+const PROTOCOL = "http";
+const BASE_API_ENDPOINT = "api";
+const WITHOUT_API_URL = "$PROTOCOL://$HOST";
+const API_URL = "$PROTOCOL://$HOST/$BASE_API_ENDPOINT";
+const LOCATION_SOCKET_URL = "$PROTOCOL://$HOST/location";
+const CHAT_SOCKET_URL = "$PROTOCOL://$HOST/chat";
+const JOB_SOCKET_URL = "$PROTOCOL://$HOST/job";
+const INACTIVITY_TIMEOUT = const Duration(minutes: 15);
