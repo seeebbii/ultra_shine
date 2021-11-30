@@ -26,9 +26,19 @@ class _MainSplashScreenState extends State<MainSplashScreen>
         () => navigationController.getOffAll(onBoardRoot));
   }
 
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 3),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.fastLinearToSlowEaseIn,
+  );
+
   @override
   void dispose() {
     super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -44,20 +54,21 @@ class _MainSplashScreenState extends State<MainSplashScreen>
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.high),
           ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Center(
-                  child: Hero(
-                tag: 'main-logo',
-                child: Image.asset(
-                  ImagePaths.ultraShineLogo,
-                  height: 0.25.sh,
-                  filterQuality: FilterQuality.high,
-                  color: Colors.white,
-                ),
-              ))
-            ],
+          child: ScaleTransition(
+            scale: _animation,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Center(
+                  child: Image.asset(
+                    ImagePaths.ultraShineLogo,
+                    height: 0.9.sh,
+                    // filterQuality: FilterQuality.high,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

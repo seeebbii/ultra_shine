@@ -20,7 +20,6 @@ import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_2.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
 
-import '../../main.dart';
 
 // STATIC ROUTE NAMES
 // SPLASH / ON BOARDING
@@ -55,6 +54,8 @@ const String myAppointments='/my-appointments';
 
 // ignore: todo
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
+
+
 class RouteGenerator {
   // FUNCTION THAT HANDLES ROUTING
   static Route<dynamic> onGeneratedRoutes(RouteSettings settings) {
