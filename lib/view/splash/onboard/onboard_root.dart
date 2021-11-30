@@ -49,7 +49,7 @@ class _OnBoardRootState extends State<OnBoardRoot>
 
   @override
   void initState() {
-    Get.put(VehicleTypeController().getVehicleTypes());
+    Get.put(VehicleTypeController());
     super.initState();
   }
 

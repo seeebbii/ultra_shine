@@ -10,7 +10,12 @@ class VehicleTypeController extends GetxController {
 
   void getVehicleTypes() async{
     vehicleTypes.value = await ApiClient.vehicleTypeService.getVehicleTypes();
-    debugPrint(vehicleTypes.length.toString());
+  }
+
+  @override
+  void onInit() {
+    getVehicleTypes();
+    super.onInit();
   }
 
 }
