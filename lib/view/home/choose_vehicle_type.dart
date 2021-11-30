@@ -151,10 +151,10 @@ dispose() {
                             });
                           },
                           child: BuildVehicleType(
-                            imagePath: carTypes[index].imagePath!,
-                            carText: carTypes[index].carText!,
-                            value: carTypes[index].value!,
-                            index: index,
+                            imagePath: vehicleTypeController.vehicleTypes[index].imagePath!,
+                            carText: vehicleTypeController.vehicleTypes[index].carText!,
+                            value: vehicleTypeController.vehicleTypes[index].value!,
+                            index: vehicleTypeController.vehicleTypes.length,
                           ),
                         );
                       },
