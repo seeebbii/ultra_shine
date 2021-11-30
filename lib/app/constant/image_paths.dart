@@ -22,6 +22,7 @@ class ImagePaths{
 
 
   static const String drawerProfile = "$ICON_PATH/profile.png";
+  static const String noteIconAppointment = "$ICON_PATH/note_icon_apt.png";
 
 
 // TODO :: IMAGES

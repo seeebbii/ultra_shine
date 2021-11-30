@@ -49,7 +49,6 @@ class _InteriorScreenState extends State<InteriorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -202,8 +201,8 @@ class _InteriorScreenState extends State<InteriorScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> navigationController.navigateToNamed(filmScreen), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 2, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 2, btnColor: primaryColor,)),
                         ],
                       ),
                     ),

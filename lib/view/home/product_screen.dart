@@ -50,7 +50,6 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -166,8 +165,8 @@ class _ProductScreenState extends State<ProductScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>navigationController.navigateToNamed(maintenanceScreen), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 5, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>stepperController.toNextPage(), pageNumber: 5, btnColor: primaryColor,)),
                         ],
                       ),
                     ),

@@ -31,7 +31,7 @@ class _RequestScreenState extends State<RequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+
       body: Stack(
         children: [
           CustomScrollView(
@@ -142,7 +142,7 @@ class _RequestScreenState extends State<RequestScreen> {
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Previous",
-                            onPressed: () => navigationController.goBack(),
+                            onPressed: () => stepperController.toPreviousPage(),
                             pageNumber: 3,
                             btnColor: Colors.black,
                           )),

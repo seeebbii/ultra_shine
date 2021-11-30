@@ -63,7 +63,6 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -186,8 +185,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>navigationController.goBack(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> navigationController.navigateToNamed(productScreen), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 4, btnColor: Colors.black,)),
+                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 4, btnColor: primaryColor,)),
                         ],
                       ),
                     ),
