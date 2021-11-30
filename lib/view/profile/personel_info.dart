@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/home/widgets/text_fields.dart';
@@ -25,7 +24,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   Widget build(BuildContext context) {
  
     return Scaffold(
-      backgroundColor:primaryColor,
+      backgroundColor: Colors.redAccent,
       body: profileView()// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -34,14 +33,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 50, 30, 30),
+          padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(height: 50, width: 50 ,child: IconButton(onPressed: ()=>navigationController.goBack(),
-              icon: const Icon(Icons.arrow_back, size: 24,color: Colors.white)),
+              Container(height: 50, width: 50 ,child: const Icon(Icons.arrow_back_ios, size: 24,color: Colors.white),
               
-               decoration: BoxDecoration(border: Border.all(color: primaryColor), 
+               decoration: BoxDecoration(border: Border.all(color: Colors.redAccent), 
                
                borderRadius: const BorderRadius.all(const Radius.circular(10))),),
 
@@ -53,19 +51,17 @@ class _PersonalInfoState extends State<PersonalInfo> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0,0 ,0),
-        
           child: Stack(
             children: <Widget>[
               CircleAvatar(
-                backgroundColor:whiteColor,
                 radius: 50,
-                child: ClipOval(child: Image.asset(  ImagePaths.ultraShineLogo, height: 150, width: 150, fit: BoxFit.cover,),),
+                child: ClipOval(child: Image.asset(  ImagePaths.tireBackground, height: 150, width: 150, fit: BoxFit.cover,),),
               ),
               Positioned(bottom: 1, right: 1 ,child: Container(
                 height: 40, width: 40,
                 child: const Icon(Icons.add_a_photo, color: Colors.white,),
                 decoration: const BoxDecoration(
-                  color: red,
+                  color: Colors.deepOrange,
                   borderRadius: BorderRadius.all(const Radius.circular(20))
                 ),
               ))
@@ -89,14 +85,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                      _infoTiles('ContactNumber'),
                                        _infoTiles('City'),
                                             _infoTiles('Country'),
-                      _infoTiles('Country'),
+                   
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container( height: 60, width: 350,
                       child: const Align(child: Text('Save', style: TextStyle(color: Colors.white70, fontSize: 20),),),
                       decoration: const BoxDecoration(
-                        color: primaryColor,
+                        color: Colors.redAccent,
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                     ),
@@ -112,12 +108,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
   Padding _infoTiles( String title) {
     return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 5, 10, 4),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 8,bottom: 5),
+                    padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       
                       title,style:Theme.of(context).textTheme.headline2?.copyWith(
@@ -134,16 +130,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     hintText: title,
                     hide: false,
                     textInputType: TextInputType.name)
-                    , decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),border: Border.all(width: 1.0, color: Colors.white)),
+                    , decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(20)),border: Border.all(width: 1.0, color: Colors.white70)),
                   ),
                 ],
               ),
             );
   }
-   
-  
-  
+ 
 }
