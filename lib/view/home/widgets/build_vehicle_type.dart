@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,6 +71,7 @@ dispose() {
             borderRadius: const BorderRadius.all(Radius.circular(12))),
         child: Stack(
           children: [
+            _buildAnim(),
             Positioned(
               left: 0.01.sw,
               top: 0.01.sh,
@@ -82,7 +84,7 @@ dispose() {
                     shape: BoxShape.circle),
               ),
             ),
-             _buildAnim(),
+
             Container(
               margin: const EdgeInsets.all(5),
               child: Align(
@@ -108,9 +110,9 @@ dispose() {
             transform: Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
         child:  Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Image.asset(
-              widget.imagePath,
-              fit: BoxFit.cover,
+            child: CachedNetworkImage(
+              imageUrl: widget.imagePath,
+              fit: BoxFit.contain,
             ),
           ),));
   }
