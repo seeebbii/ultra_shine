@@ -2,7 +2,6 @@ import 'config.dart';
 
 // ignore: camel_case_types
 class API_URLS {
-  
   static const REGISTER_API = "$API_URL/register";
   static const LOGIN_API = "$API_URL/login";
 
@@ -29,6 +28,6 @@ class API_URLS {
   static const GETACOMPANY_API = "$API_URL/company";
   static const GETMYREVIEWS_API = "$API_URL/rating/my";
   static const SENDREVIEWS_API = "$API_URL/rating";
-
- 
 }
+
+const String baseUrl = 'http://ultrashinecarepair.geeklone.com:4001/api';
