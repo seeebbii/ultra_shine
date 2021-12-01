@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/app/constant/imp.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_textfield.dart';
@@ -27,6 +28,22 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
   final countryController = TextEditingController();
   final manufacturerController = TextEditingController();
   final addressController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+
+  void _trySubmit() async {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+
+
+
+      navigationController
+          .navigateToNamed(paymentMethodScreen);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,74 +80,77 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
                 ),
               ),
               SliverToBoxAdapter(
-                  child: Column(
-                children: [
-                  _buildNameField(),
-                  _buildEmailField(),
-                  _buildNumberField(),
-                  _buildYearField(),
-                  _buildModelField(),
-                  _buildPolishedField(),
-                  _buildCityField(),
-                  _buildCountryField(),
-                  _buildManufacturerField(),
-                  _buildAddressField(),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
+                  child: Form(
+                    key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 2.sp),
-                          child: Text(
-                            "Must Upload Videos/Photos of damaged car",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                ?.copyWith(fontWeight: FontWeight.w700),
+                children: [
+                    _buildNameField(),
+                    _buildEmailField(),
+                    _buildNumberField(),
+                    _buildYearField(),
+                    _buildModelField(),
+                    _buildPolishedField(),
+                    _buildCityField(),
+                    _buildCountryField(),
+                    _buildManufacturerField(),
+                    _buildAddressField(),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 2.sp),
+                            child: Text(
+                              "Must Upload Videos/Photos of damaged car",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 0.01.sp),
-                        InkWell(
-                          onTap: () {
-                            Get.bottomSheet(const UploadPhotoBottomSheet());
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                alignment: Alignment.bottomCenter,
-                                height: 0.18.sh,
-                                decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image:
-                                            AssetImage(ImagePaths.uploadImage),
-                                        scale: 0.6),
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: Colors.black45)),
+                          SizedBox(height: 0.01.sp),
+                          InkWell(
+                            onTap: () {
+                              Get.bottomSheet(const UploadPhotoBottomSheet());
+                            },
+                            child: Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
                                 child: Container(
-                                    margin: EdgeInsets.all(20.sp),
-                                    child: Text(
-                                      "Add Photo or Video",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.copyWith(
-                                              color: Colors.grey.shade500),
-                                    )),
+                                  alignment: Alignment.bottomCenter,
+                                  height: 0.18.sh,
+                                  decoration: BoxDecoration(
+                                      image: const DecorationImage(
+                                          image:
+                                              AssetImage(ImagePaths.uploadImage),
+                                          scale: 0.6),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.black45)),
+                                  child: Container(
+                                      margin: EdgeInsets.all(20.sp),
+                                      child: Text(
+                                        "Add Photo or Video",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.copyWith(
+                                                color: Colors.grey.shade500),
+                                      )),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
+                        ],
+                      ),
+                    )
                 ],
-              )),
+              ),
+                  )),
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -149,8 +169,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
                           Expanded(
                               child: BuildBottomButton(
                             buttonText: "Send",
-                            onPressed: () => navigationController
-                                .navigateToNamed(paymentMethodScreen),
+                            onPressed: _trySubmit,
                             pageNumber: 3,
                             btnColor: Colors.grey,
                           )),
@@ -190,7 +209,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "John Doe",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.name,
               suffixIcon: const SizedBox.shrink()),
@@ -219,7 +243,14 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "JohnDoe@mail.com",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }else if(!emailValidate.hasMatch(str)){
+                  return "Email is not valid";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.emailAddress,
               suffixIcon: const SizedBox.shrink()),
@@ -248,7 +279,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "3655825154",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.number,
               suffixIcon: const SizedBox.shrink()),
@@ -277,7 +313,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "2021",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.number,
               suffixIcon: const SizedBox.shrink()),
@@ -306,7 +347,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "2007",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.number,
               suffixIcon: const SizedBox.shrink()),
@@ -335,7 +381,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "2",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.number,
               suffixIcon: const SizedBox.shrink()),
@@ -364,7 +415,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "..",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.name,
               suffixIcon: const SizedBox.shrink()),
@@ -393,7 +449,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "...",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.name,
               suffixIcon: const SizedBox.shrink()),
@@ -422,7 +483,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "...",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.next,
               keyType: TextInputType.name,
               suffixIcon: const SizedBox.shrink()),
@@ -451,7 +517,12 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               borderRadius: 12,
               obSecureText: false,
               hintText: "...",
-              validator: (str) {},
+              validator: (str) {
+                if(str == '' || str == null){
+                  return "Required*";
+                }
+                return null;
+              },
               action: TextInputAction.done,
               keyType: TextInputType.name,
               suffixIcon: const SizedBox.shrink()),

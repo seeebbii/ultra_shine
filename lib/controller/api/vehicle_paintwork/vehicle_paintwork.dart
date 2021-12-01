@@ -7,6 +7,7 @@ import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
 class VehiclePaintWorkController extends GetxController {
   static VehiclePaintWorkController instance = Get.find();
 
+  var vehiclePainWorkSelected = false.obs;
 
   void getVehiclePaintWork() async{
     ApiClient.vehicleTypeService.getVehicleTypes();

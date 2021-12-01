@@ -19,10 +19,8 @@ class ImagePaths {
   static const String payPal = "$ICON_PATH/paypal.png";
   static const String stripeIcons = "$ICON_PATH/stripe_icons.png";
  static const String loadingIcon="$ICON_PATH/index.png";
-
-
+static const String noteIconAppointment="$ICON_PATH/note_icon_apt.png";
   static const String drawerProfile = "$ICON_PATH/profile.png";
-  static const String noteIconAppointment = "$ICON_PATH/note_icon_apt.png";
 
 // TODO :: IMAGES
   static const String mainSplash = "$IMAGES_PATH/splash.png";
