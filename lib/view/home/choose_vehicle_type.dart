@@ -30,6 +30,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   late AnimationController _animationController;
   late Animation _animation;
 
+
   void homelistener(status) {
     if (status == AnimationStatus.completed) {
       _animation.removeStatusListener(homelistener);
@@ -133,6 +134,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                                   .forEach((element) => element.value = false);
                               vehicleTypeController.vehicleTypes[index].value = true;
                             });
+                            vehicleTypeController.vehicleTypeSelected.value = true;
                           },
                           child: BuildVehicleType(
                             imagePath: vehicleTypeController
@@ -185,6 +187,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                                 element.value = false;
                               }
                               paintWorkTypes[index].value = true;
+                              vehiclePaintWorkController.vehiclePainWorkSelected.value = true;
                             });
                           },
                           child: BuildVehiclePaintwork(
@@ -220,12 +223,12 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                               btnColor: Colors.grey,
                             )),
                             Expanded(
-                                child: BuildBottomButton(
-                              buttonText: "Next",
-                              onPressed: () => stepperController.toNextPage(),
-                              pageNumber: 1,
-                              btnColor: primaryColor,
-                            )),
+                                child: Obx(() => BuildBottomButton(
+                                  buttonText: "Next",
+                                  onPressed: vehicleTypeController.vehicleTypeSelected.value && vehiclePaintWorkController.vehiclePainWorkSelected.value ? () => stepperController.toNextPage() : (){},
+                                  pageNumber: 1,
+                                  btnColor: primaryColor,
+                                ))),
                             // AuthButton(buttonText: "Previous", onPressed: (){}),
                           ],
                         ),
