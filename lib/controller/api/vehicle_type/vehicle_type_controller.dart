@@ -8,6 +8,9 @@ class VehicleTypeController extends GetxController {
   static VehicleTypeController instance = Get.find();
   var vehicleTypes = <ChooseVehicleModel>[].obs;
 
+  // VARIABLE FOR VALIDATION
+  var vehicleTypeSelected = false.obs;
+
   void getVehicleTypes() async{
     vehicleTypes.value = await ApiClient.vehicleTypeService.getVehicleTypes();
   }

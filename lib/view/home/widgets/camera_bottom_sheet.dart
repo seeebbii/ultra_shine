@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_social_button.dart';
 
-import 'camera_bottom_sheet.dart';
-import 'gallery_bottom_sheet.dart';
-
-class UploadPhotoBottomSheet extends StatelessWidget {
-  const UploadPhotoBottomSheet({Key? key}) : super(key: key);
+class CameraBottomSheet extends StatelessWidget {
+  const CameraBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ImagePicker _picker = ImagePicker();
+
     return SingleChildScrollView(
       child: Container(
         height: 0.5.sh,
@@ -80,23 +79,29 @@ class UploadPhotoBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   AuthSocialButton(
-                    onPressed: () {
-                      debugPrint("Camera pressed");
+                    onPressed: () async {
+                      debugPrint("Image Capture");
 
-                      Get.bottomSheet(const CameraBottomSheet());
+                      // Capture a photo
+
+                      final XFile? photo =
+                          await _picker.pickImage(source: ImageSource.camera);
                     },
-                    socialName: 'Camera',
+                    socialName: 'Image',
                     imagePath: ImagePaths.cameraIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,
                     elevation: 8,
                   ),
                   AuthSocialButton(
-                    onPressed: () {
-                      debugPrint("Gallery pressed");
-                      Get.bottomSheet(const GalleryBottomSheet());
+                    onPressed: () async {
+                      debugPrint("Video Capture");
+
+                      // Capture a video
+                      final XFile? video =
+                          await _picker.pickVideo(source: ImageSource.camera);
                     },
-                    socialName: 'Gallery',
+                    socialName: 'Video',
                     imagePath: ImagePaths.galleryIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,

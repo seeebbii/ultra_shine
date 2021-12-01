@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/controller/api/films/films_controller.dart';
 import 'package:ultra_shine/view/splash/onboard/widgets/onboard_text.dart';
 
 class OnBoardWelcome1 extends StatefulWidget {
@@ -11,6 +13,13 @@ class OnBoardWelcome1 extends StatefulWidget {
 }
 
 class _OnBoardWelcome1State extends State<OnBoardWelcome1> {
+  @override
+  @override
+  void initState() {
+    Get.put(FilmsController());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
