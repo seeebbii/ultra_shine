@@ -79,11 +79,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                               },
                               child: Card(
                                 color:
-<<<<<<< HEAD
-                                    widget.model.types![index].selected == true
-=======
                                     widget.model.types[index].selected == true
->>>>>>> main
                                         ? Colors.red
                                         : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -93,12 +89,12 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 12.sp, vertical: 5.sp),
                                   child: Text(
-                                    "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
+                                    "${widget.model.types[index].name}: \$${widget.model.types[index].price}",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
                                         ?.copyWith(
-                                            color: widget.model.types![index]
+                                            color: widget.model.types[index]
                                                     .selected!
                                                 ? Colors.white
                                                 : Colors.black,

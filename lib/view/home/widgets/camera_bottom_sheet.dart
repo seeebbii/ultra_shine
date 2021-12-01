@@ -87,7 +87,7 @@ class CameraBottomSheet extends StatelessWidget {
                       final XFile? photo =
                           await _picker.pickImage(source: ImageSource.camera);
                     },
-                    socialName: 'Image',
+                    socialName: 'Capture Image',
                     imagePath: ImagePaths.cameraIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,
@@ -101,7 +101,7 @@ class CameraBottomSheet extends StatelessWidget {
                       final XFile? video =
                           await _picker.pickVideo(source: ImageSource.camera);
                     },
-                    socialName: 'Video',
+                    socialName: 'Capture Video',
                     imagePath: ImagePaths.galleryIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,

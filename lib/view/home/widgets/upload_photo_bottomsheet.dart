@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -92,9 +93,20 @@ class UploadPhotoBottomSheet extends StatelessWidget {
                     elevation: 8,
                   ),
                   AuthSocialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       debugPrint("Gallery pressed");
-                      Get.bottomSheet(const GalleryBottomSheet());
+                      // Get.bottomSheet(const GalleryBottomSheet());
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles(
+                        allowMultiple: true,
+                        allowedExtensions: ['jpg', 'png', 'mp4'],
+                      );
+
+// if (result != null) {
+//   List<File> files = result.paths.map((path) => File(path)).toList();
+// } else {
+//   // User canceled the picker
+// }
                     },
                     socialName: 'Gallery',
                     imagePath: ImagePaths.galleryIcon,
