@@ -1,10 +1,10 @@
 class FilmsModel {
-  FilmsModel({this.id, this.title, this.description, this.types, this.value});
+  FilmsModel({this.id, this.title, this.description, required this.types, this.value});
 
   int? id;
   String? title;
   String? description;
-  List<Type>? types;
+  List<Type> types;
   bool? value;
 
   factory FilmsModel.fromJson(Map<String, dynamic> json) => FilmsModel(
@@ -18,7 +18,7 @@ class FilmsModel {
         "id": id,
         "title": title,
         "description": description,
-        "types": List<dynamic>.from(types!.map((x) => x.toJson())),
+        "types": List<dynamic>.from(types.map((x) => x.toJson())),
         'value': value,
       };
 }

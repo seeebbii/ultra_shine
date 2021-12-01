@@ -167,17 +167,19 @@ class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAlive
                     return InkWell(
                         onTap: () {
                           setState(() {
-                            exteriorCard
-                                .forEach((element) => element.value = false);
-                            exteriorCard.forEach((element) {
-                              element.exteriorOptions
-                                  .forEach((opt) => opt.selected = false);
-                            });
-                            exteriorCard[index].value = true;
+                            for (var element in polishTypeController.polishTypes) {
+                              element.value = false;
+                            }
+                            for (var element in polishTypeController.polishTypes) {
+                              for (var opt in element.types!) {
+                                opt.selected= false;
+                              }
+                            }
+                            polishTypeController.polishTypes[index].value = true;
                           });
                         },
                         child: BuildExteriorCard(
-                          model: exteriorCard[index],
+                          model: polishTypeController.polishTypes[index],
                         ));
                   }, childCount: exteriorCard.length),
                 ),
