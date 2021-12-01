@@ -7,6 +7,9 @@ class FilmsController extends GetxController {
   static FilmsController instance = Get.find();
   var filmsModel = <FilmsModel>[].obs;
 
+  var optionSelected = false.obs;
+  var packageSelected = false.obs;
+
   void getFilmsList() async{
     filmsModel.value = await ApiClient.filmsServices.getFilmsServices();
   }

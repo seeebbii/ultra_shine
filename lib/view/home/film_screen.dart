@@ -77,6 +77,10 @@ class _FilmScreenState extends State<FilmScreen>
                               element.types.forEach((opt) => opt.selected = false);
                             });
                             filmsController.filmsModel[index].value = true;
+
+                            filmsController.packageSelected.value = false;
+                            filmsController.optionSelected.value = true;
+
                           });
                         },
                         child: BuildFilmCard(
@@ -102,11 +106,18 @@ class _FilmScreenState extends State<FilmScreen>
                           )),
                           Expanded(
                               child: BuildBottomButton(
-                            buttonText: "Next",
-                            onPressed: () => stepperController.toNextPage(),
-                            pageNumber: 3,
-                            btnColor: primaryColor,
-                          )),
+                                buttonText: "Next",
+                                onPressed: () {
+                                  if (filmsController.optionSelected.value ==
+                                      true &&
+                                      filmsController.packageSelected.value ==
+                                          true) {
+                                    stepperController.toNextPage();
+                                  }
+                                },
+                                pageNumber: 1,
+                                btnColor: primaryColor,
+                              )),
                         ],
                       ),
                     ),

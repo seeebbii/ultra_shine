@@ -68,15 +68,23 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
                     ?.copyWith(fontSize: 10.sp)),
           ),
           SizedBox(height: 0.01.sh),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 3.sp),
-          //   child: Container(
-          //     height: 0.15.sh,
-          //     child: ListView.builder(itemBuilder: (_, index){
-          //       return _buildRatingRow(widget.model.ratingTile[index].packageName!, widget.model.ratingTile[index].value!);
-          //     }, itemCount: widget.model.ratingTile.length, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),),
-          //   ),
-          // )
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 3.sp),
+            child: Container(
+              height: 0.15.sh,
+              child: ListView(
+                children: [
+                  _buildRatingRow('Durability', widget.model.durability!.toDouble()),
+                  _buildRatingRow('Ease of Application', widget.model.easeOfApplication!.toDouble()),
+                  _buildRatingRow('Sickness', widget.model.slickness!.toDouble()),
+                  _buildRatingRow('Gloss', widget.model.gloss!.toDouble()),
+                  _buildRatingRow('Price', widget.model.price!.toDouble()),
+                ],
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+              ),
+            ),
+          )
         ],
       ),
     );

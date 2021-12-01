@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/models/films_model.dart';
 
 class BuildFilmCard extends StatefulWidget {
@@ -75,6 +76,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                                 setState(() {
                                   widget.model.types.forEach((opt) => opt.selected = false);
                                   widget.model.types[index].selected = true;
+                                  filmsController.packageSelected.value = true;
                                 });
                               },
                               child: Card(

@@ -168,8 +168,9 @@ class _RequestScreenState extends State<RequestScreen>
                                                 itemBuilder: (context, index) {
                                                   return Container(
                                                       margin:
-                                                          EdgeInsets.all(1.sp),
+                                                          EdgeInsets.all(0.sp),
                                                       child: Card(
+                                                        color: Colors.white,
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment

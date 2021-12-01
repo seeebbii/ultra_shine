@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
 import 'package:http/http.dart' as http;
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/controller/api/request/request_controller.dart';
 
 class RequestService {
   //final _client = http.Client();
-  static RequestController instance = Get.find();
   Future<void> postRequest(
     String name,
     String email,
@@ -46,9 +46,9 @@ class RequestService {
     //for token
     // request.headers.addAll({"Authorization": "Bearer token"});
     //for image and videos and files
-    print(instance.assets.length);
+    print(requestController.assets.length);
 
-    instance.assets.forEach((element) async {
+    requestController.assets.forEach((element) async {
       request.files.add(
           await http.MultipartFile.fromPath("files", element.path.toString()));
     });

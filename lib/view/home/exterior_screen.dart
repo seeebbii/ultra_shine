@@ -17,36 +17,10 @@ class ExteriorScreen extends StatefulWidget {
   State<ExteriorScreen> createState() => _ExteriorScreenState();
 }
 
-class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAliveClientMixin {
-  List<ExteriorOptions> exteriorOptions = <ExteriorOptions>[
-    ExteriorOptions(packageName: "Small", price: 700, selected: false),
-    ExteriorOptions(packageName: "Medium", price: 800, selected: false),
-    ExteriorOptions(packageName: "Large", price: 900, selected: false),
-  ];
-
-  late List<ExteriorCardModel> exteriorCard;
-
+class _ExteriorScreenState extends State<ExteriorScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
-    exteriorCard = <ExteriorCardModel>[
-      ExteriorCardModel(
-          exteriorOptions: exteriorOptions,
-          titleText: "Single Stage Polish",
-          subTitleText:
-              "Removes superficial scratches & revives color | good for light colors & soft paint",
-          value: false),
-      ExteriorCardModel(
-          exteriorOptions: exteriorOptions,
-          titleText: "Concours Multi-Stage Paint Correction",
-          subTitleText:
-              "Removes superficial scratches & revives color | good for light colors & soft paint",
-          value: false),
-      ExteriorCardModel(
-          exteriorOptions: exteriorOptions,
-          titleText: "Exterior Nano Ceramic Coatings",
-          subTitleText: "Addresses paint, wheels, glass, plastic trim.",
-          value: false),
-    ];
     super.initState();
   }
 
@@ -160,31 +134,34 @@ class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAlive
                 ),
               ),
               SliverPadding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
+                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
                           setState(() {
-                            for (var element in polishTypeController.polishTypes) {
+                            for (var element
+                                in polishTypeController.polishTypes) {
                               element.value = false;
                             }
-                            for (var element in polishTypeController.polishTypes) {
+                            for (var element
+                                in polishTypeController.polishTypes) {
                               for (var opt in element.types!) {
-                                opt.selected= false;
+                                opt.selected = false;
                               }
                             }
-                            polishTypeController.polishTypes[index].value = true;
+                            polishTypeController.polishTypes[index].value =
+                                true;
+                            polishTypeController.packageSelected.value = false;
+                            polishTypeController.optionSelected.value = true;
                           });
                         },
                         child: BuildExteriorCard(
                           model: polishTypeController.polishTypes[index],
                         ));
-                  }, childCount: exteriorCard.length),
+                  }, childCount: polishTypeController.polishTypes.length),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -193,8 +170,27 @@ class _ExteriorScreenState extends State<ExteriorScreen> with AutomaticKeepAlive
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 1, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>stepperController.toNextPage(), pageNumber: 1, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => stepperController.toPreviousPage(),
+                            pageNumber: 1,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () {
+                              if (polishTypeController.optionSelected.value ==
+                                      true &&
+                                  polishTypeController.packageSelected.value ==
+                                      true) {
+                                stepperController.toNextPage();
+                              }
+                            },
+                            pageNumber: 1,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),

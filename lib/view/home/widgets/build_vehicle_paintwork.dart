@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+
 class BuildVehiclePaintwork extends StatefulWidget {
   final String imagePath;
   final String carText;
@@ -10,10 +12,10 @@ class BuildVehiclePaintwork extends StatefulWidget {
 
   const BuildVehiclePaintwork(
       {Key? key,
-        required this.imagePath,
-        required this.carText,
-        required this.value,
-        required this.index})
+      required this.imagePath,
+      required this.carText,
+      required this.value,
+      required this.index})
       : super(key: key);
 
   @override
@@ -29,12 +31,12 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
         height: 0.15.sh,
         width: 0.4.sw,
         decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image:true? FadeInImage.assetNetwork(
-        //       fadeInCurve: Curves.bounceIn,
-        //       placeholder: ImagePaths.backArrow,  image:  widget.imagePath): ,
-        //  fit: BoxFit.cover
-        //   ),
+            //   image: DecorationImage(
+            //     image:true? FadeInImage.assetNetwork(
+            //       fadeInCurve: Curves.bounceIn,
+            //       placeholder: ImagePaths.backArrow,  image:  widget.imagePath): ,
+            //  fit: BoxFit.cover
+            //   ),
             border: Border.all(
               width: 1.3,
               color: widget.value ? Colors.red : Colors.black,
@@ -42,13 +44,7 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
             borderRadius: const BorderRadius.all(Radius.circular(12))),
         child: Stack(
           children: [
-               Positioned.fill(
-              
-            
-              child:buildPaintworktypes()
-            
-            
-            ),
+            Positioned.fill(child: buildPaintworktypes()),
             Positioned(
               left: 0.01.sw,
               top: 0.01.sh,
@@ -61,8 +57,6 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
                     shape: BoxShape.circle),
               ),
             ),
-          
-
             Container(
               margin: const EdgeInsets.all(5),
               child: Align(
@@ -83,16 +77,11 @@ class _BuildVehiclePaintworkState extends State<BuildVehiclePaintwork> {
 
   ClipRRect buildPaintworktypes() {
     return ClipRRect(
-borderRadius: BorderRadius.circular(8.r),child: FadeInImage.assetNetwork
-
-(
-  fadeInCurve: Curves.easeIn,
-  fadeInDuration: const Duration(milliseconds: 1500),
-  placeholder:ImagePaths.loadingIcon,image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Mercedes-Benz_W115_220D_%281973%29.jpg/1200px-Mercedes-Benz_W115_220D_%281973%29.jpg',
-  fit: BoxFit.cover,
-)
-              
-            
-          );
+        borderRadius: BorderRadius.circular(8.r),
+        child: CachedNetworkImage(
+          fadeInCurve: Curves.easeIn,
+          fadeInDuration: const Duration(milliseconds: 1500),
+          imageUrl: widget.imagePath ,fit: BoxFit.cover,
+        ));
   }
 }

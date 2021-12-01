@@ -1,16 +1,30 @@
 class ChooseVehiclePaintworkModel {
+  int? id;
+  String? name;
+  String? image;
+  String? createdAt;
+  String? updatedAt;
   bool? value;
-  String? carText;
-  String? imagePath;
 
-  ChooseVehiclePaintworkModel({this.value, this.carText, this.imagePath});
+  ChooseVehiclePaintworkModel(
+      {this.id, this.name, this.image, this.createdAt, this.updatedAt, this.value});
 
-// ChooseVehiclePaintworkModel({ this.id, this.name });
+  ChooseVehiclePaintworkModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    value = false;
+  }
 
-// ChooseVehiclePaintworkModel.fromJson(Map<String, dynamic> json){
-//     this.id = json['id'];
-//     this.name = json['name'];
-// }
-//
-// Map<String, dynamic> toJson() => {'id':id, 'name':name };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
 }

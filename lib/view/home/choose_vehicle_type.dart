@@ -59,17 +59,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     // you need this
   }
 
-  List<ChooseVehiclePaintworkModel> paintWorkTypes =
-      <ChooseVehiclePaintworkModel>[
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "New Car", imagePath: ImagePaths.ptNew),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Light Swirls", imagePath: ImagePaths.ptLight),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Large Swirls", imagePath: ImagePaths.ptLarge),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Deep Scratches", imagePath: ImagePaths.ptDeep),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -172,36 +161,36 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                 SliverPadding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
-                  sliver: SliverGrid(
+                  sliver: Obx(() => SliverGrid(
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) {
+                          (context, index) {
                         return InkWell(
                           onTap: () {
                             setState(() {
-                              for (var element in paintWorkTypes) {
+                              for (var element in vehiclePaintWorkController.vehiclePaintWorkList) {
                                 element.value = false;
                               }
-                              paintWorkTypes[index].value = true;
+                              vehiclePaintWorkController.vehiclePaintWorkList[index].value = true;
                               vehiclePaintWorkController
                                   .vehiclePainWorkSelected.value = true;
                             });
                           },
                           child: BuildVehiclePaintwork(
-                            imagePath: paintWorkTypes[index].imagePath!,
-                            carText: paintWorkTypes[index].carText!,
-                            value: paintWorkTypes[index].value!,
+                            imagePath: vehiclePaintWorkController.vehiclePaintWorkList[index].image!,
+                            carText: vehiclePaintWorkController.vehiclePaintWorkList[index].name!,
+                            value: vehiclePaintWorkController.vehiclePaintWorkList[index].value!,
                             index: index,
                           ),
                         );
                       },
-                      childCount: paintWorkTypes.length,
+                      childCount: vehiclePaintWorkController.vehiclePaintWorkList.length,
                     ),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200.sp,
                         childAspectRatio: 3 / 2.5,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5),
-                  ),
+                  )),
                 ),
                 SliverToBoxAdapter(
                   child: Column(
