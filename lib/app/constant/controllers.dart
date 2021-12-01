@@ -8,11 +8,7 @@ import 'package:ultra_shine/controller/stepper/stepper_controller.dart';
 NavigationController navigationController = NavigationController.instance;
 StepperController stepperController = StepperController.instance;
 VehicleTypeController vehicleTypeController = VehicleTypeController.instance;
-<<<<<<< HEAD
-VehiclePaintWorkController vehiclePaintWorkController = VehiclePaintWorkController.instance;
-PolishTypeController polishTypeController=PolishTypeController.instance;
-=======
 VehiclePaintWorkController vehiclePaintWorkController =
     VehiclePaintWorkController.instance;
 FilmsController filmsController = FilmsController.instance;
->>>>>>> dev
+PolishTypeController polishTypeController=PolishTypeController.instance;
