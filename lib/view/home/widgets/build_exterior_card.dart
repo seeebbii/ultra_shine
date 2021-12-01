@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/models/home/exterior_card_model.dart';
+import 'package:ultra_shine/models/home/polishing_types.dart';
 
 class BuildExteriorCard extends StatefulWidget {
-  final ExteriorCardModel model;
+  final Polishtypes model;
 
   const BuildExteriorCard({Key? key, required this.model}) : super(key: key);
 
@@ -44,7 +45,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                     contentPadding: EdgeInsets.symmetric(
                         horizontal: 25.sp, vertical: 20.sp),
                     title: Text(
-                      "${widget.model.titleText}",
+                      "${widget.model.title}",
                       style: Theme.of(context)
                           .textTheme
                           .headline3
@@ -53,7 +54,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                     subtitle: Padding(
                       padding: EdgeInsets.only(top: 8.sp),
                       child: Text(
-                        "${widget.model.subTitleText}",
+                        "${widget.model.description}",
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2
@@ -64,7 +65,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 5.sp),
                     child: Visibility(
-                      visible: widget.model.value!,
+                       visible: widget.model.value!,
                       child: Container(
                         height: 0.05.sh,
                         child: ListView.builder(
@@ -72,15 +73,16 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                             return InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.model.exteriorOptions
-                                      .forEach((opt) => opt.selected = false);
-                                  widget.model.exteriorOptions[index].selected =
+                                  widget.model.types
+                                      ?.forEach((opt) => opt.selected= false);
+                                  widget.model.types![index].selected =
                                       true;
                                 });
                               },
                               child: Card(
-                                color: widget
-                                        .model.exteriorOptions[index].selected!
+                                color: 
+                                 
+                                    widget.model.types![index].selected!
                                     ? Colors.red
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -90,24 +92,20 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 12.sp, vertical: 5.sp),
                                   child: Text(
-                                    "${widget.model.exteriorOptions[index].packageName}: \$${widget.model.exteriorOptions[index].price}",
+                                    "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
                                         ?.copyWith(
-                                            color: widget
-                                                    .model
-                                                    .exteriorOptions[index]
-                                                    .selected!
-                                                ? Colors.white
-                                                : Colors.black,
+                                            
+                                               
                                             fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
                             );
                           },
-                          itemCount: widget.model.exteriorOptions.length,
+                          itemCount: widget.model.types!.length,
                           scrollDirection: Axis.horizontal,
                         ),
                       ),
