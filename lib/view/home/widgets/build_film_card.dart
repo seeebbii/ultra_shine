@@ -80,7 +80,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                               },
                               child: Card(
                                 color:
-                                    widget.model.types![index].selected == false
+                                    widget.model.types![index].selected == true
                                         ? Colors.red
                                         : Colors.white,
                                 shape: RoundedRectangleBorder(
