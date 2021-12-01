@@ -16,7 +16,7 @@ class _OnBoardWelcome1State extends State<OnBoardWelcome1> {
   @override
   @override
   void initState() {
-    Get.put(FilmsController());
+   
     super.initState();
   }
 

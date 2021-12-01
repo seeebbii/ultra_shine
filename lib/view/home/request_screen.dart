@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,7 +19,8 @@ class RequestScreen extends StatefulWidget {
   _RequestScreenState createState() => _RequestScreenState();
 }
 
-class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveClientMixin {
+class _RequestScreenState extends State<RequestScreen>
+    with AutomaticKeepAliveClientMixin {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final contactController = TextEditingController();
@@ -28,27 +31,35 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
   final countryController = TextEditingController();
   final manufacturerController = TextEditingController();
   final addressController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
 
   void _trySubmit() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
+//Post request
 
+      requestController.requestSubmit(
+        name: nameController.text,
+        email: emailController.text,
+        contact: contactController.text,
+        yearMake: yearMakeController.text,
+        model: modelController.text,
+        polished: polishedController.text,
+        city: cityController.text,
+        country: countryController.text,
+        manufacturer: manufacturerController.text,
+        address: addressController.text,
+      );
 
-
-      navigationController
-          .navigateToNamed(paymentMethodScreen);
+      // navigationController.navigateToNamed(paymentMethodScreen);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Stack(
         children: [
           CustomScrollView(
@@ -81,9 +92,9 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               ),
               SliverToBoxAdapter(
                   child: Form(
-                    key: _formKey,
-                    child: Column(
-                children: [
+                key: _formKey,
+                child: Column(
+                  children: [
                     _buildNameField(),
                     _buildEmailField(),
                     _buildNumberField(),
@@ -95,8 +106,8 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
                     _buildManufacturerField(),
                     _buildAddressField(),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.sp, vertical: 5.sp),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -113,44 +124,108 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
                           SizedBox(height: 0.01.sp),
                           InkWell(
                             onTap: () {
-                              Get.bottomSheet(const UploadPhotoBottomSheet());
+                              Get.bottomSheet(const UploadPhotoBottomSheet())
+                                  .then((value) => setState(() {}));
                             },
                             child: Card(
                               color: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)),
                               child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  height: 0.18.sh,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image:
-                                              AssetImage(ImagePaths.uploadImage),
-                                          scale: 0.6),
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.black45)),
-                                  child: Container(
-                                      margin: EdgeInsets.all(20.sp),
-                                      child: Text(
-                                        "Add Photo or Video",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.copyWith(
-                                                color: Colors.grey.shade500),
-                                      )),
-                                ),
-                              ),
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: requestController.assets.length <= 0
+                                      ? Container(
+                                          alignment: Alignment.bottomCenter,
+                                          height: 0.18.sh,
+                                          decoration: BoxDecoration(
+                                              image: const DecorationImage(
+                                                  image: AssetImage(
+                                                      ImagePaths.uploadImage),
+                                                  scale: 0.6),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                  color: Colors.black45)),
+                                          child: Container(
+                                              margin: EdgeInsets.all(20.sp),
+                                              child: Text(
+                                                "Add Photo or Video",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1
+                                                    ?.copyWith(
+                                                        color: Colors
+                                                            .grey.shade500),
+                                              )),
+                                        )
+                                      : Obx(
+                                          () => Container(
+                                            alignment: Alignment.bottomCenter,
+                                            height: 0.18.sh,
+                                            child: ListView.builder(
+                                                itemCount: requestController
+                                                    .assets.length,
+                                                itemBuilder: (context, index) {
+                                                  return Container(
+                                                      margin:
+                                                          EdgeInsets.all(1.sp),
+                                                      child: Card(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Flexible(
+                                                              child: RichText(
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                strutStyle:
+                                                                    StrutStyle(
+                                                                        fontSize:
+                                                                            12.0),
+                                                                text: TextSpan(
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                  text: requestController
+                                                                      .assets
+                                                                      .value[
+                                                                          index]
+                                                                      .name,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            IconButton(
+                                                                onPressed: () => setState(() =>
+                                                                    requestController
+                                                                        .assets
+                                                                        .removeAt(
+                                                                            index)),
+                                                                icon: const Icon(
+                                                                    Icons
+                                                                        .cancel_outlined))
+                                                          ],
+                                                        ),
+                                                      )
+                                                      // Image.file(File(
+                                                      //     requestController
+                                                      //         .assets
+                                                      //         .value[index]
+                                                      //         .path))
+
+                                                      );
+                                                }),
+                                          ),
+                                        )),
                             ),
                           ),
                         ],
                       ),
                     )
-                ],
-              ),
-                  )),
+                  ],
+                ),
+              )),
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -210,7 +285,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "John Doe",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -244,9 +319,9 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "JohnDoe@mail.com",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
-                }else if(!emailValidate.hasMatch(str)){
+                } else if (!emailValidate.hasMatch(str)) {
                   return "Email is not valid";
                 }
                 return null;
@@ -280,7 +355,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "3655825154",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -314,7 +389,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "2021",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -348,7 +423,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "2007",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -382,7 +457,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "2",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -416,7 +491,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "..",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -450,7 +525,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "...",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -484,7 +559,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "...",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
@@ -518,7 +593,7 @@ class _RequestScreenState extends State<RequestScreen> with AutomaticKeepAliveCl
               obSecureText: false,
               hintText: "...",
               validator: (str) {
-                if(str == '' || str == null){
+                if (str == '' || str == null) {
                   return "Required*";
                 }
                 return null;
