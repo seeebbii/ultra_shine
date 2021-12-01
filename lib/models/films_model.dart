@@ -1,40 +1,5 @@
-// To parse this JSON data, do
-//
-//     final filmsModel = filmsModelFromJson(jsonString);
-
-import 'dart:convert';
-
-FilmsModel filmsModelFromJson(String str) =>
-    FilmsModel.fromJson(json.decode(str));
-
-String filmsModelToJson(FilmsModel data) => json.encode(data.toJson());
-
 class FilmsModel {
   FilmsModel({
-    this.code,
-    this.data,
-    this.message,
-  });
-
-  int? code;
-  List<Datum>? data;
-  String? message;
-
-  factory FilmsModel.fromJson(Map<String, dynamic> json) => FilmsModel(
-        code: json["code"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        message: json["message"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "code": code,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-        "message": message,
-      };
-}
-
-class Datum {
-  Datum({
     this.id,
     this.title,
     this.description,
@@ -46,7 +11,7 @@ class Datum {
   String? description;
   List<Type>? types;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory FilmsModel.fromJson(Map<String, dynamic> json) => FilmsModel(
         id: json["id"],
         title: json["title"],
         description: json["description"],
