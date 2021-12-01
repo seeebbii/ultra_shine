@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/models/films_model.dart';
-import 'package:ultra_shine/models/home/film_card_model.dart';
 
 class BuildFilmCard extends StatefulWidget {
   final FilmsModel model;

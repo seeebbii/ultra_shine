@@ -4,7 +4,6 @@ import 'package:ultra_shine/app/constant/controllers.dart';
 import 'dart:math' as math;
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/film_card_model.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/build_film_card.dart';
 
@@ -17,35 +16,10 @@ class FilmScreen extends StatefulWidget {
 
 class _FilmScreenState extends State<FilmScreen>
     with AutomaticKeepAliveClientMixin {
-  List<FilmOptions> filmOptions = <FilmOptions>[
-    FilmOptions(packageName: "Price", price: 700, selected: false),
-  ];
 
-  //late List<FilmCardModel> filmCard;
 
   @override
   void initState() {
-    // filmCard = <FilmCardModel>[
-    //   FilmCardModel(
-    //       filmOptions: filmOptions,
-    //       titleText: "Window Tint",
-    //       subTitleText:
-    //       "Cleaning, sanitizing, reconditioning of all interior surfaces.",
-    //       value: false),
-    //   FilmCardModel(
-    //       filmOptions: filmOptions,
-    //       titleText: "Paint Protection Film, PPF",
-    //       subTitleText:
-    //       "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
-    //       value: false),
-    //   FilmCardModel(
-    //       filmOptions: filmOptions,
-    //       titleText: "Windshield Exterior Protection Film",
-    //       subTitleText:
-    //       "Exterior Protection for the front Windshield from Stone Chips ",
-    //       value: false),
-    // ];
-
     super.initState();
   }
 
