@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'dart:math' as math;
-
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/models/home/film_card_model.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
@@ -17,36 +15,37 @@ class FilmScreen extends StatefulWidget {
   _FilmScreenState createState() => _FilmScreenState();
 }
 
-class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMixin {
-
+class _FilmScreenState extends State<FilmScreen>
+    with AutomaticKeepAliveClientMixin {
   List<FilmOptions> filmOptions = <FilmOptions>[
     FilmOptions(packageName: "Price", price: 700, selected: false),
   ];
 
-  late List<FilmCardModel> filmCard;
+  //late List<FilmCardModel> filmCard;
 
   @override
   void initState() {
-    filmCard = <FilmCardModel>[
-      FilmCardModel(
-          filmOptions: filmOptions,
-          titleText: "Window Tint",
-          subTitleText:
-          "Cleaning, sanitizing, reconditioning of all interior surfaces.",
-          value: false),
-      FilmCardModel(
-          filmOptions: filmOptions,
-          titleText: "Paint Protection Film, PPF",
-          subTitleText:
-          "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
-          value: false),
-      FilmCardModel(
-          filmOptions: filmOptions,
-          titleText: "Windshield Exterior Protection Film",
-          subTitleText:
-          "Exterior Protection for the front Windshield from Stone Chips ",
-          value: false),
-    ];
+    // filmCard = <FilmCardModel>[
+    //   FilmCardModel(
+    //       filmOptions: filmOptions,
+    //       titleText: "Window Tint",
+    //       subTitleText:
+    //       "Cleaning, sanitizing, reconditioning of all interior surfaces.",
+    //       value: false),
+    //   FilmCardModel(
+    //       filmOptions: filmOptions,
+    //       titleText: "Paint Protection Film, PPF",
+    //       subTitleText:
+    //       "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
+    //       value: false),
+    //   FilmCardModel(
+    //       filmOptions: filmOptions,
+    //       titleText: "Windshield Exterior Protection Film",
+    //       subTitleText:
+    //       "Exterior Protection for the front Windshield from Stone Chips ",
+    //       value: false),
+    // ];
+
     super.initState();
   }
 
@@ -83,7 +82,6 @@ class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMi
                         style: Theme.of(context).textTheme.headline3,
                       ),
                     ),
-
                     SizedBox(
                       height: 0.02.sh,
                     ),
@@ -91,29 +89,27 @@ class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
               SliverPadding(
-                padding:
-                EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
+                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
                           setState(() {
-                            filmCard
+                            filmsController.filmsModel
                                 .forEach((element) => element.value = false);
-                            filmCard.forEach((element) {
-                              element.filmOptions
-                                  .forEach((opt) => opt.selected = false);
+                            filmsController.filmsModel.forEach((element) {
+                              // element.types
+                              //     .forEach((opt) => opt.selected = false);
                             });
-                            filmCard[index].value = true;
+                            filmsController.filmsModel[index].value = true;
                           });
                         },
                         child: BuildFilmCard(
-                          model: filmCard[index],
+                          model: filmsController.filmsModel[index],
                         ));
-                  }, childCount: filmCard.length),
+                  }, childCount: filmsController.filmsModel.length),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -122,8 +118,20 @@ class _FilmScreenState extends State<FilmScreen> with AutomaticKeepAliveClientMi
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 3, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 3, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => stepperController.toPreviousPage(),
+                            pageNumber: 3,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () => stepperController.toNextPage(),
+                            pageNumber: 3,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),

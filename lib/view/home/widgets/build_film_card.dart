@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/models/films_model.dart';
 import 'package:ultra_shine/models/home/film_card_model.dart';
 
 class BuildFilmCard extends StatefulWidget {
-  final FilmCardModel model;
+  final FilmsModel model;
   const BuildFilmCard({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                 width: 20.sp,
                 decoration: BoxDecoration(
                     color:
-                    widget.model.value! ? Colors.red : Colors.transparent,
+                        widget.model.value! ? Colors.red : Colors.transparent,
                     border: Border.all(color: Colors.grey.shade500, width: 1.5),
                     shape: BoxShape.circle),
               ),
@@ -43,7 +44,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                     contentPadding: EdgeInsets.symmetric(
                         horizontal: 25.sp, vertical: 20.sp),
                     title: Text(
-                      "${widget.model.titleText}",
+                      "${widget.model.title}",
                       style: Theme.of(context)
                           .textTheme
                           .headline3
@@ -52,7 +53,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                     subtitle: Padding(
                       padding: EdgeInsets.only(top: 8.sp),
                       child: Text(
-                        "${widget.model.subTitleText}",
+                        "${widget.model.description}",
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2
@@ -62,7 +63,8 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                   ),
                   Container(
                     // REMOVE HORIZONTAL PADDING IF OVERFLOWING
-                    margin: EdgeInsets.symmetric(vertical: 5.sp, horizontal: 20.sp),
+                    margin:
+                        EdgeInsets.symmetric(vertical: 5.sp, horizontal: 20.sp),
                     child: Visibility(
                       visible: widget.model.value!,
                       child: Container(
@@ -72,17 +74,16 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                             return InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.model.filmOptions
-                                      .forEach((opt) => opt.selected = false);
-                                  widget.model.filmOptions[index].selected =
-                                  true;
+                                  widget.model.types
+                                      ?.forEach((opt) => opt.selected = false);
+                                  widget.model.types![index].selected = true;
                                 });
                               },
                               child: Card(
-                                color: widget
-                                    .model.filmOptions[index].selected!
-                                    ? Colors.red
-                                    : Colors.white,
+                                color:
+                                    widget.model.types![index].selected == false
+                                        ? Colors.red
+                                        : Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 elevation: 8,
@@ -90,24 +91,22 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 12.sp, vertical: 5.sp),
                                   child: Text(
-                                    "${widget.model.filmOptions[index].packageName}: \$${widget.model.filmOptions[index].price}",
+                                    "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
                                         ?.copyWith(
-                                        color: widget
-                                            .model
-                                            .filmOptions[index]
-                                            .selected!
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                            color: widget.model.types![index]
+                                                    .selected!
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
                             );
                           },
-                          itemCount: widget.model.filmOptions.length,
+                          itemCount: widget.model.types?.length,
                           scrollDirection: Axis.horizontal,
                         ),
                       ),
