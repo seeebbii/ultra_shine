@@ -1,10 +1,12 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/models/home/paint_protection_model.dart';
+import 'package:ultra_shine/models/home/paint_protection_models.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/build_paint_protection.dart';
 
@@ -15,56 +17,56 @@ class PaintProtectionScreen extends StatefulWidget {
   _PaintProtectionScreenState createState() => _PaintProtectionScreenState();
 }
 
-class _PaintProtectionScreenState extends State<PaintProtectionScreen>with AutomaticKeepAliveClientMixin {
-  List<RatingTile> ratingTiles = <RatingTile>[
-    RatingTile(
-      packageName: "Durability",
-      value: 5,
-    ),
-    RatingTile(
-      packageName: "Ease of Application",
-      value: 4,
-    ),
-    RatingTile(
-      packageName: "Sickness",
-      value: 3.5,
-    ),
-    RatingTile(
-      packageName: "Gloss",
-      value: 1.5,
-    ),
-  ];
-
-  late List<PaintProtectionModel> paintProtectionModel;
+class _PaintProtectionScreenState extends State<PaintProtectionScreen>
+    with AutomaticKeepAliveClientMixin {
+  // List<RatingTile> ratingTiles = <RatingTile>[
+  //   RatingTile(
+  //     packageName: "Durability",
+  //     value: 5,
+  //   ),
+  //   RatingTile(
+  //     packageName: "Ease of Application",
+  //     value: 4,
+  //   ),
+  //   RatingTile(
+  //     packageName: "Sickness",
+  //     value: 3.5,
+  //   ),
+  //   RatingTile(
+  //     packageName: "Gloss",
+  //     value: 1.5,
+  //   ),
+  // ];
 
   @override
   void initState() {
-    paintProtectionModel = <PaintProtectionModel>[
-      PaintProtectionModel(
-          ratingTile: ratingTiles,
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-          value: false),
-      PaintProtectionModel(
-          ratingTile: ratingTiles,
-          titleText: "Heading",
-          subTitleText:
-              "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
-          value: false),
-      PaintProtectionModel(
-          ratingTile: ratingTiles,
-          titleText: "Heading",
-          subTitleText:
-              "Exterior Protection for the front Windshield from Stone Chips ",
-          value: false),
-      PaintProtectionModel(
-          ratingTile: ratingTiles,
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-          value: false),
-    ];
+    // paintProtectionModel = <PaintProtectionModel>[
+    //   PaintProtectionModel(
+    //       ratingTile: ratingTiles,
+    //       titleText: "Heading",
+    //       subTitleText:
+    //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+    //       value: false),
+    //   PaintProtectionModel(
+    //       ratingTile: ratingTiles,
+    //       titleText: "Heading",
+    //       subTitleText:
+    //           "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
+    //       value: false),
+    //   PaintProtectionModel(
+    //       ratingTile: ratingTiles,
+    //       titleText: "Heading",
+    //       subTitleText:
+    //           "Exterior Protection for the front Windshield from Stone Chips ",
+    //       value: false),
+    //   PaintProtectionModel(
+    //       ratingTile: ratingTiles,
+    //       titleText: "Heading",
+    //       subTitleText:
+    //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    //       value: false),
+    // ];
+
     super.initState();
   }
 
@@ -161,33 +163,37 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>with Autom
               ),
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            paintProtectionModel
-                                .forEach((element) => element.value = false);
-                            paintProtectionModel[index].value = true;
-                          });
+                sliver: Obx(() => SliverGrid(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                paintProtectionController.paintProtectionList
+                                    .forEach(
+                                        (element) => element.value = false);
+                                paintProtectionController
+                                    .paintProtectionList[index].value = true;
+                                paintProtectionController.isSelected.value =
+                                    true;
+                              });
+                            },
+                            child: BuildPaintProtection(
+                              model: paintProtectionController
+                                  .paintProtectionList[index],
+                            ),
+                          );
                         },
-                        child: BuildPaintProtection(
-                          model: paintProtectionModel[index],
-                        ),
-                      );
-                    },
-                    childCount: paintProtectionModel.length,
-                  ),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 300.sp,
-                      childAspectRatio: 0.33.sp,
-                      // childAspectRatio: 5 / 6,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 0
-                      
+                        childCount: paintProtectionController
+                            .paintProtectionList.length,
                       ),
-                ),
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 300.sp,
+                          childAspectRatio: 0.33.sp,
+                          // childAspectRatio: 5 / 6,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 0),
+                    )),
               ),
               SliverToBoxAdapter(
                 child: Column(
@@ -197,8 +203,25 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>with Autom
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 4, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=> stepperController.toNextPage(), pageNumber: 4, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => stepperController.toPreviousPage(),
+                            pageNumber: 4,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () {
+                              if (paintProtectionController.isSelected.value ==
+                                  true) {
+                                stepperController.toNextPage();
+                              }
+                            },
+                            pageNumber: 4,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),

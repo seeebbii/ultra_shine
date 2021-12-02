@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_social_button.dart';
@@ -86,8 +87,9 @@ class CameraBottomSheet extends StatelessWidget {
 
                       final XFile? photo =
                           await _picker.pickImage(source: ImageSource.camera);
+                      requestController.assets.add(photo!);
                     },
-                    socialName: 'Image',
+                    socialName: 'Capture Image',
                     imagePath: ImagePaths.cameraIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,
@@ -101,7 +103,7 @@ class CameraBottomSheet extends StatelessWidget {
                       final XFile? video =
                           await _picker.pickVideo(source: ImageSource.camera);
                     },
-                    socialName: 'Video',
+                    socialName: 'Capture Video',
                     imagePath: ImagePaths.galleryIcon,
                     backGroundColor: Colors.white,
                     textColor: primaryColor,

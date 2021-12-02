@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/models/home/exterior_card_model.dart';
 import 'package:ultra_shine/models/home/polishing_types.dart';
 
@@ -77,6 +78,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                       ?.forEach((opt) => opt.selected= false);
                                   widget.model.types![index].selected =
                                       true;
+                                  polishTypeController.packageSelected.value = true;
                                 });
                               },
                               child: Card(

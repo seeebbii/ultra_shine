@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/paint_protection_model.dart';
+import 'package:ultra_shine/models/home/paint_protection_models.dart';
 
 class BuildPaintProtection extends StatefulWidget {
   final PaintProtectionModel model;
@@ -53,7 +53,7 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 3.sp),
-            child: Text('${widget.model.titleText}',
+            child: Text('${widget.model.title}',
                 style: Theme.of(context)
                     .textTheme
                     .headline3
@@ -61,7 +61,7 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 3.sp),
-            child: Text('${widget.model.subTitleText}',
+            child: Text('${widget.model.description}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
@@ -72,9 +72,17 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
             padding: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 3.sp),
             child: Container(
               height: 0.15.sh,
-              child: ListView.builder(itemBuilder: (_, index){
-                return _buildRatingRow(widget.model.ratingTile[index].packageName!, widget.model.ratingTile[index].value!);
-              }, itemCount: widget.model.ratingTile.length, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),),
+              child: ListView(
+                children: [
+                  _buildRatingRow('Durability', widget.model.durability!.toDouble()),
+                  _buildRatingRow('Ease of Application', widget.model.easeOfApplication!.toDouble()),
+                  _buildRatingRow('Sickness', widget.model.slickness!.toDouble()),
+                  _buildRatingRow('Gloss', widget.model.gloss!.toDouble()),
+                  _buildRatingRow('Price', widget.model.price!.toDouble()),
+                ],
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+              ),
             ),
           )
         ],

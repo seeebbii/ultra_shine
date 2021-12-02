@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/models/films_model.dart';
 
 class BuildFilmCard extends StatefulWidget {
@@ -73,14 +74,14 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                             return InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.model.types
-                                      ?.forEach((opt) => opt.selected = false);
-                                  widget.model.types![index].selected = true;
+                                  widget.model.types.forEach((opt) => opt.selected = false);
+                                  widget.model.types[index].selected = true;
+                                  filmsController.packageSelected.value = true;
                                 });
                               },
                               child: Card(
                                 color:
-                                    widget.model.types![index].selected == false
+                                    widget.model.types[index].selected == true
                                         ? Colors.red
                                         : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -90,12 +91,12 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 12.sp, vertical: 5.sp),
                                   child: Text(
-                                    "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
+                                    "${widget.model.types[index].name}: \$${widget.model.types[index].price}",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
                                         ?.copyWith(
-                                            color: widget.model.types![index]
+                                            color: widget.model.types[index]
                                                     .selected!
                                                 ? Colors.white
                                                 : Colors.black,
@@ -105,7 +106,7 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                               ),
                             );
                           },
-                          itemCount: widget.model.types?.length,
+                          itemCount: widget.model.types.length,
                           scrollDirection: Axis.horizontal,
                         ),
                       ),

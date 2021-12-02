@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'dart:math' as math;
 import 'package:ultra_shine/app/constant/image_paths.dart';
@@ -64,25 +65,29 @@ class _FilmScreenState extends State<FilmScreen>
               ),
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver: SliverList(
+                sliver: Obx(() => SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
                           setState(() {
-                            filmsController.filmsModel
-                                .forEach((element) => element.value = false);
                             filmsController.filmsModel.forEach((element) {
-                              // element.types
-                              //     .forEach((opt) => opt.selected = false);
+                              element.value = false;
+                            });
+                            filmsController.filmsModel.forEach((element) {
+                              element.types.forEach((opt) => opt.selected = false);
                             });
                             filmsController.filmsModel[index].value = true;
+
+                            filmsController.packageSelected.value = false;
+                            filmsController.optionSelected.value = true;
+
                           });
                         },
                         child: BuildFilmCard(
                           model: filmsController.filmsModel[index],
                         ));
                   }, childCount: filmsController.filmsModel.length),
-                ),
+                )),
               ),
               SliverToBoxAdapter(
                 child: Column(
@@ -101,11 +106,18 @@ class _FilmScreenState extends State<FilmScreen>
                           )),
                           Expanded(
                               child: BuildBottomButton(
-                            buttonText: "Next",
-                            onPressed: () => stepperController.toNextPage(),
-                            pageNumber: 3,
-                            btnColor: primaryColor,
-                          )),
+                                buttonText: "Next",
+                                onPressed: () {
+                                  if (filmsController.optionSelected.value ==
+                                      true &&
+                                      filmsController.packageSelected.value ==
+                                          true) {
+                                    stepperController.toNextPage();
+                                  }
+                                },
+                                pageNumber: 1,
+                                btnColor: primaryColor,
+                              )),
                         ],
                       ),
                     ),

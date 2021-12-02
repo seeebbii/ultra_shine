@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
+import 'package:ultra_shine/controller/api/films/films_controller.dart';
+import 'package:ultra_shine/controller/api/paint_protection/paint_protection_controller.dart';
+import 'package:ultra_shine/controller/api/request/polish_type/polish_type_controller.dart';
+import 'package:ultra_shine/controller/api/request/request_controller.dart';
 import 'package:ultra_shine/controller/api/vehicle_paintwork/vehicle_paintwork.dart';
-import 'package:ultra_shine/controller/api/vehicle_type/polish_type/polish_type_controller.dart';
 import 'package:ultra_shine/controller/api/vehicle_type/vehicle_type_controller.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_3.dart';
@@ -19,10 +22,7 @@ class OnBoardRoot extends StatefulWidget {
 
 class _OnBoardRootState extends State<OnBoardRoot>
     with AutomaticKeepAliveClientMixin {
-
-
-  final pageViewController =
-      PageController(initialPage: 0, keepPage: true);
+  final pageViewController = PageController(initialPage: 0, keepPage: true);
   int currentIndex = 0;
 
   List<Widget> pageList = <Widget>[
@@ -54,6 +54,9 @@ class _OnBoardRootState extends State<OnBoardRoot>
     Get.put(VehicleTypeController());
     Get.put(VehiclePaintWorkController());
     Get.put(PolishTypeController());
+    Get.put(FilmsController());
+    Get.put(RequestController());
+    Get.put(PaintProtectionController());
     super.initState();
   }
 

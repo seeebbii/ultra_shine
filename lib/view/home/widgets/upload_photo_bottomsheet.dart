@@ -1,16 +1,22 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_social_button.dart';
-
 import 'camera_bottom_sheet.dart';
-import 'gallery_bottom_sheet.dart';
 
-class UploadPhotoBottomSheet extends StatelessWidget {
+class UploadPhotoBottomSheet extends StatefulWidget {
   const UploadPhotoBottomSheet({Key? key}) : super(key: key);
 
+  @override
+  State<UploadPhotoBottomSheet> createState() => _UploadPhotoBottomSheetState();
+}
+
+class _UploadPhotoBottomSheetState extends State<UploadPhotoBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -92,10 +98,7 @@ class UploadPhotoBottomSheet extends StatelessWidget {
                     elevation: 8,
                   ),
                   AuthSocialButton(
-                    onPressed: () {
-                      debugPrint("Gallery pressed");
-                      Get.bottomSheet(const GalleryBottomSheet());
-                    },
+                    onPressed: () => selectListOfFiles(),
                     socialName: 'Gallery',
                     imagePath: ImagePaths.galleryIcon,
                     backGroundColor: Colors.white,
@@ -109,5 +112,24 @@ class UploadPhotoBottomSheet extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void selectListOfFiles() async {
+    debugPrint("Gallery pressed");
+    setState(() async {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        //  allowedExtensions: ['jpg', 'pdf'],
+      );
+
+      if (result != null) {
+        requestController.assets.value =
+            result.paths.map((path) => XFile(path!)).toList();
+        debugPrint("Assets length = ${requestController.assets.value.length}");
+        Get.back();
+      } else {
+        // User canceled the picker
+      }
+    });
   }
 }

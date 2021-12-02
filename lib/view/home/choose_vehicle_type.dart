@@ -4,16 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
+import 'package:ultra_shine/controller/api/request/request_controller.dart';
 import 'package:ultra_shine/models/home/choose_vehicle_paintwork_model.dart';
-
 import 'dart:math' as math;
-
-import 'package:ultra_shine/view/components/auth_button.dart';
 import 'package:ultra_shine/view/home/widgets/build_vehicle_type.dart';
-
 import 'widgets/build_bottom_buttons.dart';
 import 'widgets/build_vehicle_paintwork.dart';
 
@@ -30,7 +25,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   late AnimationController _animationController;
   late Animation _animation;
 
-
   void homelistener(status) {
     if (status == AnimationStatus.completed) {
       _animation.removeStatusListener(homelistener);
@@ -44,11 +38,11 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
   @override
   void initState() {
     super.initState();
+    Get.put(RequestController());
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     );
-
     _animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeIn,
@@ -65,18 +59,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     // you need this
   }
 
-
-  List<ChooseVehiclePaintworkModel> paintWorkTypes =
-      <ChooseVehiclePaintworkModel>[
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "New Car", imagePath: ImagePaths.ptNew),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Light Swirls", imagePath: ImagePaths.ptLight),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Large Swirls", imagePath: ImagePaths.ptLarge),
-    ChooseVehiclePaintworkModel(
-        value: false, carText: "Deep Scratches", imagePath: ImagePaths.ptDeep),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -128,26 +110,28 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         return Obx(() => InkWell(
-                          onTap: () {
-                            setState(() {
-                              vehicleTypeController.vehicleTypes
-                                  .forEach((element) => element.value = false);
-                              vehicleTypeController.vehicleTypes[index].value = true;
-                            });
-                            vehicleTypeController.vehicleTypeSelected.value = true;
-                          },
-                          child: BuildVehicleType(
-                            imagePath: vehicleTypeController
-                                .vehicleTypes[index].imagePath!,
-                            carText: vehicleTypeController
-                                .vehicleTypes[index].carText!,
-                            value: vehicleTypeController
-                                .vehicleTypes[index].value!,
-                            index: index,
-                          ),
-                        ));
+                              onTap: () {
+                                setState(() {
+                                  vehicleTypeController.vehicleTypes.forEach(
+                                      (element) => element.value = false);
+                                  vehicleTypeController
+                                      .vehicleTypes[index].value = true;
+                                });
+                                vehicleTypeController
+                                    .vehicleTypeSelected.value = true;
+                              },
+                              child: BuildVehicleType(
+                                imagePath: vehicleTypeController
+                                    .vehicleTypes[index].imagePath!,
+                                carText: vehicleTypeController
+                                    .vehicleTypes[index].carText!,
+                                value: vehicleTypeController
+                                    .vehicleTypes[index].value!,
+                                index: index,
+                              ),
+                            ));
                       },
-                      childCount:  vehicleTypeController.vehicleTypes.length,
+                      childCount: vehicleTypeController.vehicleTypes.length,
                     ),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200.sp,
@@ -177,35 +161,36 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                 SliverPadding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
-                  sliver: SliverGrid(
+                  sliver: Obx(() => SliverGrid(
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) {
+                          (context, index) {
                         return InkWell(
                           onTap: () {
                             setState(() {
-                              for (var element in paintWorkTypes) {
+                              for (var element in vehiclePaintWorkController.vehiclePaintWorkList) {
                                 element.value = false;
                               }
-                              paintWorkTypes[index].value = true;
-                              vehiclePaintWorkController.vehiclePainWorkSelected.value = true;
+                              vehiclePaintWorkController.vehiclePaintWorkList[index].value = true;
+                              vehiclePaintWorkController
+                                  .vehiclePainWorkSelected.value = true;
                             });
                           },
                           child: BuildVehiclePaintwork(
-                            imagePath: paintWorkTypes[index].imagePath!,
-                            carText: paintWorkTypes[index].carText!,
-                            value: paintWorkTypes[index].value!,
+                            imagePath: vehiclePaintWorkController.vehiclePaintWorkList[index].image!,
+                            carText: vehiclePaintWorkController.vehiclePaintWorkList[index].name!,
+                            value: vehiclePaintWorkController.vehiclePaintWorkList[index].value!,
                             index: index,
                           ),
                         );
                       },
-                      childCount: paintWorkTypes.length,
+                      childCount: vehiclePaintWorkController.vehiclePaintWorkList.length,
                     ),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200.sp,
                         childAspectRatio: 3 / 2.5,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5),
-                  ),
+                  )),
                 ),
                 SliverToBoxAdapter(
                   child: Column(
@@ -224,11 +209,16 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                             )),
                             Expanded(
                                 child: Obx(() => BuildBottomButton(
-                                  buttonText: "Next",
-                                  onPressed: vehicleTypeController.vehicleTypeSelected.value && vehiclePaintWorkController.vehiclePainWorkSelected.value ? () => stepperController.toNextPage() : (){},
-                                  pageNumber: 1,
-                                  btnColor: primaryColor,
-                                ))),
+                                      buttonText: "Next",
+                                      onPressed: vehicleTypeController
+                                                  .vehicleTypeSelected.value &&
+                                              vehiclePaintWorkController
+                                                  .vehiclePainWorkSelected.value
+                                          ? () => stepperController.toNextPage()
+                                          : () {},
+                                      pageNumber: 1,
+                                      btnColor: primaryColor,
+                                    ))),
                             // AuthButton(buttonText: "Previous", onPressed: (){}),
                           ],
                         ),
