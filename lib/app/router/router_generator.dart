@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
 import 'package:ultra_shine/view/drawer/my_appointments.dart';
 import 'package:ultra_shine/view/drawer/notification_screen.dart';

@@ -18,4 +18,4 @@ class VehiclePaintWorkController extends GetxController {
     super.onInit();
   }
 
-}
+}// write a function to get average 
