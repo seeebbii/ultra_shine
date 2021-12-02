@@ -66,25 +66,33 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 5.sp),
                     child: Visibility(
-                       visible: widget.model.value!,
+                      visible: widget.model.value!,
                       child: Container(
                         height: 0.05.sh,
                         child: ListView.builder(
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {
+
+                                if(requestController.exteriorPrevAmount != 0.00){
+                                  requestController.exteriorAmount -= requestController.exteriorPrevAmount;
+                                  requestController.exteriorPrevAmount = 0.00;
+                                }
+                                requestController.exteriorAmount += widget.model.types![index].price!;
+                                requestController.exteriorPrevAmount = widget.model.types![index].price!;
+
+                                requestController.calculateTotalAmount();
+
                                 setState(() {
                                   widget.model.types
-                                      ?.forEach((opt) => opt.selected= false);
-                                  widget.model.types![index].selected =
+                                      ?.forEach((opt) => opt.selected = false);
+                                  widget.model.types![index].selected = true;
+                                  polishTypeController.packageSelected.value =
                                       true;
-                                  polishTypeController.packageSelected.value = true;
                                 });
                               },
                               child: Card(
-                                color: 
-                                 
-                                    widget.model.types![index].selected!
+                                color: widget.model.types![index].selected!
                                     ? Colors.red
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -99,8 +107,10 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                         .textTheme
                                         .bodyText2
                                         ?.copyWith(
-                                            
-                                               
+                                            color: widget.model.types![index]
+                                                    .selected!
+                                                ? Colors.white
+                                                : Colors.black,
                                             fontWeight: FontWeight.bold),
                                   ),
                                 ),

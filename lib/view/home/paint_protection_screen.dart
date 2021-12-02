@@ -145,13 +145,13 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Text("\$0.00",
+                          Obx(() => Text("\$${requestController.totalAmount}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: primaryColor)),
+                                  fontWeight: FontWeight.w700,
+                                  color: primaryColor))),
                         ],
                       ),
                     ),
@@ -168,6 +168,15 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>
                         (context, index) {
                           return InkWell(
                             onTap: () {
+                              if(requestController.paintProtectionPrevAmount != 0.00){
+                                requestController.paintProtectionAmount -= requestController.paintProtectionPrevAmount;
+                                requestController.paintProtectionPrevAmount = 0.00;
+                              }
+                              requestController.paintProtectionAmount += paintProtectionController.paintProtectionList[index].price!;
+                              requestController.paintProtectionPrevAmount = paintProtectionController.paintProtectionList[index].price!;
+
+                              requestController.calculateTotalAmount();
+
                               setState(() {
                                 paintProtectionController.paintProtectionList
                                     .forEach(

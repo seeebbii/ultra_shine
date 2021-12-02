@@ -69,6 +69,9 @@ class _FilmScreenState extends State<FilmScreen>
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
+                          requestController.filmsAmount = 0.00;
+                          requestController.filmsPrevAmount = 0.00;
+                          requestController.calculateTotalAmount();
                           setState(() {
                             filmsController.filmsModel.forEach((element) {
                               element.value = false;

@@ -26,14 +26,14 @@ class FilmsModel {
 class Type {
   Type({this.id, this.name, this.price, this.selected});
 
-  dynamic id;
-  dynamic name;
-  dynamic price;
+  int? id;
+  String? name;
+  double? price;
   bool? selected;
   factory Type.fromJson(Map<String, dynamic> json) => Type(
         id: json["id"],
         name: json["name"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
         selected: false,
       );
 
