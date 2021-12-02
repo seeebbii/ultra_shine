@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/controller/api/films/films_controller.dart';
 import 'package:ultra_shine/view/splash/onboard/widgets/onboard_text.dart';
 
 class OnBoardWelcome1 extends StatefulWidget {

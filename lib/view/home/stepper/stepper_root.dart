@@ -2,16 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:im_stepper/stepper.dart';
-
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
-import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
 import 'package:ultra_shine/view/home/choose_vehicle_type.dart';
 import 'package:ultra_shine/view/home/exterior_screen.dart';
 import 'package:ultra_shine/view/home/film_screen.dart';

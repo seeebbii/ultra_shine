@@ -1,4 +1,3 @@
-import 'config.dart';
 
 // ignore: camel_case_types
 class API_URLS {

@@ -1,13 +1,9 @@
 import 'dart:async';
-
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
-import 'package:ultra_shine/view/authentication/auth_login_screen.dart';
 
 class MainSplashScreen extends StatefulWidget {
   const MainSplashScreen({Key? key}) : super(key: key);

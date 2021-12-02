@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/controller/api/request/request_controller.dart';
 
 class RequestService {
   //final _client = http.Client();
@@ -21,8 +20,6 @@ class RequestService {
   ) async {
     var url = Uri.parse('$baseUrl/requests');
 
-
-    
     //for multipartrequest
     var request = http.MultipartRequest('POST', url);
     request.fields['name'] = name;
@@ -46,7 +43,8 @@ class RequestService {
     //for token
     // request.headers.addAll({"Authorization": "Bearer token"});
     //for image and videos and files
-    print(requestController.assets.length);
+
+    debugPrint(requestController.assets.length.toString());
 
     requestController.assets.forEach((element) async {
       request.files.add(

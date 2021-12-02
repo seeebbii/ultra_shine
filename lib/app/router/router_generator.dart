@@ -15,7 +15,6 @@ import 'package:ultra_shine/view/home/payment_method_screen.dart';
 import 'package:ultra_shine/view/home/product_screen.dart';
 import 'package:ultra_shine/view/home/request_screen.dart';
 import 'package:ultra_shine/view/home/stepper/stepper_root.dart';
-import 'package:ultra_shine/view/profile/personel_info.dart';
 import 'package:ultra_shine/view/splash/main_splash_screen.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_root.dart';
 import 'package:ultra_shine/view/splash/onboard/onboard_welcome_1.dart';
