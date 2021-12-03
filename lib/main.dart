@@ -33,7 +33,6 @@ class _MyAppState extends State<MyApp> {
     ImagePaths.preCacheImages(context);
     super.didChangeDependencies();
   }
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

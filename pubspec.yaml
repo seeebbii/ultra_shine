@@ -49,6 +49,7 @@ dependencies:
   #IMAGEPICKER
   image_picker: ^0.8.4+4
   file_picker: ^4.2.6
+  mime: ^1.0.1
 
 dev_dependencies:
   flutter_test:

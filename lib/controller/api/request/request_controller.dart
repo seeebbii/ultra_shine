@@ -19,6 +19,7 @@ class RequestController extends GetxController {
   double interiorPrevAmount = 0.00;
   double filmsPrevAmount = 0.00;
   double paintProtectionPrevAmount = 0.00;
+  RxBool isImage=true.obs;
 
 
   void calculateTotalAmount(){

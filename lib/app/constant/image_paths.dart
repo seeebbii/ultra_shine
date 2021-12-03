@@ -21,6 +21,7 @@ class ImagePaths {
  static const String loadingIcon="$ICON_PATH/index.png";
 static const String noteIconAppointment="$ICON_PATH/note_icon_apt.png";
   static const String drawerProfile = "$ICON_PATH/profile.png";
+  static const String imageIcon = "$IMAGES_PATH/";
 
 // TODO :: IMAGES
   static const String mainSplash = "$IMAGES_PATH/splash.png";
@@ -48,7 +49,7 @@ static const String noteIconAppointment="$ICON_PATH/note_icon_apt.png";
       "$IMAGES_PATH/slider_circular_dot.png";
   static const String sliderRedDot = "$IMAGES_PATH/slider_red_dot.png";
   static const String uploadImage = "$IMAGES_PATH/upload_image.png";
-
+  
   static void preCacheImages(BuildContext context) {
     precacheImage(const AssetImage(ImagePaths.ultraShineLogo), context);
     precacheImage(const AssetImage(ImagePaths.mainSplash), context);

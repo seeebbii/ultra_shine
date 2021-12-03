@@ -71,13 +71,13 @@ dispose() {
             borderRadius: const BorderRadius.all(Radius.circular(12))),
         child: Stack(
           children: [
-            _buildAnim(),
+          Positioned.fill( child: _buildAnim(),),
             Positioned(
               left: 0.01.sw,
               top: 0.01.sh,
               child: Container(
-                height: 20.sp,
-                width: 20.sp,
+                height: 25.sp,
+                width: 25.sp,
                 decoration: BoxDecoration(
                   color: widget.value ? Colors.red : Colors.transparent,
                     border: Border.all(color: Colors.grey.shade300, width: 2.5),
@@ -108,8 +108,8 @@ dispose() {
       animation: _animationController,
       builder: (context, child) => Transform(
             transform: Matrix4.translationValues(_animation.value * 200, 0.0, 0.0),
-        child:  Padding(
-            padding: const EdgeInsets.all(12.0),
+        child: ClipRRect(
+         borderRadius: BorderRadius.circular(8.r),
             child: CachedNetworkImage(
               imageUrl: widget.imagePath,
               fit: BoxFit.contain,

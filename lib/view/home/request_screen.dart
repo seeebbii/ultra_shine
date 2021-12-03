@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/components/auth_textfield.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/upload_photo_bottomsheet.dart';
-
+import 'package:mime/mime.dart';
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
 
@@ -159,6 +160,8 @@ class _RequestScreenState extends State<RequestScreen>
                                               )),
                                         )
                                       : Obx(
+                                        // ignore: invalid_use_of_protected_member
+                                      
                                           () => Container(
                                             alignment: Alignment.bottomCenter,
                                             height: 0.18.sh,
@@ -166,6 +169,11 @@ class _RequestScreenState extends State<RequestScreen>
                                                 itemCount: requestController
                                                     .assets.length,
                                                 itemBuilder: (context, index) {
+
+
+                                           requestController.isImage.value=getFiletype(requestController.assets.value[index].name);
+                                                 
+
                                                   return Container(
                                                       margin:
                                                           EdgeInsets.all(0.sp),
@@ -176,6 +184,15 @@ class _RequestScreenState extends State<RequestScreen>
                                                               MainAxisAlignment
                                                                   .spaceEvenly,
                                                           children: [
+                                                            Padding(
+                                                              padding: EdgeInsets.only(right:40),
+                                                            child:Icon(Icons.upload),
+                                                            ),
+                                                            
+                                                            requestController.isImage.value==true?
+                                                            const Icon(Icons.image):
+                                                            const Icon(CupertinoIcons.videocam),
+
                                                             Flexible(
                                                               child: RichText(
                                                                 overflow:
@@ -610,4 +627,15 @@ class _RequestScreenState extends State<RequestScreen>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  bool getFiletype(String path) {
+  String? mimeStr = lookupMimeType(path);
+var fileType = mimeStr!.split('/');
+if(fileType[0].toString()=='image')
+return true;
+else
+return false;
+
+
+  }
 }
