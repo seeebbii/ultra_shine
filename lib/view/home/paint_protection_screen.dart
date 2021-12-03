@@ -17,10 +17,8 @@ class PaintProtectionScreen extends StatefulWidget {
 
 class _PaintProtectionScreenState extends State<PaintProtectionScreen>
     with AutomaticKeepAliveClientMixin {
-  
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -104,8 +102,8 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: primaryColor))),
+                                      fontWeight: FontWeight.w700,
+                                      color: primaryColor))),
                         ],
                       ),
                     ),
@@ -122,23 +120,36 @@ class _PaintProtectionScreenState extends State<PaintProtectionScreen>
                         (context, index) {
                           return InkWell(
                             onTap: () {
-                              if(requestController.paintProtectionPrevAmount != 0.00){
-                                requestController.paintProtectionAmount -= requestController.paintProtectionPrevAmount;
-                                requestController.paintProtectionPrevAmount = 0.00;
+                              if (requestController.paintProtectionPrevAmount !=
+                                  0.00) {
+                                requestController.paintProtectionAmount -=
+                                    requestController.paintProtectionPrevAmount;
+                                requestController.paintProtectionPrevAmount =
+                                    0.00;
                               }
-                              requestController.paintProtectionAmount += paintProtectionController.paintProtectionList[index].price!;
-                              requestController.paintProtectionPrevAmount = paintProtectionController.paintProtectionList[index].price!;
+                              requestController.paintProtectionAmount +=
+                                  paintProtectionController
+                                      .paintProtectionList[index].price!;
+                              requestController.paintProtectionPrevAmount =
+                                  paintProtectionController
+                                      .paintProtectionList[index].price!;
 
                               requestController.calculateTotalAmount();
 
                               setState(() {
-                                paintProtectionController.paintProtectionList
-                                    .forEach(
-                                        (element) => element.value = false);
+                                for (var element in paintProtectionController
+                                    .paintProtectionList) {
+                                  element.value = false;
+                                }
                                 paintProtectionController
                                     .paintProtectionList[index].value = true;
                                 paintProtectionController.isSelected.value =
                                     true;
+                                paintProtectionController
+                                        .paintProtectionID.value =
+                                    paintProtectionController
+                                        .paintProtectionList[index].id
+                                        .toString();
                               });
                             },
                             child: BuildPaintProtection(

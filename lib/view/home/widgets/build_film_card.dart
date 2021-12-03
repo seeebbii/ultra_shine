@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/models/films_model.dart';
+import 'package:ultra_shine/models/home/films_model.dart';
 
 class BuildFilmCard extends StatefulWidget {
   final FilmsModel model;
@@ -73,21 +73,25 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {
-
-                                if(requestController.filmsPrevAmount != 0.00){
-                                  requestController.filmsAmount -= requestController.filmsPrevAmount;
+                                if (requestController.filmsPrevAmount != 0.00) {
+                                  requestController.filmsAmount -=
+                                      requestController.filmsPrevAmount;
                                   requestController.filmsPrevAmount = 0.00;
                                 }
-                                requestController.filmsAmount += widget.model.types[index].price!;
-                                requestController.filmsPrevAmount = widget.model.types[index].price!;
+                                requestController.filmsAmount +=
+                                    widget.model.types[index].price!;
+                                requestController.filmsPrevAmount =
+                                    widget.model.types[index].price!;
 
                                 requestController.calculateTotalAmount();
 
-
                                 setState(() {
-                                  widget.model.types.forEach((opt) => opt.selected = false);
+                                  widget.model.types
+                                      .forEach((opt) => opt.selected = false);
                                   widget.model.types[index].selected = true;
                                   filmsController.packageSelected.value = true;
+                                  filmsController.selectedTypeID.value =
+                                      widget.model.types[index].id.toString();
                                 });
                               },
                               child: Card(
