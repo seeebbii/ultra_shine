@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/controller/api/films/films_controller.dart';
 import 'package:ultra_shine/controller/api/paint_protection/paint_protection_controller.dart';
+import 'package:ultra_shine/controller/api/product/product_controller.dart';
 import 'package:ultra_shine/controller/api/request/polish_type/polish_type_controller.dart';
 import 'package:ultra_shine/controller/api/request/request_controller.dart';
 import 'package:ultra_shine/controller/api/vehicle_paintwork/vehicle_paintwork.dart';
@@ -57,6 +58,7 @@ class _OnBoardRootState extends State<OnBoardRoot>
     Get.put(FilmsController());
     Get.put(RequestController());
     Get.put(PaintProtectionController());
+    Get.put(ProductController());
     super.initState();
   }
 

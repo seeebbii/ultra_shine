@@ -4,10 +4,15 @@ class ChooseVehiclePaintworkModel {
   String? image;
   String? createdAt;
   String? updatedAt;
-  bool? value;
+  bool? isSelected;
 
   ChooseVehiclePaintworkModel(
-      {this.id, this.name, this.image, this.createdAt, this.updatedAt, this.value});
+      {this.id,
+      this.name,
+      this.image,
+      this.createdAt,
+      this.updatedAt,
+      this.isSelected});
 
   ChooseVehiclePaintworkModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -15,7 +20,7 @@ class ChooseVehiclePaintworkModel {
     image = json['image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    value = false;
+    isSelected = false;
   }
 
   Map<String, dynamic> toJson() {

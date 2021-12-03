@@ -182,17 +182,17 @@ class _RequestScreenState extends State<RequestScreen>
                                                                     TextOverflow
                                                                         .ellipsis,
                                                                 strutStyle:
-                                                                    StrutStyle(
+                                                                    const StrutStyle(
                                                                         fontSize:
                                                                             12.0),
                                                                 text: TextSpan(
-                                                                  style: TextStyle(
+                                                                  style: const TextStyle(
                                                                       color: Colors
                                                                           .black),
                                                                   text: requestController
                                                                       .assets
-                                                                      .value[
-                                                                          index]
+                                                                      // ignore: invalid_use_of_protected_member
+                                                                      .value[index]
                                                                       .name,
                                                                 ),
                                                               ),

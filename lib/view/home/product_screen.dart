@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'dart:math' as math;
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/product_model.dart';
+import 'package:ultra_shine/models/home/product_m.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/build_product.dart';
 
@@ -16,33 +17,10 @@ class ProductScreen extends StatefulWidget {
   _ProductScreenState createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveClientMixin {
-  late List<ProductModel> productModel;
-
+class _ProductScreenState extends State<ProductScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
-    productModel = <ProductModel>[
-      ProductModel(
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-          value: false),
-      ProductModel(
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-          value: false),
-      ProductModel(
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-          value: false),
-      ProductModel(
-          titleText: "Heading",
-          subTitleText:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-          value: false),
-    ];
     super.initState();
   }
 
@@ -115,13 +93,14 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Text("\$0.00",
+                          Obx(() => (Text(
+                              "${productController.selectedProduct.value.price}.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
                                       fontWeight: FontWeight.w700,
-                                      color: primaryColor)),
+                                      color: primaryColor)))),
                         ],
                       ),
                     ),
@@ -133,30 +112,35 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
               ),
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            productModel
-                                .forEach((element) => element.value = false);
-                            productModel[index].value = true;
-                          });
-                        },
-                        child: BuildProduct(
-                          model: productModel[index],
-                        ),
-                      );
-                    },
-                    childCount: productModel.length,
+                sliver: Obx(
+                  () => SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              for (var element
+                                  in productController.productModel) {
+                                element.isSelected = false;
+                              }
+                              productController.productModel[index].isSelected =
+                                  true;
+                              productController.selectedProduct.value =
+                                  productController.productModel[index];
+                            });
+                          },
+                          child: BuildProduct(
+                            model: productController.productModel[index],
+                          ),
+                        );
+                      },
+                      childCount: productController.productModel.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 300.sp,
+                        childAspectRatio: 0.5.sp,
+                        mainAxisSpacing: 0),
                   ),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 300.sp,
-                      childAspectRatio: 0.5.sp,
-                      // childAspectRatio: 5 / 6,
-                      // crossAxisSpacing: 20,
-                      mainAxisSpacing: 0),
                 ),
               ),
               SliverToBoxAdapter(
@@ -167,8 +151,26 @@ class _ProductScreenState extends State<ProductScreen> with AutomaticKeepAliveCl
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         children: [
-                          Expanded(child: BuildBottomButton(buttonText: "Previous", onPressed:  ()=>stepperController.toPreviousPage(), pageNumber: 5, btnColor: Colors.black,)),
-                          Expanded(child: BuildBottomButton(buttonText: "Next", onPressed: ()=>stepperController.toNextPage(), pageNumber: 5, btnColor: primaryColor,)),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Previous",
+                            onPressed: () => stepperController.toPreviousPage(),
+                            pageNumber: 5,
+                            btnColor: Colors.black,
+                          )),
+                          Expanded(
+                              child: BuildBottomButton(
+                            buttonText: "Next",
+                            onPressed: () {
+                              if (productController
+                                      .selectedProduct.value.isSelected ==
+                                  true) {
+                                stepperController.toNextPage();
+                              }
+                            },
+                            pageNumber: 5,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),

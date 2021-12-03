@@ -1,36 +1,33 @@
 class Polishtypes {
-    int? id;
+  int? id;
   String? title;
-  bool ?value;
+  bool? isSelected;
   String? description;
   int? isInterior;
   List<Type>? types;
 
-
   Polishtypes({
     this.id,
     this.title,
-    this.value,
+    this.isSelected,
     this.description,
     this.isInterior,
     this.types,
   });
 
-
-
   Polishtypes.fromJson(Map<String, dynamic> json) {
-        id= json["id"];
-        title= json["title"];
-        value=false;
-        description= json["description"];
-        isInterior=json["is_interior"];
-        types= List<Type>.from(json["types"].map((x) => Type.fromJson(x)));
+    id = json["id"];
+    title = json["title"];
+    isSelected = false;
+    description = json["description"];
+    isInterior = json["is_interior"];
+    types = List<Type>.from(json["types"].map((x) => Type.fromJson(x)));
   }
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "value":false,
+        "isSelected": false,
         "description": description,
         "is_interior": isInterior,
         "types": List<dynamic>.from(types!.map((x) => x.toJson())),
@@ -38,19 +35,11 @@ class Polishtypes {
 }
 
 class Type {
-
-
-  int  ? id;
-  String ?name;
-  int ?price;
-  bool ? selected;
-  Type({
-    this.id,
-    this.name,
-    this.price,
-    this.selected
-  });
-
+  int? id;
+  String? name;
+  int? price;
+  bool? selected;
+  Type({this.id, this.name, this.price, this.selected});
 
   factory Type.fromJson(Map<String, dynamic> json) => Type(
         id: json["id"],
@@ -59,10 +48,6 @@ class Type {
         selected: false,
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "price": price,
-          "selected":false
-      };
+  Map<String, dynamic> toJson() =>
+      {"id": id, "name": name, "price": price, "selected": false};
 }

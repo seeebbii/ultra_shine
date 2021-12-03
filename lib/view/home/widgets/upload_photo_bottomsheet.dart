@@ -119,12 +119,13 @@ class _UploadPhotoBottomSheetState extends State<UploadPhotoBottomSheet> {
     setState(() async {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
+
         //  allowedExtensions: ['jpg', 'pdf'],
       );
 
       if (result != null) {
-        requestController.assets.value =
-            result.paths.map((path) => XFile(path!)).toList();
+        var list = result.paths.map((path) => XFile(path!)).toList();
+        requestController.assets.addAll(list);
         debugPrint("Assets length = ${requestController.assets.value.length}");
         Get.back();
       } else {

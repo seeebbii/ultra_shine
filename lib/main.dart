@@ -23,8 +23,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-
-    
     super.initState();
   }
 
@@ -42,9 +40,6 @@ class _MyAppState extends State<MyApp> {
               theme: myTheme,
               initialRoute: mainSplashScreen,
               onGenerateRoute: RouteGenerator.onGeneratedRoutes,
-            )
-    );
+            ));
   }
-
-
 }

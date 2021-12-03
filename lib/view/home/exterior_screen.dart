@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
@@ -96,13 +97,14 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Text("\$0.00",
+                          Obx(() => (Text(
+                              "${polishTypeController.selectedPolishType.value.types?[polishTypeController.index.value].price}.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
                                       fontWeight: FontWeight.w700,
-                                      color: primaryColor)),
+                                      color: primaryColor)))),
                         ],
                       ),
                     ),
@@ -140,7 +142,7 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                           setState(() {
                             for (var element
                                 in polishTypeController.polishTypes) {
-                              element.value = false;
+                              element.isSelected = false;
                             }
                             for (var element
                                 in polishTypeController.polishTypes) {
@@ -148,10 +150,13 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 opt.selected = false;
                               }
                             }
-                            polishTypeController.polishTypes[index].value =
+                            polishTypeController.polishTypes[index].isSelected =
                                 true;
-                            polishTypeController.packageSelected.value = false;
-                            polishTypeController.optionSelected.value = true;
+                            polishTypeController.selectedPolishType.value =
+                                polishTypeController.polishTypes[index];
+                            //  polishTypeController.index.value = index;
+                            // polishTypeController.packageSelected.value = false;
+                            // polishTypeController.optionSelected.value = true;
                           });
                         },
                         child: BuildExteriorCard(
@@ -179,9 +184,16 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                               child: BuildBottomButton(
                             buttonText: "Next",
                             onPressed: () {
-                              if (polishTypeController.optionSelected.value ==
+                              if (polishTypeController.selectedPolishType.value
+                                          .isSelected ==
                                       true &&
-                                  polishTypeController.packageSelected.value ==
+                                  // ignore: unrelated_type_equality_checks
+                                  polishTypeController
+                                          .selectedPolishType
+                                          .value
+                                          .types?[
+                                              polishTypeController.index.value]
+                                          .selected ==
                                       true) {
                                 stepperController.toNextPage();
                               }
