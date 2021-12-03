@@ -37,14 +37,14 @@ class Polishtypes {
 class Type {
   int? id;
   String? name;
-  int? price;
+  double? price;
   bool? selected;
   Type({this.id, this.name, this.price, this.selected});
 
   factory Type.fromJson(Map<String, dynamic> json) => Type(
         id: json["id"],
         name: json["name"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
         selected: false,
       );
 

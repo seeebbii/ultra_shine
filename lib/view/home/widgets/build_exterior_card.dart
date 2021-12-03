@@ -74,6 +74,16 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {
+
+                                if(requestController.exteriorPrevAmount != 0.00){
+                                  requestController.exteriorAmount -= requestController.exteriorPrevAmount;
+                                  requestController.exteriorPrevAmount = 0.00;
+                                }
+                                requestController.exteriorAmount += widget.model.types![index].price!;
+                                requestController.exteriorPrevAmount = widget.model.types![index].price!;
+
+                                requestController.calculateTotalAmount();
+
                                 setState(() {
                                   widget.model.types
                                       ?.forEach((opt) => opt.selected = false);

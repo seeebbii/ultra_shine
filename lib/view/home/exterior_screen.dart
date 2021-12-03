@@ -139,6 +139,9 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
+                          requestController.exteriorAmount = 0.00;
+                          requestController.exteriorPrevAmount = 0.00;
+                          requestController.calculateTotalAmount();
                           setState(() {
                             for (var element
                                 in polishTypeController.polishTypes) {

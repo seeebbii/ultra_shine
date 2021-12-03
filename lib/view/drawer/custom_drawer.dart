@@ -52,14 +52,14 @@ class _CustomDrawerState extends State<CustomDrawer>
                       height: 0.015.sh,
                     ),
                     Text(
-                      "David Alex",
+                      "Guest User",
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
                           ?.copyWith(fontSize: 18.sp, color: Colors.white),
                     ),
                     Text(
-                      "david@gmail.com",
+                      "guest@ultrashine.com",
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(
                           fontSize: 14.sp,
                           color: Colors.white.withOpacity(0.9),

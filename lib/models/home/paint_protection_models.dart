@@ -21,7 +21,7 @@ class PaintProtectionModel {
   int? easeOfApplication;
   int? slickness;
   int? gloss;
-  int? price;
+  double? price;
   DateTime? createdAt;
   DateTime? updatedAt;
   bool? value;
@@ -36,7 +36,7 @@ class PaintProtectionModel {
           easeOfApplication: json["ease_of_application"],
           slickness: json["slickness"],
           gloss: json["gloss"],
-          price: json["price"],
+          price: double.parse(json["price"].toString()),
           createdAt: DateTime.parse(json["created_at"]),
           updatedAt: DateTime.parse(json["updated_at"]),
           value: false);
