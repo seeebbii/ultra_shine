@@ -125,8 +125,12 @@ class _RequestScreenState extends State<RequestScreen>
                           SizedBox(height: 0.01.sp),
                           InkWell(
                             onTap: () {
-                              Get.bottomSheet(const UploadPhotoBottomSheet())
+                              Get.bottomSheet(
+                                
+                                const UploadPhotoBottomSheet())
                                   .then((value) => setState(() {}));
+                          
+
                             },
                             child: Card(
                               color: Colors.white,
