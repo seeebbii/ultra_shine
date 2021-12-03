@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'dart:math' as math;
 
 import 'package:ultra_shine/view/components/auth_textfield.dart';
+import 'package:ultra_shine/view/home/widgets/upload_photo_bottomsheet.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
   const PersonalInfoScreen({Key? key}) : super(key: key);
@@ -15,7 +17,6 @@ class PersonalInfoScreen extends StatefulWidget {
 }
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
-
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final contactController = TextEditingController();
@@ -87,30 +88,33 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           overflow: Overflow.visible,
           alignment: Alignment.center,
           children: [
-          Positioned(
-            top: -0.05.sh,
-            child: Container(
-              child: CircleAvatar(
-                radius: 58.0.r,
-                backgroundColor: Colors.white,
+            Positioned(
+              top: -0.05.sh,
+              child: Container(
                 child: CircleAvatar(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      radius: 15.0.r,
-                      child: Icon(
-                        Icons.camera_alt,
-                        size: 15.0.r,
-                        color: Colors.white,
+                  radius: 58.0.r,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.red,
+                        radius: 15.0.r,
+                        child: IconButton(
+                          color: Colors.white,
+                          icon: Icon(Icons.camera_alt, size: 15.0.r),
+                          onPressed: () {
+                            Get.bottomSheet(const UploadPhotoBottomSheet());
+                          },
+                        ),
                       ),
                     ),
+                    radius: 52.0.r,
+                    backgroundImage: const AssetImage(ImagePaths.paint),
                   ),
-                  radius: 52.0.r,
-                  backgroundImage: const AssetImage(ImagePaths.paint),
                 ),
-              ),),
-          ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(top: 0.15.sh),
               // color: Colors.black,
@@ -126,28 +130,31 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: Padding(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 5),
                         child: ElevatedButton(
                           style: Theme.of(context)
                               .elevatedButtonTheme
                               .style
                               ?.copyWith(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ))),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                              ))),
                           onPressed: () {
                             debugPrint("Send button pressed");
                           },
                           child: Text(
                             "Send",
-                            style: Theme.of(context).textTheme.headline1?.copyWith(
-                                fontSize: 12.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                ?.copyWith(
+                                    fontSize: 12.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1),
                           ),
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/models/home/interior_card_model.dart';
 
 class BuildInteriorCard extends StatefulWidget {
@@ -70,6 +71,15 @@ class _BuildInteriorCardState extends State<BuildInteriorCard> {
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {
+                                if(requestController.interiorPrevAmount != 0.00){
+                                  requestController.interiorAmount -= requestController.interiorPrevAmount;
+                                  requestController.interiorPrevAmount = 0.00;
+                                }
+                                requestController.interiorAmount += widget.model.interiorOptions[index].price!;
+                                requestController.interiorPrevAmount = widget.model.interiorOptions[index].price!;
+
+                                requestController.calculateTotalAmount();
+
                                 setState(() {
                                   widget.model.interiorOptions
                                       .forEach((opt) => opt.selected = false);

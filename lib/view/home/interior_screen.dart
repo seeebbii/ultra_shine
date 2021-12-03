@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'dart:math' as math;
 
@@ -134,13 +135,13 @@ class _InteriorScreenState extends State<InteriorScreen> with AutomaticKeepAlive
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Text("\$0.00",
+                          Obx(() => Text("\$${requestController.totalAmount}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
                                   fontWeight: FontWeight.w700,
-                                  color: primaryColor)),
+                                  color: primaryColor))),
                         ],
                       ),
                     ),
@@ -176,6 +177,9 @@ class _InteriorScreenState extends State<InteriorScreen> with AutomaticKeepAlive
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
+                          requestController.interiorAmount = 0.00;
+                          requestController.interiorPrevAmount = 0.00;
+                          requestController.calculateTotalAmount();
                           setState(() {
                             interiorCard
                                 .forEach((element) => element.value = false);

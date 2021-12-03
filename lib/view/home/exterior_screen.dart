@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
@@ -98,13 +99,13 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Text("\$0.00",
+                          Obx(() => Text("\$${requestController.totalAmount}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: primaryColor)),
+                                  fontWeight: FontWeight.w700,
+                                  color: primaryColor))),
                         ],
                       ),
                     ),
@@ -139,6 +140,9 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
+                          requestController.exteriorAmount = 0.00;
+                          requestController.exteriorPrevAmount = 0.00;
+                          requestController.calculateTotalAmount();
                           setState(() {
                             for (var element
                                 in polishTypeController.polishTypes) {
