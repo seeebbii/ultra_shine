@@ -87,7 +87,13 @@ class CameraBottomSheet extends StatelessWidget {
 
                       final XFile? photo =
                           await _picker.pickImage(source: ImageSource.camera);
-                      requestController.assets.add(photo!);
+
+                      print(photo?.path.toString());
+                      if (photo != null) {
+                        requestController.assets.add(photo);
+                        navigationController.goBack();
+                        navigationController.goBack();
+                      }
                     },
                     socialName: 'Capture Image',
                     imagePath: ImagePaths.cameraIcon,
@@ -102,6 +108,13 @@ class CameraBottomSheet extends StatelessWidget {
                       // Capture a video
                       final XFile? video =
                           await _picker.pickVideo(source: ImageSource.camera);
+
+                      print(video?.path.toString());
+                      if (video != null) {
+                        requestController.assets.add(video);
+                        navigationController.goBack();
+                        navigationController.goBack();
+                      }
                     },
                     socialName: 'Capture Video',
                     imagePath: ImagePaths.galleryIcon,

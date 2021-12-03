@@ -19,7 +19,7 @@ class ProductsModel {
   int? id;
   String? name;
   String? description;
-  int? price;
+  double? price;
   int? quantity;
   String? image;
   int? categoryId;
@@ -32,7 +32,7 @@ class ProductsModel {
         id: json["id"],
         name: json["name"],
         description: json["description"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
         quantity: json["quantity"],
         image: json["image"],
         categoryId: json["category_id"],

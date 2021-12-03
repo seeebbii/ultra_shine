@@ -13,15 +13,19 @@ class RequestController extends GetxController {
   double interiorAmount = 0.00;
   double filmsAmount = 0.00;
   double paintProtectionAmount = 0.00;
+  double productAmount = 0.00;
+
   double exteriorPrevAmount = 0.00;
   double interiorPrevAmount = 0.00;
   double filmsPrevAmount = 0.00;
   double paintProtectionPrevAmount = 0.00;
+  double productPrevAmount = 0.00;
+
   RxBool isImage=true.obs;
 
 
   void calculateTotalAmount(){
-    totalAmount.value = exteriorAmount + interiorAmount + filmsAmount + paintProtectionAmount;
+    totalAmount.value = exteriorAmount + interiorAmount + filmsAmount + paintProtectionAmount + productAmount;
     debugPrint("TOTAL AMOUNT: $totalAmount");
   }
 

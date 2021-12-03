@@ -113,7 +113,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
-                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                        ?.copyWith(fontWeight: FontWeight.bold, color: widget.model.types![index].selected! ? Colors.white : Colors.black),
                                   ),
                                 ),
                               ),

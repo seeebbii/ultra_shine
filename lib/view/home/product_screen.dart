@@ -94,7 +94,7 @@ class _ProductScreenState extends State<ProductScreen>
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                           Obx(() => (Text(
-                              "\$${productController.selectedProduct.value.price}.00",
+                              "\$${productController.selectedProduct.value.price ?? 0.00}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -118,6 +118,18 @@ class _ProductScreenState extends State<ProductScreen>
                       (context, index) {
                         return InkWell(
                           onTap: () {
+                            if (requestController.productPrevAmount != 0.00) {
+                              requestController.productAmount -=
+                                  requestController.productPrevAmount;
+                              requestController.productPrevAmount = 0.00;
+                            }
+                            requestController.productAmount +=
+                                productController.productModel[index].price!;
+                            requestController.productPrevAmount =
+                            productController.productModel[index].price!;
+
+                            requestController.calculateTotalAmount();
+
                             setState(() {
                               for (var element
                                   in productController.productModel) {
