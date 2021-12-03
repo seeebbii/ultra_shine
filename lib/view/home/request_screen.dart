@@ -184,11 +184,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                               MainAxisAlignment
                                                                   .spaceEvenly,
                                                           children: [
-                                                            Padding(
-                                                              padding: EdgeInsets.only(right:40),
-                                                            child:Icon(Icons.upload),
-                                                            ),
-                                                            
+                                                          
                                                             requestController.isImage.value==true?
                                                             const Icon(Icons.image):
                                                             const Icon(CupertinoIcons.videocam),
@@ -226,11 +222,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                           ],
                                                         ),
                                                       )
-                                                      // Image.file(File(
-                                                      //     requestController
-                                                      //         .assets
-                                                      //         .value[index]
-                                                      //         .path))
+                                                    
 
                                                       );
                                                 }),
