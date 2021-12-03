@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ultra_shine/app/api/api_client.dart';   
+import 'package:ultra_shine/app/api/api_client.dart';
 import 'package:ultra_shine/models/home/paint_protection_models.dart';
 
 class PaintProtectionController extends GetxController {
@@ -8,9 +8,10 @@ class PaintProtectionController extends GetxController {
   var isSelected = false.obs;
 
   var paintProtectionList = <PaintProtectionModel>[].obs;
-
-  void getPaintProtectionList() async{
-    paintProtectionList.value = await ApiClient.paintProtectionService.getPaintProtection();
+  var paintProtectionID = "".obs;
+  void getPaintProtectionList() async {
+    paintProtectionList.value =
+        await ApiClient.paintProtectionService.getPaintProtection();
   }
 
   @override
@@ -18,5 +19,4 @@ class PaintProtectionController extends GetxController {
     getPaintProtectionList();
     super.onInit();
   }
-
 }

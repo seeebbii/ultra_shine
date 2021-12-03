@@ -98,7 +98,7 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                           Obx(() => (Text(
-                              "${polishTypeController.selectedPolishType.value.types?[polishTypeController.index.value].price}.00",
+                              "0.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -139,9 +139,6 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return InkWell(
                         onTap: () {
-                          requestController.exteriorAmount = 0.00;
-                          requestController.exteriorPrevAmount = 0.00;
-                          requestController.calculateTotalAmount();
                           setState(() {
                             for (var element
                                 in polishTypeController.polishTypes) {
@@ -157,9 +154,9 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 true;
                             polishTypeController.selectedPolishType.value =
                                 polishTypeController.polishTypes[index];
-                            //  polishTypeController.index.value = index;
-                            // polishTypeController.packageSelected.value = false;
-                            // polishTypeController.optionSelected.value = true;
+                          //  polishTypeController.index.value = index;
+                            polishTypeController.packageSelected.value = false;
+                            polishTypeController.optionSelected.value = true;
                           });
                         },
                         child: BuildExteriorCard(
@@ -191,12 +188,7 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                           .isSelected ==
                                       true &&
                                   // ignore: unrelated_type_equality_checks
-                                  polishTypeController
-                                          .selectedPolishType
-                                          .value
-                                          .types?[
-                                              polishTypeController.index.value]
-                                          .selected ==
+                                  polishTypeController.packageSelected.value ==
                                       true) {
                                 stepperController.toNextPage();
                               }

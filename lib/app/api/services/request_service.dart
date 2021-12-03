@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
@@ -32,13 +34,19 @@ class RequestService {
     request.fields['city_id'] = city;
     request.fields['manufacturer'] = manufacturer;
     request.fields['address'] = address;
-    request.fields['vehicle_type_id'] = '';
-    request.fields['paint_work_id'] = '';
-    request.fields['polishing_id'] = '';
-    request.fields['polishing_type_id'] = '';
-    request.fields['film_id'] = '';
-    request.fields['film_type_id'] = '';
-    request.fields['paint_option_id'] = '';
+    request.fields['vehicle_type_id'] =
+        vehicleTypeController.selectedVehicleType.value.id.toString();
+    request.fields['paint_work_id'] =
+        vehiclePaintWorkController.selectedVehiclePaintWork.value.id.toString();
+    request.fields['polishing_id'] =
+        polishTypeController.selectedPolishType.value.id.toString();
+    request.fields['polishing_type_id'] =
+        polishTypeController.selectedPolishTypeId.value;
+    request.fields['film_id'] = filmsController.selectedFilmID.value.toString();
+    request.fields['film_type_id'] =
+        filmsController.selectedTypeID.value.toString();
+    request.fields['paint_option_id'] =
+        paintProtectionController.paintProtectionID.value.toString();
 
     //for token
     // request.headers.addAll({"Authorization": "Bearer token"});
@@ -64,6 +72,5 @@ class RequestService {
     } else {
       print("ERROR");
     }
-    // }}
   }
 }

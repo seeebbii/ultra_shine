@@ -17,8 +17,6 @@ class FilmScreen extends StatefulWidget {
 
 class _FilmScreenState extends State<FilmScreen>
     with AutomaticKeepAliveClientMixin {
-
-
   @override
   void initState() {
     super.initState();
@@ -66,31 +64,36 @@ class _FilmScreenState extends State<FilmScreen>
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
                 sliver: Obx(() => SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return InkWell(
-                        onTap: () {
-                          requestController.filmsAmount = 0.00;
-                          requestController.filmsPrevAmount = 0.00;
-                          requestController.calculateTotalAmount();
-                          setState(() {
-                            filmsController.filmsModel.forEach((element) {
-                              element.value = false;
-                            });
-                            filmsController.filmsModel.forEach((element) {
-                              element.types.forEach((opt) => opt.selected = false);
-                            });
-                            filmsController.filmsModel[index].value = true;
-
-                            filmsController.packageSelected.value = false;
-                            filmsController.optionSelected.value = true;
-
-                          });
-                        },
-                        child: BuildFilmCard(
-                          model: filmsController.filmsModel[index],
-                        ));
-                  }, childCount: filmsController.filmsModel.length),
-                )),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        return InkWell(
+                            onTap: () {
+                              requestController.filmsAmount = 0.00;
+                              requestController.filmsPrevAmount = 0.00;
+                              requestController.calculateTotalAmount();
+                              setState(() {
+                                for (var element
+                                    in filmsController.filmsModel) {
+                                  element.value = false;
+                                }
+                                for (var element
+                                    in filmsController.filmsModel) {
+                                  for (var opt in element.types) {
+                                    opt.selected = false;
+                                  }
+                                }
+                                filmsController.filmsModel[index].value = true;
+                                filmsController.selectedFilmID.value =
+                                    filmsController.filmsModel[index].id
+                                        .toString();
+                                filmsController.packageSelected.value = false;
+                                filmsController.optionSelected.value = true;
+                              });
+                            },
+                            child: BuildFilmCard(
+                              model: filmsController.filmsModel[index],
+                            ));
+                      }, childCount: filmsController.filmsModel.length),
+                    )),
               ),
               SliverToBoxAdapter(
                 child: Column(
@@ -109,18 +112,18 @@ class _FilmScreenState extends State<FilmScreen>
                           )),
                           Expanded(
                               child: BuildBottomButton(
-                                buttonText: "Next",
-                                onPressed: () {
-                                  if (filmsController.optionSelected.value ==
+                            buttonText: "Next",
+                            onPressed: () {
+                              if (filmsController.optionSelected.value ==
                                       true &&
-                                      filmsController.packageSelected.value ==
-                                          true) {
-                                    stepperController.toNextPage();
-                                  }
-                                },
-                                pageNumber: 1,
-                                btnColor: primaryColor,
-                              )),
+                                  filmsController.packageSelected.value ==
+                                      true) {
+                                stepperController.toNextPage();
+                              }
+                            },
+                            pageNumber: 1,
+                            btnColor: primaryColor,
+                          )),
                         ],
                       ),
                     ),

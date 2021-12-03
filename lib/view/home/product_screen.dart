@@ -94,7 +94,7 @@ class _ProductScreenState extends State<ProductScreen>
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                           Obx(() => (Text(
-                              "${productController.selectedProduct.value.price}.00",
+                              "\$${productController.selectedProduct.value.price}.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1

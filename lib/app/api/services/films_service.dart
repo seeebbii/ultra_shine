@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
 import 'package:http/http.dart' as http;
-import 'package:ultra_shine/models/films_model.dart';
+import 'package:ultra_shine/models/home/films_model.dart';
 
 class FilmServices {
   final _client = http.Client();

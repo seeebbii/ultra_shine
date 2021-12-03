@@ -6,9 +6,10 @@ class PolishTypeController extends GetxController {
   static PolishTypeController instance = Get.find();
   var polishTypes = <Polishtypes>[].obs;
   var selectedPolishType = Polishtypes().obs;
-  RxInt index = 0.obs;
- // var opt ionSelected = false.obs;
- // var packageSelected = false.obs;
+  //RxInt index = 0.obs;
+  var selectedPolishTypeId = "".obs;
+  var optionSelected = false.obs;
+  var packageSelected = false.obs;
 
   void getPolishTypes() async {
     polishTypes.value = await ApiClient.polishTypeService.getPolishTypes();
