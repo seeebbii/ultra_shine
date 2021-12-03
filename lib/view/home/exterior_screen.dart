@@ -97,14 +97,14 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Obx(() => (Text(
+                         Text(
                               "0.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
                                       fontWeight: FontWeight.w700,
-                                      color: primaryColor)))),
+                                      color: primaryColor)),
                         ],
                       ),
                     ),

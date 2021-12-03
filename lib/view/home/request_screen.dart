@@ -123,7 +123,14 @@ class _RequestScreenState extends State<RequestScreen>
                             ),
                           ),
                           SizedBox(height: 0.01.sp),
-                          InkWell(
+                         Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: requestController.assets.length <= 0
+                                      ?  InkWell(
                             onTap: () {
                               Get.bottomSheet(
                                 
@@ -132,14 +139,7 @@ class _RequestScreenState extends State<RequestScreen>
                           
 
                             },
-                            child: Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: requestController.assets.length <= 0
-                                      ? Container(
+                            child:Container(
                                           alignment: Alignment.bottomCenter,
                                           height: 0.18.sh,
                                           decoration: BoxDecoration(
@@ -163,77 +163,102 @@ class _RequestScreenState extends State<RequestScreen>
                                                             .grey.shade500),
                                               )),
                                         )
+                                      )
                                       : Obx(
                                         // ignore: invalid_use_of_protected_member
                                       
-                                          () => Container(
-                                            alignment: Alignment.bottomCenter,
-                                            height: 0.18.sh,
-                                            child: ListView.builder(
-                                                itemCount: requestController
-                                                    .assets.length,
-                                                itemBuilder: (context, index) {
+                                          () => Column(
+                                            children: [
+                                             Align(
+                                               alignment: Alignment.topRight,
+                                               child: IconButton(icon: Icon(Icons.upload,color: red,),onPressed: ()
+                                               {
+                                                   Get.bottomSheet(
+                                                                             
+                                                                             const UploadPhotoBottomSheet()
+                                                                             
+                                                                             )
+                                                                               .then((value) {
+                                                                                 
+                                                                                 setState(() {});
+                                                                                
+                                                                                 
+                                                                                 });
 
+                                               },),
+                                             )
+                                             
+                                             ,
+                                              Container(
+                                                alignment: Alignment.bottomCenter,
+                                                height: 0.18.sh,
+                                                child: ListView.builder(
+                                                    itemCount: requestController
+                                                        .assets.length,
+                                                    itemBuilder: (context, index) {
 
-                                           requestController.isImage.value=getFiletype(requestController.assets.value[index].name);
-                                                 
+                                                    //to get the type of file as selected file is image or video 
+                                               requestController.isImage.value=getFiletype(requestController.assets.value[index].name);
+                                                     
 
-                                                  return Container(
-                                                      margin:
-                                                          EdgeInsets.all(0.sp),
-                                                      child: Card(
-                                                        color: Colors.white,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                          
-                                                            requestController.isImage.value==true?
-                                                            const Icon(Icons.image):
-                                                            const Icon(CupertinoIcons.videocam),
+                                                      return Container(
+                                                          margin:
+                                                              EdgeInsets.all(0.sp),
+                                                          child: Card(
+                                                            color: Colors.white,
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                              
+                                                                requestController.isImage.value==true?
+                                                                const Icon(Icons.image):
+                                                                const Icon(CupertinoIcons.videocam),
 
-                                                            Flexible(
-                                                              child: RichText(
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                strutStyle:
-                                                                    StrutStyle(
-                                                                        fontSize:
-                                                                            12.0),
-                                                                text: TextSpan(
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black),
-                                                                  text: requestController
-                                                                      .assets
-                                                                      .value[
-                                                                          index]
-                                                                      .name,
+                                                                Flexible(
+                                                                  child: RichText(
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    strutStyle:
+                                                                        StrutStyle(
+                                                                            fontSize:
+                                                                                12.0),
+                                                                    text: TextSpan(
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                      text: requestController
+                                                                          .assets
+                                                                          .value[
+                                                                              index]
+                                                                          .name,
+                                                                    ),
+                                                                  ),
                                                                 ),
-                                                              ),
+                                                                IconButton(
+                                                                    onPressed: () => setState(() =>
+                                                                        requestController
+                                                                            .assets
+                                                                            .removeAt(
+                                                                                index)),
+                                                                    icon: const Icon(
+                                                                        Icons
+                                                                            .cancel_outlined))
+                                                              ],
                                                             ),
-                                                            IconButton(
-                                                                onPressed: () => setState(() =>
-                                                                    requestController
-                                                                        .assets
-                                                                        .removeAt(
-                                                                            index)),
-                                                                icon: const Icon(
-                                                                    Icons
-                                                                        .cancel_outlined))
-                                                          ],
-                                                        ),
-                                                      )
-                                                    
+                                                          )
+                                                        
 
-                                                      );
-                                                }),
+                                                          );
+                                                    }),
+                                              ),
+                                            ],
                                           ),
                                         )),
                             ),
-                          ),
+                          
                         ],
                       ),
                     )

@@ -99,7 +99,7 @@ class _UploadPhotoBottomSheetState extends State<UploadPhotoBottomSheet> {
                   ),
                   AuthSocialButton(
                     onPressed: () {
-                      navigationController.goBack();
+                    
                       selectListOfFiles();},
                     socialName: 'Gallery',
                     imagePath: ImagePaths.galleryIcon,
