@@ -7,8 +7,6 @@ import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
 import 'package:ultra_shine/view/home/stepper/stepper_root.dart';
 
-import '../home/choose_vehicle_type.dart';
-
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 

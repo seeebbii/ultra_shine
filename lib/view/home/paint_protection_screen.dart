@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/paint_protection_model.dart';
-import 'package:ultra_shine/models/home/paint_protection_models.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/build_paint_protection.dart';
 
@@ -19,54 +17,10 @@ class PaintProtectionScreen extends StatefulWidget {
 
 class _PaintProtectionScreenState extends State<PaintProtectionScreen>
     with AutomaticKeepAliveClientMixin {
-  // List<RatingTile> ratingTiles = <RatingTile>[
-  //   RatingTile(
-  //     packageName: "Durability",
-  //     value: 5,
-  //   ),
-  //   RatingTile(
-  //     packageName: "Ease of Application",
-  //     value: 4,
-  //   ),
-  //   RatingTile(
-  //     packageName: "Sickness",
-  //     value: 3.5,
-  //   ),
-  //   RatingTile(
-  //     packageName: "Gloss",
-  //     value: 1.5,
-  //   ),
-  // ];
-
+  
   @override
   void initState() {
-    // paintProtectionModel = <PaintProtectionModel>[
-    //   PaintProtectionModel(
-    //       ratingTile: ratingTiles,
-    //       titleText: "Heading",
-    //       subTitleText:
-    //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-    //       value: false),
-    //   PaintProtectionModel(
-    //       ratingTile: ratingTiles,
-    //       titleText: "Heading",
-    //       subTitleText:
-    //           "Glossy & Matte | Self-Healing | Top Coated | Computer Pre-Cut | No Yellowing | Crystal Clear ",
-    //       value: false),
-    //   PaintProtectionModel(
-    //       ratingTile: ratingTiles,
-    //       titleText: "Heading",
-    //       subTitleText:
-    //           "Exterior Protection for the front Windshield from Stone Chips ",
-    //       value: false),
-    //   PaintProtectionModel(
-    //       ratingTile: ratingTiles,
-    //       titleText: "Heading",
-    //       subTitleText:
-    //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    //       value: false),
-    // ];
-
+    
     super.initState();
   }
 

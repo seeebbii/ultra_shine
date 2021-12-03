@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/view/components/auth_button.dart';
 import 'package:ultra_shine/view/components/auth_textfield.dart';
-import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
   const PaymentMethodScreen({Key? key}) : super(key: key);

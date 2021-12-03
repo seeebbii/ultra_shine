@@ -59,7 +59,6 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
     // you need this
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,13 +111,16 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                         return Obx(() => InkWell(
                               onTap: () {
                                 setState(() {
-                                  vehicleTypeController.vehicleTypes.forEach(
-                                      (element) => element.value = false);
+                                  for (var element
+                                      in vehicleTypeController.vehicleTypes) {
+                                    element.isSelected = false;
+                                  }
                                   vehicleTypeController
-                                      .vehicleTypes[index].value = true;
+                                      .vehicleTypes[index].isSelected = true;
                                 });
                                 vehicleTypeController
-                                    .vehicleTypeSelected.value = true;
+                                        .selectedVehicleType.value =
+                                    vehicleTypeController.vehicleTypes[index];
                               },
                               child: BuildVehicleType(
                                 imagePath: vehicleTypeController
@@ -126,7 +128,7 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                                 carText: vehicleTypeController
                                     .vehicleTypes[index].carText!,
                                 value: vehicleTypeController
-                                    .vehicleTypes[index].value!,
+                                    .vehicleTypes[index].isSelected!,
                                 index: index,
                               ),
                             ));
@@ -162,35 +164,44 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.sp, vertical: 2.sp),
                   sliver: Obx(() => SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
+                        delegate: SliverChildBuilderDelegate(
                           (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              for (var element in vehiclePaintWorkController.vehiclePaintWorkList) {
-                                element.value = false;
-                              }
-                              vehiclePaintWorkController.vehiclePaintWorkList[index].value = true;
-                              vehiclePaintWorkController
-                                  .vehiclePainWorkSelected.value = true;
-                            });
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  for (var element in vehiclePaintWorkController
+                                      .vehiclePaintWorkList) {
+                                    element.isSelected = false;
+                                  }
+                                  vehiclePaintWorkController
+                                      .vehiclePaintWorkList[index]
+                                      .isSelected = true;
+                                  vehiclePaintWorkController
+                                          .selectedVehiclePaintWork.value =
+                                      vehiclePaintWorkController
+                                          .vehiclePaintWorkList[index];
+                                });
+                              },
+                              child: BuildVehiclePaintwork(
+                                imagePath: vehiclePaintWorkController
+                                    .vehiclePaintWorkList[index].image!,
+                                carText: vehiclePaintWorkController
+                                    .vehiclePaintWorkList[index].name!,
+                                value: vehiclePaintWorkController
+                                    .vehiclePaintWorkList[index].isSelected!,
+                                index: index,
+                              ),
+                            );
                           },
-                          child: BuildVehiclePaintwork(
-                            imagePath: vehiclePaintWorkController.vehiclePaintWorkList[index].image!,
-                            carText: vehiclePaintWorkController.vehiclePaintWorkList[index].name!,
-                            value: vehiclePaintWorkController.vehiclePaintWorkList[index].value!,
-                            index: index,
-                          ),
-                        );
-                      },
-                      childCount: vehiclePaintWorkController.vehiclePaintWorkList.length,
-                    ),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200.sp,
-                        childAspectRatio: 3 / 2.5,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5),
-                  )),
+                          childCount: vehiclePaintWorkController
+                              .vehiclePaintWorkList.length,
+                        ),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200.sp,
+                            childAspectRatio: 3 / 2.5,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5),
+                      )),
                 ),
                 SliverToBoxAdapter(
                   child: Column(
@@ -211,9 +222,15 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                                 child: Obx(() => BuildBottomButton(
                                       buttonText: "Next",
                                       onPressed: vehicleTypeController
-                                                  .vehicleTypeSelected.value &&
+                                                      .selectedVehicleType
+                                                      .value
+                                                      .isSelected ==
+                                                  true &&
                                               vehiclePaintWorkController
-                                                  .vehiclePainWorkSelected.value
+                                                      .selectedVehiclePaintWork
+                                                      .value
+                                                      .isSelected ==
+                                                  true
                                           ? () => stepperController.toNextPage()
                                           : () {},
                                       pageNumber: 1,

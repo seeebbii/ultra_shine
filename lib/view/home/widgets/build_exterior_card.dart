@@ -31,8 +31,9 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                 height: 20.sp,
                 width: 20.sp,
                 decoration: BoxDecoration(
-                    color:
-                        widget.model.value! ? Colors.red : Colors.transparent,
+                    color: widget.model.isSelected!
+                        ? Colors.red
+                        : Colors.transparent,
                     border: Border.all(color: Colors.grey.shade500, width: 1.5),
                     shape: BoxShape.circle),
               ),
@@ -66,7 +67,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 5.sp),
                     child: Visibility(
-                      visible: widget.model.value!,
+                      visible: widget.model.isSelected!,
                       child: Container(
                         height: 0.05.sh,
                         child: ListView.builder(
@@ -87,8 +88,9 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                   widget.model.types
                                       ?.forEach((opt) => opt.selected = false);
                                   widget.model.types![index].selected = true;
-                                  polishTypeController.packageSelected.value =
-                                      true;
+                                  polishTypeController.selectedPolishType.value
+                                      .types?[index].selected = true;
+                                  polishTypeController.index.value = index;
                                 });
                               },
                               child: Card(
@@ -106,12 +108,7 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText2
-                                        ?.copyWith(
-                                            color: widget.model.types![index]
-                                                    .selected!
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontWeight: FontWeight.bold),
+                                        ?.copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),

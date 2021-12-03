@@ -2,16 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:im_stepper/stepper.dart';
-
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
-import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
-import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
 import 'package:ultra_shine/view/home/choose_vehicle_type.dart';
 import 'package:ultra_shine/view/home/exterior_screen.dart';
 import 'package:ultra_shine/view/home/film_screen.dart';
@@ -29,7 +21,8 @@ class StepperRoot extends StatefulWidget {
   State<StepperRoot> createState() => _StepperRootState();
 }
 
-class _StepperRootState extends State<StepperRoot> with AutomaticKeepAliveClientMixin {
+class _StepperRootState extends State<StepperRoot>
+    with AutomaticKeepAliveClientMixin {
   int activeStep = 0;
 
   final List<Widget> widgetList = <Widget>[
@@ -274,5 +267,5 @@ class _StepperRootState extends State<StepperRoot> with AutomaticKeepAliveClient
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive =>true;
+  bool get wantKeepAlive => true;
 }

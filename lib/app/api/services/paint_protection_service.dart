@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:ultra_shine/models/home/paint_protection_models.dart';
 
-import 'package:ultra_shine/models/home/polishing_types.dart';
 
 class PaintProtectionService {
   final _client = http.Client();

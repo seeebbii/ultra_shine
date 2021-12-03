@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
-import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
-import 'package:ultra_shine/models/home/exterior_card_model.dart';
 import 'dart:math' as math;
 
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
@@ -99,13 +97,14 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Obx(() => Text("\$${requestController.totalAmount}",
+                          Obx(() => (Text(
+                              "${polishTypeController.selectedPolishType.value.types?[polishTypeController.index.value].price}.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: primaryColor))),
+                                      fontWeight: FontWeight.w700,
+                                      color: primaryColor)))),
                         ],
                       ),
                     ),
@@ -146,7 +145,7 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                           setState(() {
                             for (var element
                                 in polishTypeController.polishTypes) {
-                              element.value = false;
+                              element.isSelected = false;
                             }
                             for (var element
                                 in polishTypeController.polishTypes) {
@@ -154,10 +153,13 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 opt.selected = false;
                               }
                             }
-                            polishTypeController.polishTypes[index].value =
+                            polishTypeController.polishTypes[index].isSelected =
                                 true;
-                            polishTypeController.packageSelected.value = false;
-                            polishTypeController.optionSelected.value = true;
+                            polishTypeController.selectedPolishType.value =
+                                polishTypeController.polishTypes[index];
+                            //  polishTypeController.index.value = index;
+                            // polishTypeController.packageSelected.value = false;
+                            // polishTypeController.optionSelected.value = true;
                           });
                         },
                         child: BuildExteriorCard(
@@ -185,9 +187,16 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                               child: BuildBottomButton(
                             buttonText: "Next",
                             onPressed: () {
-                              if (polishTypeController.optionSelected.value ==
+                              if (polishTypeController.selectedPolishType.value
+                                          .isSelected ==
                                       true &&
-                                  polishTypeController.packageSelected.value ==
+                                  // ignore: unrelated_type_equality_checks
+                                  polishTypeController
+                                          .selectedPolishType
+                                          .value
+                                          .types?[
+                                              polishTypeController.index.value]
+                                          .selected ==
                                       true) {
                                 stepperController.toNextPage();
                               }

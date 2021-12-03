@@ -1,6 +1,6 @@
 class ChooseVehicleModel {
   int? id;
-  bool? value;
+  bool? isSelected;
   String? carText;
   String? imagePath;
   String? description;
@@ -8,7 +8,7 @@ class ChooseVehicleModel {
   String? updatedAt;
 
   ChooseVehicleModel(
-      {this.value,
+      {this.isSelected,
       this.carText,
       this.imagePath,
       this.id,
@@ -20,7 +20,7 @@ class ChooseVehicleModel {
     id = json['id'];
     carText = json['name'];
     description = json['description'];
-    value = false;
+    isSelected = false;
     imagePath = json['image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -30,7 +30,7 @@ class ChooseVehicleModel {
         'id': id,
         'name': carText,
         'description': description,
-        'value': value,
+        'isSelected': isSelected,
         'image': imagePath,
         'created_at': createdAt,
         'updated_at': updatedAt
