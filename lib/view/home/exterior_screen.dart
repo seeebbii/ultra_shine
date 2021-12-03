@@ -97,8 +97,7 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Obx(() => (Text(
-                              "0.00",
+                          Obx(() => (Text("0.00",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -154,7 +153,8 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                 true;
                             polishTypeController.selectedPolishType.value =
                                 polishTypeController.polishTypes[index];
-                          //  polishTypeController.index.value = index;
+                            //  polishTypeController.index.value = index;
+
                             polishTypeController.packageSelected.value = false;
                             polishTypeController.optionSelected.value = true;
                           });
