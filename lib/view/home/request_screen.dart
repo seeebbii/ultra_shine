@@ -195,17 +195,17 @@ class _RequestScreenState extends State<RequestScreen>
                                                                     TextOverflow
                                                                         .ellipsis,
                                                                 strutStyle:
-                                                                    const StrutStyle(
+                                                                    StrutStyle(
                                                                         fontSize:
                                                                             12.0),
                                                                 text: TextSpan(
-                                                                  style: const TextStyle(
+                                                                  style: TextStyle(
                                                                       color: Colors
                                                                           .black),
                                                                   text: requestController
                                                                       .assets
-                                                                      // ignore: invalid_use_of_protected_member
-                                                                      .value[index]
+                                                                      .value[
+                                                                          index]
                                                                       .name,
                                                                 ),
                                                               ),
@@ -238,6 +238,7 @@ class _RequestScreenState extends State<RequestScreen>
               )),
               SliverToBoxAdapter(
                 child: Column(
+                  
                   children: [
                     SizedBox(height: 0.05.sh),
                     Padding(
@@ -294,6 +295,7 @@ class _RequestScreenState extends State<RequestScreen>
               borderRadius: 12,
               obSecureText: false,
               hintText: "John Doe",
+              
               validator: (str) {
                 if (str == '' || str == null) {
                   return "Required*";

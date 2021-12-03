@@ -88,7 +88,7 @@ class _UploadPhotoBottomSheetState extends State<UploadPhotoBottomSheet> {
                   AuthSocialButton(
                     onPressed: () {
                       debugPrint("Camera pressed");
-
+                      navigationController.goBack();
                       Get.bottomSheet(const CameraBottomSheet());
                     },
                     socialName: 'Camera',
