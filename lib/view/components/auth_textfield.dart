@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthTextField extends StatelessWidget {
@@ -14,7 +15,9 @@ class AuthTextField extends StatelessWidget {
   TextInputType keyType;
 
   Widget suffixIcon;
+  List<TextInputFormatter>? formatter = [];
 
+  AutovalidateMode? validateMode = AutovalidateMode.disabled;
 
   AuthTextField({Key? key, required this.controller,
     required this.containerBoxColor,
@@ -24,7 +27,7 @@ class AuthTextField extends StatelessWidget {
     required this.action,
     required this.keyType,
     required this.suffixIcon,
-    this.hintText}) : super(key: key);
+    this.hintText, this.formatter = const [], this.validateMode = AutovalidateMode.disabled, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,6 @@ class AuthTextField extends StatelessWidget {
           color: containerBoxColor,
           borderRadius: BorderRadius.circular(borderRadius)),
       child: TextFormField(
-        // autovalidateMode: AutovalidateMode.onUserInteraction ,
         style: Theme
             .of(context)
             .textTheme
@@ -45,6 +47,8 @@ class AuthTextField extends StatelessWidget {
         cursorWidth: 1,
         textInputAction: action,
         keyboardType: keyType,
+        autovalidateMode: validateMode,
+        inputFormatters: formatter,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,

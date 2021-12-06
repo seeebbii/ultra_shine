@@ -9,10 +9,12 @@ import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/constant/imp.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
+import 'package:ultra_shine/controller/payment/payment_controller.dart';
 import 'package:ultra_shine/view/components/auth_textfield.dart';
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
 import 'package:ultra_shine/view/home/widgets/upload_photo_bottomsheet.dart';
 import 'package:mime/mime.dart';
+
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
 
@@ -38,8 +40,10 @@ class _RequestScreenState extends State<RequestScreen>
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
+    navigationController.navigateToNamed(paymentMethodScreen);
+
     if (isValid) {
-//Post request
+      //Post request
 
       requestController.requestSubmit(
         name: nameController.text,
@@ -56,6 +60,12 @@ class _RequestScreenState extends State<RequestScreen>
 
       // navigationController.navigateToNamed(paymentMethodScreen);
     }
+  }
+
+  @override
+  void initState() {
+    Get.put(PaymentController());
+    super.initState();
   }
 
   @override
@@ -123,23 +133,20 @@ class _RequestScreenState extends State<RequestScreen>
                             ),
                           ),
                           SizedBox(height: 0.01.sp),
-                         Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: requestController.assets.length <= 0
-                                      ?  InkWell(
-                            onTap: () {
-                              Get.bottomSheet(
-                                
-                                const UploadPhotoBottomSheet())
-                                  .then((value) => setState(() {}));
-                          
-
-                            },
-                            child:Container(
+                          Card(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: requestController.assets.length <= 0
+                                    ? InkWell(
+                                        onTap: () {
+                                          Get.bottomSheet(
+                                                  const UploadPhotoBottomSheet())
+                                              .then((value) => setState(() {}));
+                                        },
+                                        child: Container(
                                           alignment: Alignment.bottomCenter,
                                           height: 0.18.sh,
                                           decoration: BoxDecoration(
@@ -162,103 +169,105 @@ class _RequestScreenState extends State<RequestScreen>
                                                         color: Colors
                                                             .grey.shade500),
                                               )),
-                                        )
-                                      )
-                                      : Obx(
+                                        ))
+                                    : Obx(
                                         // ignore: invalid_use_of_protected_member
-                                      
-                                          () => Column(
-                                            children: [
-                                             Align(
-                                               alignment: Alignment.topRight,
-                                               child: IconButton(icon: Icon(Icons.upload,color: red,),onPressed: ()
-                                               {
-                                                   Get.bottomSheet(
-                                                                             
-                                                                             const UploadPhotoBottomSheet()
-                                                                             
-                                                                             )
-                                                                               .then((value) {
-                                                                                 
-                                                                                 setState(() {});
-                                                                                
-                                                                                 
-                                                                                 });
 
-                                               },),
-                                             )
-                                             
-                                             ,
-                                              Container(
-                                                alignment: Alignment.bottomCenter,
-                                                height: 0.18.sh,
-                                                child: ListView.builder(
-                                                    itemCount: requestController
-                                                        .assets.length,
-                                                    itemBuilder: (context, index) {
+                                        () => Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topRight,
+                                              child: IconButton(
+                                                icon: Icon(
+                                                  Icons.upload,
+                                                  color: red,
+                                                ),
+                                                onPressed: () {
+                                                  Get.bottomSheet(
+                                                          const UploadPhotoBottomSheet())
+                                                      .then((value) {
+                                                    setState(() {});
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.bottomCenter,
+                                              height: 0.18.sh,
+                                              child: ListView.builder(
+                                                  itemCount: requestController
+                                                      .assets.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    //to get the type of file as selected file is image or video
+                                                    requestController
+                                                            .isImage.value =
+                                                        getFiletype(
+                                                            requestController
+                                                                .assets
+                                                                .value[index]
+                                                                .name);
 
-                                                    //to get the type of file as selected file is image or video 
-                                               requestController.isImage.value=getFiletype(requestController.assets.value[index].name);
-                                                     
-
-                                                      return Container(
-                                                          margin:
-                                                              EdgeInsets.all(0.sp),
-                                                          child: Card(
-                                                            color: Colors.white,
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceEvenly,
-                                                              children: [
-                                                              
-                                                                requestController.isImage.value==true?
-                                                                const Icon(Icons.image):
-                                                                const Icon(CupertinoIcons.videocam),
-
-                                                                Flexible(
-                                                                  child: RichText(
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    strutStyle:
-                                                                        StrutStyle(
-                                                                            fontSize:
-                                                                                12.0),
-                                                                    text: TextSpan(
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                      text: requestController
-                                                                          .assets
-                                                                          .value[
-                                                                              index]
-                                                                          .name,
-                                                                    ),
+                                                    return Container(
+                                                        margin: EdgeInsets.all(
+                                                            0.sp),
+                                                        child: Card(
+                                                          color: Colors.white,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            children: [
+                                                              requestController
+                                                                          .isImage
+                                                                          .value ==
+                                                                      true
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .image)
+                                                                  : const Icon(
+                                                                      CupertinoIcons
+                                                                          .videocam),
+                                                              Flexible(
+                                                                child: RichText(
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  strutStyle:
+                                                                      StrutStyle(
+                                                                          fontSize:
+                                                                              12.0),
+                                                                  text:
+                                                                      TextSpan(
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black),
+                                                                    text: requestController
+                                                                        .assets
+                                                                        .value[
+                                                                            index]
+                                                                        .name,
                                                                   ),
                                                                 ),
-                                                                IconButton(
-                                                                    onPressed: () => setState(() =>
-                                                                        requestController
-                                                                            .assets
-                                                                            .removeAt(
-                                                                                index)),
-                                                                    icon: const Icon(
-                                                                        Icons
-                                                                            .cancel_outlined))
-                                                              ],
-                                                            ),
-                                                          )
-                                                        
-
-                                                          );
-                                                    }),
-                                              ),
-                                            ],
-                                          ),
-                                        )),
-                            ),
-                          
+                                                              ),
+                                                              IconButton(
+                                                                  onPressed: () => setState(() =>
+                                                                      requestController
+                                                                          .assets
+                                                                          .removeAt(
+                                                                              index)),
+                                                                  icon: const Icon(
+                                                                      Icons
+                                                                          .cancel_outlined))
+                                                            ],
+                                                          ),
+                                                        ));
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                          ),
                         ],
                       ),
                     )
@@ -267,7 +276,6 @@ class _RequestScreenState extends State<RequestScreen>
               )),
               SliverToBoxAdapter(
                 child: Column(
-                  
                   children: [
                     SizedBox(height: 0.05.sh),
                     Padding(
@@ -324,7 +332,6 @@ class _RequestScreenState extends State<RequestScreen>
               borderRadius: 12,
               obSecureText: false,
               hintText: "John Doe",
-              
               validator: (str) {
                 if (str == '' || str == null) {
                   return "Required*";
@@ -652,13 +659,11 @@ class _RequestScreenState extends State<RequestScreen>
   bool get wantKeepAlive => true;
 
   bool getFiletype(String path) {
-  String? mimeStr = lookupMimeType(path);
-var fileType = mimeStr!.split('/');
-if(fileType[0].toString()=='image')
-return true;
-else
-return false;
-
-
+    String? mimeStr = lookupMimeType(path);
+    var fileType = mimeStr!.split('/');
+    if (fileType[0].toString() == 'image')
+      return true;
+    else
+      return false;
   }
 }
