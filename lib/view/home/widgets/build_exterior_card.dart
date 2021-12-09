@@ -70,61 +70,91 @@ class _BuildExteriorCardState extends State<BuildExteriorCard> {
                       visible: widget.model.isSelected!,
                       child: Container(
                         height: 0.05.sh,
-                        child: ListView.builder(
-                          itemBuilder: (ctx, index) {
-                            return InkWell(
-                              onTap: () {
-                                if (requestController.exteriorPrevAmount !=
-                                    0.00) {
-                                  requestController.exteriorAmount -=
-                                      requestController.exteriorPrevAmount;
-                                  requestController.exteriorPrevAmount = 0.00;
-                                }
-                                requestController.exteriorAmount +=
-                                    widget.model.types![index].price!;
-                                requestController.exteriorPrevAmount =
-                                    widget.model.types![index].price!;
-                                requestController.calculateTotalAmount();
-                                setState(() {
-                                  widget.model.types
-                                      ?.forEach((opt) => opt.selected = false);
-                                  widget.model.types![index].selected = true;
-                                  polishTypeController.selectedPolishType.value
-                                      .types?[index].selected = true;
-                                  polishTypeController
-                                          .selectedPolishTypeId.value =
-                                      widget.model.types![index].id.toString();
-                                  polishTypeController.packageSelected.value =
-                                      true;
-                                });
-                              },
-                              child: Card(
-                                color: widget.model.types![index].selected!
-                                    ? Colors.red
-                                    : Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                elevation: 8,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 12.sp, vertical: 5.sp),
-                                  child: Text(
-                                    "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2
-                                        ?.copyWith(fontWeight: FontWeight.bold, color: widget.model.types![index].selected! ? Colors.white : Colors.black),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          itemCount: widget.model.types!.length,
-                          scrollDirection: Axis.horizontal,
+                        child: Card(
+                          color: Colors.red,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          elevation: 8,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.sp, vertical: 5.sp),
+                            child: Text(
+                              "Price : \$${widget.model.price}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
+
+                  // Container(
+                  //   margin: EdgeInsets.symmetric(vertical: 5.sp),
+                  //   child: Visibility(
+                  //     visible: widget.model.isSelected!,
+                  //     child: Container(
+                  //       height: 0.05.sh,
+                  //       child: ListView.builder(
+                  //         itemBuilder: (ctx, index) {
+                  //           return InkWell(
+                  //             onTap: () {
+                  //               if (requestController.exteriorPrevAmount !=
+                  //                   0.00) {
+                  //                 requestController.exteriorAmount -=
+                  //                     requestController.exteriorPrevAmount;
+                  //                 requestController.exteriorPrevAmount = 0.00;
+                  //               }
+                  //               requestController.exteriorAmount +=
+                  //                   widget.model.types![index].price!;
+                  //               requestController.exteriorPrevAmount =
+                  //                   widget.model.types![index].price!;
+                  //               requestController.calculateTotalAmount();
+                  //               setState(() {
+                  //                 widget.model.types
+                  //                     ?.forEach((opt) => opt.selected = false);
+                  //                 widget.model.types![index].selected = true;
+                  //                 polishTypeController.selectedPolishType.value
+                  //                     .types?[index].selected = true;
+                  //                 polishTypeController
+                  //                         .selectedPolishTypeId.value =
+                  //                     widget.model.types![index].id.toString();
+                  //                 polishTypeController.packageSelected.value =
+                  //                     true;
+                  //               });
+                  //             },
+                  //             child: Card(
+                  //               color: widget.model.types![index].selected!
+                  //                   ? Colors.red
+                  //                   : Colors.white,
+                  //               shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(8)),
+                  //               elevation: 8,
+                  //               child: Padding(
+                  //                 padding: EdgeInsets.symmetric(
+                  //                     horizontal: 12.sp, vertical: 5.sp),
+                  //                 child: Text(
+                  //                   "${widget.model.types![index].name}: \$${widget.model.types![index].price}",
+                  //                   style: Theme.of(context)
+                  //                       .textTheme
+                  //                       .bodyText2
+                  //                       ?.copyWith(fontWeight: FontWeight.bold, color: widget.model.types![index].selected! ? Colors.white : Colors.black),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           );
+                  //         },
+                  //         itemCount: widget.model.types!.length,
+                  //         scrollDirection: Axis.horizontal,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+
                   SizedBox(
                     height: 0.02.sh,
                   )

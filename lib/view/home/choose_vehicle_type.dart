@@ -231,7 +231,18 @@ class _ChooseVehicleTypeState extends State<ChooseVehicleType>
                                                       .value
                                                       .isSelected ==
                                                   true
-                                          ? () => stepperController.toNextPage()
+                                          ? () {
+                                              polishTypeController.getPolishTypes(
+                                                  vehicleTypeController
+                                                      .selectedVehicleType
+                                                      .value
+                                                      .id,
+                                                  vehiclePaintWorkController
+                                                      .selectedVehiclePaintWork
+                                                      .value
+                                                      .id);
+                                              stepperController.toNextPage();
+                                            }
                                           : () {},
                                       pageNumber: 1,
                                       btnColor: primaryColor,
