@@ -15,11 +15,11 @@ class PolishTypeController extends GetxController {
 
   void getPolishTypes(int? cvid, int? cpid) async {
     polishTypes.value = [];
+    
     polishTypes.value = await ApiClient.polishTypeService
         .getPolishTypes(cvid, cpid)
         .whenComplete(() => {
               isLoading.value = true,
-              
             });
   }
 

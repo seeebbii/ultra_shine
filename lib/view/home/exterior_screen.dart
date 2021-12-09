@@ -133,52 +133,62 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                   ],
                 ),
               ),
-              polishTypeController.isLoading.value
-                  ? SliverPadding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5.sp, vertical: 2.sp),
-                      sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          return InkWell(
-                              onTap: () {
-                                requestController.exteriorAmount = 0.00;
-                                requestController.exteriorPrevAmount = 0.00;
-                                requestController.calculateTotalAmount();
-                                setState(() {
-                                  for (var element
-                                      in polishTypeController.polishTypes) {
-                                    element.isSelected = false;
-                                  }
+              Obx(
+                () => polishTypeController.isLoading.value
+                    ? polishTypeController.polishTypes.value.length > 0
+                        ? SliverPadding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.sp, vertical: 2.sp),
+                            sliver: SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                return InkWell(
+                                    onTap: () {
+                                      requestController.exteriorAmount = 0.00;
+                                      requestController.exteriorPrevAmount =
+                                          0.00;
+                                      requestController.calculateTotalAmount();
+                                      setState(() {
+                                        for (var element in polishTypeController
+                                            .polishTypes) {
+                                          element.isSelected = false;
+                                        }
 
-                                  // for (var element
-                                  //     in polishTypeController.polishTypes) {
-                                  //   for (var opt in element.types!) {
-                                  //     opt.selected = false;
-                                  //   }
-                                  // }
-                                  polishTypeController
-                                      .polishTypes[index].isSelected = true;
-                                  polishTypeController
-                                          .selectedPolishType.value =
-                                      polishTypeController.polishTypes[index];
-                                  //  polishTypeController.index.value = index;
+                                        // for (var element
+                                        //     in polishTypeController.polishTypes) {
+                                        //   for (var opt in element.types!) {
+                                        //     opt.selected = false;
+                                        //   }
+                                        // }
+                                        polishTypeController.polishTypes[index]
+                                            .isSelected = true;
+                                        polishTypeController
+                                                .selectedPolishType.value =
+                                            polishTypeController
+                                                .polishTypes[index];
+                                        //  polishTypeController.index.value = index;
 
-                                  // polishTypeController.packageSelected.value = false;
-                                  polishTypeController.optionSelected.value =
-                                      true;
-                                });
+                                        // polishTypeController.packageSelected.value = false;
+                                        polishTypeController
+                                            .optionSelected.value = true;
+                                      });
+                                    },
+                                    child: BuildExteriorCard(
+                                      model: polishTypeController
+                                          .polishTypes[index],
+                                    ));
                               },
-                              child: BuildExteriorCard(
-                                model: polishTypeController.polishTypes[index],
-                              ));
-                        }, childCount: polishTypeController.polishTypes.length),
+                                  childCount:
+                                      polishTypeController.polishTypes.length),
+                            ),
+                          )
+                        : Center(
+                            child: const Text("No data found"),
+                          )
+                    : Center(
+                        child: CircularProgressIndicator(),
                       ),
-                    )
-                  : const SliverToBoxAdapter(
-                      child: Center(
-                        child: Text("No data found"),
-                      ),
-                    ),
+              ),
               SliverToBoxAdapter(
                 child: Column(
                   children: [
