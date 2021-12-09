@@ -10,7 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-
+  # flutter_webview_plugin:
+  #   git: https://github.com/nuc134r/flutter_webview_plugin.git
   # CORE PACKAGES
   http: ^0.13.4
   get: ^4.3.8
