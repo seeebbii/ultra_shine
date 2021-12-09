@@ -1,5 +1,6 @@
 class FilmsModel {
-  FilmsModel({this.id, this.title, this.description, required this.types, this.value});
+  FilmsModel(
+      {this.id, this.title, this.description, required this.types, this.value});
 
   int? id;
   String? title;
@@ -28,12 +29,12 @@ class Type {
 
   int? id;
   String? name;
-  double? price;
+  String? price;
   bool? selected;
   factory Type.fromJson(Map<String, dynamic> json) => Type(
         id: json["id"],
         name: json["name"],
-        price: double.parse(json["price"].toString()),
+        price:json["price"], //double.parse((json["price"].toString()).replaceAll(",", ".")),
         selected: false,
       );
 

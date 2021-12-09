@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/controllers.dart';
 import 'package:ultra_shine/app/constant/image_paths.dart';
 import 'package:ultra_shine/app/utils/colors.dart';
+import 'package:ultra_shine/controller/api/request/polish_type/polish_type_controller.dart';
 import 'dart:math' as math;
 
 import 'package:ultra_shine/view/home/widgets/build_bottom_buttons.dart';
@@ -102,8 +103,8 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: primaryColor))),
+                                      fontWeight: FontWeight.w700,
+                                      color: primaryColor))),
                         ],
                       ),
                     ),
@@ -132,42 +133,52 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                   ],
                 ),
               ),
-              SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 2.sp),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return InkWell(
-                        onTap: () {
-                          requestController.exteriorAmount = 0.00;
-                          requestController.exteriorPrevAmount = 0.00;
-                          requestController.calculateTotalAmount();
-                          setState(() {
-                            for (var element
-                                in polishTypeController.polishTypes) {
-                              element.isSelected = false;
-                            }
-                            for (var element
-                                in polishTypeController.polishTypes) {
-                              for (var opt in element.types!) {
-                                opt.selected = false;
-                              }
-                            }
-                            polishTypeController.polishTypes[index].isSelected =
-                                true;
-                            polishTypeController.selectedPolishType.value =
-                                polishTypeController.polishTypes[index];
-                            //  polishTypeController.index.value = index;
+              polishTypeController.isLoading.value
+                  ? SliverPadding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 5.sp, vertical: 2.sp),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          return InkWell(
+                              onTap: () {
+                                requestController.exteriorAmount = 0.00;
+                                requestController.exteriorPrevAmount = 0.00;
+                                requestController.calculateTotalAmount();
+                                setState(() {
+                                  for (var element
+                                      in polishTypeController.polishTypes) {
+                                    element.isSelected = false;
+                                  }
 
-                            polishTypeController.packageSelected.value = false;
-                            polishTypeController.optionSelected.value = true;
-                          });
-                        },
-                        child: BuildExteriorCard(
-                          model: polishTypeController.polishTypes[index],
-                        ));
-                  }, childCount: polishTypeController.polishTypes.length),
-                ),
-              ),
+                                  // for (var element
+                                  //     in polishTypeController.polishTypes) {
+                                  //   for (var opt in element.types!) {
+                                  //     opt.selected = false;
+                                  //   }
+                                  // }
+                                  polishTypeController
+                                      .polishTypes[index].isSelected = true;
+                                  polishTypeController
+                                          .selectedPolishType.value =
+                                      polishTypeController.polishTypes[index];
+                                  //  polishTypeController.index.value = index;
+
+                                  // polishTypeController.packageSelected.value = false;
+                                  polishTypeController.optionSelected.value =
+                                      true;
+                                });
+                              },
+                              child: BuildExteriorCard(
+                                model: polishTypeController.polishTypes[index],
+                              ));
+                        }, childCount: polishTypeController.polishTypes.length),
+                      ),
+                    )
+                  : const SliverToBoxAdapter(
+                      child: Center(
+                        child: Text("No data found"),
+                      ),
+                    ),
               SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -189,10 +200,27 @@ class _ExteriorScreenState extends State<ExteriorScreen>
                             onPressed: () {
                               if (polishTypeController.selectedPolishType.value
                                           .isSelected ==
-                                      true &&
+                                      true
+                                  // &&
                                   // ignore: unrelated_type_equality_checks
-                                  polishTypeController.packageSelected.value ==
-                                      true) {
+                                  // polishTypeController.packageSelected.value ==
+                                  //     true
+
+                                  ) {
+                                if (requestController.exteriorPrevAmount !=
+                                    0.00) {
+                                  requestController.exteriorAmount -=
+                                      requestController.exteriorPrevAmount;
+                                  requestController.exteriorPrevAmount = 0.00;
+                                }
+                                requestController.exteriorAmount +=
+                                    polishTypeController
+                                        .selectedPolishType.value.price!;
+                                requestController.exteriorPrevAmount =
+                                    polishTypeController
+                                        .selectedPolishType.value.price!
+                                        .toDouble();
+                                requestController.calculateTotalAmount();
                                 stepperController.toNextPage();
                               }
                             },
