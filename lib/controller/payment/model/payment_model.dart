@@ -32,6 +32,9 @@ class PaymentModel {
     imageUrl = json['ImageUrl'];
   }
 
+
+
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['PaymentMethodId'] = paymentMethodId;

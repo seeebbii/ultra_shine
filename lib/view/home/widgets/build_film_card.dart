@@ -78,10 +78,11 @@ class _BuildFilmCardState extends State<BuildFilmCard> {
                                       requestController.filmsPrevAmount;
                                   requestController.filmsPrevAmount = 0.00;
                                 }
-                                requestController.filmsAmount +=
-                                    widget.model.types[index].price!;
-                                requestController.filmsPrevAmount =
-                                    widget.model.types[index].price!;
+                                //TODO :  THERE IS NEED SOME DESCUSSION WITH SULMAN
+                                requestController.filmsAmount += 1;
+                                // widget.model.types[index].price!;
+                                requestController.filmsPrevAmount = 1;
+                                //  widget.model.types[index].price!;
 
                                 requestController.calculateTotalAmount();
 
