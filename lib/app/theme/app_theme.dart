@@ -33,7 +33,7 @@ ThemeData myTheme = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
           color: Colors.grey.withOpacity(0.7),
-          fontSize: 13.sp),
+          fontSize: 13.sp,),
     ),
     appBarTheme: const AppBarTheme(
       color: Colors.transparent,

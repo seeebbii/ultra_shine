@@ -10,8 +10,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   InitializeControllers.init();
 
-  // Stripe.publishableKey = stripePublishableKey;
-
   runApp(const MyApp());
 }
 
