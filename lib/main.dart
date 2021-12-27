@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:ultra_shine/app/constant/initialize_controllers.dart';
 import 'package:ultra_shine/app/router/router_generator.dart';
 import 'app/constant/image_paths.dart';
+import 'app/core/notification_service.dart';
 import 'app/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // NotificationInitilization.initilaizedPushNotifications();
   InitializeControllers.init();
 
   runApp(const MyApp());
