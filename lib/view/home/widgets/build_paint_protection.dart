@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,16 +26,17 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
           Container(
             height: 0.25.sh,
             width: double.infinity,
-            decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(ImagePaths.paint), fit: BoxFit.cover),
-                border: Border.all(
-                  width: 1.3,
-                  color: Colors.black,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(12))),
+            // decoration: BoxDecoration(
+            //     image: const DecorationImage(
+            //         image: AssetImage(ImagePaths.paint), fit: BoxFit.cover),
+            //     border: Border.all(
+            //       width: 1.3,
+            //       color: Colors.black,
+            //     ),
+            //     borderRadius: const BorderRadius.all(Radius.circular(12))),
             child: Stack(
               children: [
+                Positioned.fill(child: buildPaintworktypes()),
                 Positioned(
                   left: 0.01.sw,
                   top: 0.01.sh,
@@ -74,9 +76,12 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
               height: 0.15.sh,
               child: ListView(
                 children: [
-                  _buildRatingRow('Durability', widget.model.durability!.toDouble()),
-                  _buildRatingRow('Ease of Application', widget.model.easeOfApplication!.toDouble()),
-                  _buildRatingRow('Sickness', widget.model.slickness!.toDouble()),
+                  _buildRatingRow(
+                      'Durability', widget.model.durability!.toDouble()),
+                  _buildRatingRow('Ease of Application',
+                      widget.model.easeOfApplication!.toDouble()),
+                  _buildRatingRow(
+                      'Sickness', widget.model.slickness!.toDouble()),
                   _buildRatingRow('Gloss', widget.model.gloss!.toDouble()),
                   _buildRatingRow('Price', widget.model.price!.toDouble()),
                 ],
@@ -128,5 +133,16 @@ class _BuildPaintProtectionState extends State<BuildPaintProtection> {
         ],
       ),
     );
+  }
+
+  ClipRRect buildPaintworktypes() {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(8.r),
+        child: CachedNetworkImage(
+          fadeInCurve: Curves.easeIn,
+          fadeInDuration: const Duration(milliseconds: 1500),
+          imageUrl: widget.model.image.toString(),
+          fit: BoxFit.cover,
+        ));
   }
 }

@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-
   # CORE PACKAGES
   http: ^0.13.4
   get: ^4.3.8

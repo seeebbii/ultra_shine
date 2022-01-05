@@ -43,7 +43,9 @@ class _BuildProductState extends State<BuildProduct> {
                     height: 25.sp,
                     width: 25.sp,
                     decoration: BoxDecoration(
-                        color: widget.model.isSelected! ? Colors.red : Colors.white,
+                        color: widget.model.isSelected!
+                            ? Colors.red
+                            : Colors.white,
                         border:
                             Border.all(color: Colors.grey.shade300, width: 4.5),
                         shape: BoxShape.circle),

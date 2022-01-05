@@ -85,7 +85,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
         makeExecutePaymentRequest();
       } else {
-        if (!Get.isSnackbarOpen!) {
+        if (!Get.isSnackbarOpen) {
           Get.snackbar(
             "Please accept our Terms and Conditions",
             '',
