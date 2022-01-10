@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:ultra_shine/app/api/api.endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:ultra_shine/models/home/choose_vehicle_model.dart';
-import 'package:ultra_shine/models/home/choose_vehicle_paintwork_model.dart';
 
 class VehicleTypeService {
   final _client = http.Client();

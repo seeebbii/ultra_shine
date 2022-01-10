@@ -117,7 +117,7 @@ class _FilmScreenState extends State<FilmScreen>
                               if (filmsController.optionSelected.value ==
                                       true &&
                                   filmsController.packageSelected.value ==
-                                      true) {
+                                      true ) {
                                 stepperController.toNextPage();
                               }
                             },
