@@ -11,6 +11,7 @@ class ProductController extends GetxController {
   // var productSelected = false.obs;
 
   void getProductList() async {
+    
     productModel.value = await ApiClient.productService.getProduct();
   }
 

@@ -11,6 +11,7 @@ class FilmServices {
     var url = Uri.parse('$baseUrl/films');
     List<FilmsModel> film = <FilmsModel>[];
     try {
+      
       http.Response response = await _client.get(url);
       if (response.statusCode == 200) {
         Iterable types = jsonDecode(response.body)['data'];
